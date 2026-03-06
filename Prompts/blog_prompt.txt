@@ -1,0 +1,16 @@
+Write a professional blog post about: {topic}
+
+Audience:
+business leaders and consultants
+
+Structure:
+Title
+Introduction
+3-5 sections
+Conclusion
+
+Tone:
+insightful, authoritative, practical
+
+Length:
+900-1200 words

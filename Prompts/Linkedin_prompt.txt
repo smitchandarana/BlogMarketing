@@ -1,0 +1,13 @@
+Create a LinkedIn post summarizing a blog about:
+
+{topic}
+
+Structure:
+
+Hook
+Key insight
+Call to action
+
+Include 6 trending hashtags.
+
+Length: under 150 words.
