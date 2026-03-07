@@ -7,7 +7,8 @@ import csv
 import os
 from datetime import datetime
 
-TRACKER_PATH = os.path.join(os.path.dirname(__file__), 'tracker.csv')
+from paths import app_dir
+TRACKER_PATH = os.path.join(app_dir(), 'tracker.csv')
 
 FIELDNAMES = [
     'id', 'generated_date', 'calendar_day', 'topic', 'content_angle',

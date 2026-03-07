@@ -7,9 +7,10 @@ from llm_client import get_client, get_model
 
 load_dotenv()
 
-PROMPT_PATH   = os.path.join(os.path.dirname(__file__), 'Prompts', 'Linkedin_prompt.txt')
-HASHTAGS_PATH = os.path.join(os.path.dirname(__file__), 'Prompts', 'Hashtags.txt')
-LI_POSTS_DIR  = os.path.join(os.path.dirname(__file__), 'LinkedIn Posts')
+from paths import app_dir, resource_dir
+PROMPT_PATH   = os.path.join(resource_dir(), 'Prompts', 'Linkedin_prompt.txt')
+HASHTAGS_PATH = os.path.join(resource_dir(), 'Prompts', 'Hashtags.txt')
+LI_POSTS_DIR  = os.path.join(app_dir(),      'LinkedIn Posts')
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────

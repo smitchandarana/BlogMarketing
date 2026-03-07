@@ -14,7 +14,8 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 UNSPLASH_API  = 'https://api.unsplash.com/search/photos'
-IMAGES_DIR    = os.path.join(os.path.dirname(__file__), 'Blogs', 'images')
+from paths import app_dir
+IMAGES_DIR    = os.path.join(app_dir(), 'Blogs', 'images')
 BASE_PUB_URL  = 'https://www.phoenixsolution.in/blog/images'
 
 

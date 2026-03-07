@@ -93,61 +93,89 @@ def upload_image_asset(image_path, person_urn):
         return image_urn
 
     except Exception as exc:
-        logger.warning('Image upload failed (will post text-only): %s', exc)
+        if hasattr(exc, 'response') and getattr(exc.response, 'status_code', None) == 426:
+            logger.warning('LinkedIn Images API requires additional access (426) — posting text-only.')
+        else:
+            logger.warning('Image upload failed (will post text-only): %s', exc)
         return None
 
 
-def publish_post(text, image_path=None):
+def publish_post(text, image_path=None, org_urn=None):
     """
     Post text (with optional image) to LinkedIn as a public UGC share.
-    Returns the API response dict.
+    If org_urn is provided (e.g. 'urn:li:organization:12345'), also posts
+    to that company page using the same content.
+    Returns the personal profile API response dict.
     Falls back to text-only if image upload fails.
     """
     author_urn = authenticate()
     headers    = _get_headers()
 
-    # Try image upload
+    # Try image upload (owned by personal profile)
     image_urn = None
     if image_path and os.path.exists(image_path):
         image_urn = upload_image_asset(image_path, author_urn)
 
-    if image_urn:
-        share_content = {
-            'shareCommentary':    {'text': text},
-            'shareMediaCategory': 'IMAGE',
-            'media': [{
-                'status':      'READY',
-                'description': {'text': ''},
-                'media':       image_urn,
-                'title':       {'text': ''},
-            }],
-        }
-    else:
-        share_content = {
-            'shareCommentary':    {'text': text},
-            'shareMediaCategory': 'NONE',
+    def _build_payload(author):
+        if image_urn:
+            share_content = {
+                'shareCommentary':    {'text': text},
+                'shareMediaCategory': 'IMAGE',
+                'media': [{
+                    'status':      'READY',
+                    'description': {'text': ''},
+                    'media':       image_urn,
+                    'title':       {'text': ''},
+                }],
+            }
+        else:
+            share_content = {
+                'shareCommentary':    {'text': text},
+                'shareMediaCategory': 'NONE',
+            }
+        return {
+            'author':          author,
+            'lifecycleState':  'PUBLISHED',
+            'specificContent': {
+                'com.linkedin.ugc.ShareContent': share_content,
+            },
+            'visibility': {
+                'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC',
+            },
         }
 
-    payload = {
-        'author':          author_urn,
-        'lifecycleState':  'PUBLISHED',
-        'specificContent': {
-            'com.linkedin.ugc.ShareContent': share_content,
-        },
-        'visibility': {
-            'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC',
-        },
-    }
-
+    # Post to personal profile
     resp = requests.post(
         LINKEDIN_API_BASE + '/ugcPosts',
         headers=headers,
-        json=payload,
+        json=_build_payload(author_urn),
         timeout=15,
     )
-    resp.raise_for_status()
+    if not resp.ok:
+        logger.error('LinkedIn personal post failed %d: %s', resp.status_code, resp.text[:600])
+        resp.raise_for_status()
     log_response(resp)
-    return resp.json()
+    personal_result = resp.json()
+
+    # Optionally post to company page
+    if org_urn:
+        try:
+            org_resp = requests.post(
+                LINKEDIN_API_BASE + '/ugcPosts',
+                headers=headers,
+                json=_build_payload(org_urn),
+                timeout=15,
+            )
+            if not org_resp.ok:
+                logger.warning('Company page post failed %d: %s',
+                               org_resp.status_code, org_resp.text[:600])
+                org_resp.raise_for_status()
+            log_response(org_resp)
+            logger.info('Posted to company page: %s', org_urn)
+        except Exception as exc:
+            logger.warning('Company page post failed (personal post succeeded): %s', exc)
+
+    return personal_result
 
 
 def log_response(response):

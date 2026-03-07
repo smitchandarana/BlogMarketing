@@ -1,0 +1,23 @@
+{
+  "enabled": false,
+  "slots": [
+    "2:00",
+    "12:00",
+    "17:00",
+    "20:00",
+    "22:00"
+  ],
+  "mode": "auto",
+  "manual_id": null,
+  "post_target": "personal",
+  "dry_run": false,
+  "days": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
+  ],
+  "last_posted": null
+}

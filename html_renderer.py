@@ -3,8 +3,9 @@ import re
 import math
 from datetime import datetime
 
-TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'Blogs', '_new-post.html')
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), 'Blogs')
+from paths import app_dir, resource_dir
+TEMPLATE_PATH = os.path.join(resource_dir(), 'Blogs', '_new-post.html')
+OUTPUT_DIR    = os.path.join(app_dir(),      'Blogs')
 
 
 def _estimate_read_time(text: str) -> str:
@@ -12,15 +13,17 @@ def _estimate_read_time(text: str) -> str:
     return f'{minutes} min read'
 
 
+def _split_paras(text: str) -> list:
+    """Split on any blank line (handles \\n\\n, \\n   \\n, etc.)."""
+    return [p.strip() for p in re.split(r'\n\s*\n', text.strip()) if p.strip()]
+
+
 def _build_sections_html(sections: list) -> str:
     parts = []
     for i, sec in enumerate(sections, 1):
-        parts.append(f'    <!-- \u2500\u2500 SECTION {i} \u2500\u2500 -->')
         parts.append(f'    <h2 id="section-{i}">{sec["heading"]}</h2>')
-        for para in sec['body'].strip().split('\n\n'):
-            para = para.strip()
-            if para:
-                parts.append(f'    <p>{para}</p>')
+        for para in _split_paras(sec['body']):
+            parts.append(f'    <p>{para}</p>')
         parts.append('')
     return '\n'.join(parts)
 
@@ -83,16 +86,45 @@ def render_blog(blog_data: dict, publish_date: str = None, image_url: str = None
         '[PUBLISH DATE]': display_date,
         '[ISO DATE]': publish_date,
         '[READ TIME]': read_time,
-        '[ARTICLE INTRO \u2014 2-3 opening paragraphs that set context and explain why this topic matters to your reader.]': blog_data['intro'],
-        '[CLOSING PARAGRAPH \u2014 Summarize the key takeaway and transition to CTA.]': blog_data['conclusion'],
         '[RELATED SERVICE URL]': blog_data.get('related_service_url', '/services/business-intelligence'),
         '[RELATED SERVICE NAME]': blog_data.get('related_service_name', 'Our Services'),
         '[RELATED SERVICE DESC]': blog_data.get('related_service_desc', 'We build data solutions for your business.'),
-        '[CTA HEADLINE \u2014 e.g. \u201cWant this applied to your business?\u201d]': blog_data.get('cta_headline', 'Want this applied to your business?'),
+        '[CTA HEADLINE \u2014 e.g. "Want this applied to your business?"]': blog_data.get('cta_headline', 'Want this applied to your business?'),
         '[CTA SUBTEXT \u2014 1-2 sentences connecting the article topic to booking a call.]': blog_data.get('cta_subtext', 'Book a free 30-minute call to discuss how we can help.'),
     }
     for placeholder, value in simple.items():
         html = html.replace(placeholder, value)
+
+    # --- Multi-paragraph replacements (split on any blank line → multiple <p> tags) ---
+    def _paras(text: str) -> str:
+        return '\n'.join(f'    <p>{p}</p>' for p in _split_paras(text))
+
+    html = re.sub(
+        r'<p>\[ARTICLE INTRO.*?\]</p>',
+        _paras(blog_data['intro']),
+        html,
+        flags=re.DOTALL,
+    )
+    html = re.sub(
+        r'<p>\[CLOSING PARAGRAPH.*?\]</p>',
+        _paras(blog_data['conclusion']),
+        html,
+        flags=re.DOTALL,
+    )
+
+    # --- Working with us callout ---
+    cta_subtext = blog_data.get('cta_subtext', '')
+    cta_callout = (
+        f'{cta_subtext} <a href="https://calendly.com/phoenix-inquire/30min" '
+        f'target="_blank" rel="noopener">Book a free 30-minute call</a> to discuss '
+        f'how we can help.'
+    )
+    html = re.sub(
+        r'<p>\[One paragraph connecting.*?\]</p>',
+        f'<p>{cta_callout}</p>',
+        html,
+        flags=re.DOTALL,
+    )
 
     # --- Sections block: replace from SECTION 1 comment to just before Closing section ---
     sections_html = _build_sections_html(blog_data['sections'])
@@ -112,6 +144,30 @@ def render_blog(blog_data: dict, publish_date: str = None, image_url: str = None
         flags=re.DOTALL,
     )
 
+    html = _strip_template_comments(html)
+
+    return html
+
+
+def _strip_template_comments(html: str) -> str:
+    """Remove all template instruction artifacts from the rendered HTML."""
+    # Big ╔══...╚══╝ instruction block at top of file
+    html = re.sub(r'<!--\s*\n\s*\u2554[^\x00]*?\u255a[^\x00]*?-->', '', html, flags=re.DOTALL)
+    # ═══ style comments (STEP 2, ARTICLE HERO, ARTICLE BODY, CTA, RELATED ARTICLES, SIDEBAR)
+    html = re.sub(r'<!--\s*\u2550+[^\n>]*\u2550+\s*-->', '', html)
+    # ── style comments (Opening paragraph, Closing section, section markers)
+    html = re.sub(r'<!--\s*\u2500+[^\n>]*\u2500+\s*-->', '', html)
+    # <!-- Tag options: ... --> comment
+    html = re.sub(r'<!--\s*Tag options:[^\n]*-->', '', html)
+    # <!-- Optional: Pull quote --> and the commented-out <blockquote>
+    html = re.sub(r'<!--\s*Optional:.*?-->', '', html, flags=re.DOTALL)
+    # <!-- Replace these 3 cards... -->
+    html = re.sub(r'<!--\s*Replace these 3 cards[^>]*-->', '', html)
+    # <!-- Add one link per h2 section --> and <!-- Add more as needed -->
+    html = re.sub(r'<!--\s*Add one link per h2 section\s*-->', '', html)
+    html = re.sub(r'<!--\s*Add more as needed\s*-->', '', html)
+    # Collapse 3+ blank lines into 2
+    html = re.sub(r'\n{3,}', '\n\n', html)
     return html
 
 

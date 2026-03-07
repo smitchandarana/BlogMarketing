@@ -1,0 +1,433 @@
+2026-03-07 00:36:45,422  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 00:36:51,255  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 00:36:51,255  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 00:36:52,456  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 00:36:54,370  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 00:36:55,314  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 00:36:56,553  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 00:36:57,805  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 00:36:59,964  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:36:59,991  INFO      topic_researcher  Reddit synthesis: 10 topics generated
+2026-03-07 00:36:59,991  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 00:37:01,475  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:37:01,475  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 00:37:01,475  INFO      topic_researcher  Saved 18 research topics to C:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 00:37:01,475  INFO      topic_researcher  Research complete: 18 unique topics saved
+2026-03-07 00:37:01,494  INFO      gui  Research results loaded: 18 topics
+2026-03-07 00:37:28,290  INFO      gui  Topic selected from research: "Data Storytelling"
+2026-03-07 00:47:21,158  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 00:47:26,154  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 00:47:26,154  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 00:47:27,611  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 00:47:29,043  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 00:47:30,378  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 00:47:32,057  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 00:47:33,244  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 00:47:35,380  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:47:35,412  INFO      topic_researcher  Reddit synthesis: 11 topics generated
+2026-03-07 00:47:35,412  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 00:47:36,675  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:47:36,675  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 00:47:36,675  INFO      topic_researcher  Saved 19 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 00:47:36,675  INFO      topic_researcher  Research complete: 19 unique topics saved
+2026-03-07 00:47:36,675  INFO      gui  Research results loaded: 19 topics
+2026-03-07 00:47:42,042  INFO      gui  Topic selected from research: "Data Storytelling"
+2026-03-07 00:47:53,652  INFO      gui  Generate requested: "Data Storytelling"
+2026-03-07 00:47:53,652  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 00:47:56,679  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:47:56,679  INFO      gui  Blog generated: "The Power of Data Storytelling: Unlocking Insights for Business Success" (3 sections)
+2026-03-07 00:47:56,695  INFO      gui  Generating LinkedIn post...
+2026-03-07 00:47:57,178  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:47:57,178  INFO      gui  LinkedIn post generated.
+2026-03-07 00:48:08,465  INFO      gui  Topic selected from research: "Data Storytelling"
+2026-03-07 00:48:16,213  INFO      gui  Topic selected from research: "Data Storytelling"
+2026-03-07 00:48:29,735  INFO      gui  Topic selected from research: "Data Storytelling"
+2026-03-07 00:48:31,731  INFO      gui  Fetching trending topics from Groq...
+2026-03-07 00:48:32,292  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:48:36,449  INFO      gui  Generate requested: "Leveraging AI-Driven Predictive Analytics to Revolutionize Supply Chain Management in 2025"
+2026-03-07 00:48:36,449  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 00:48:39,285  INFO      gui  Generate requested: "Leveraging AI-Driven Predictive Analytics to Revolutionize Supply Chain Management in 2025"
+2026-03-07 00:48:39,285  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 00:48:39,929  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:48:39,929  INFO      gui  Blog generated: "Leveraging AI-Driven Predictive Analytics to Revolutionize Supply Chain Management in 2025" (3 sections)
+2026-03-07 00:48:39,929  INFO      gui  Generating LinkedIn post...
+2026-03-07 00:48:40,281  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:48:40,281  INFO      gui  LinkedIn post generated.
+2026-03-07 00:48:42,445  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:48:42,445  INFO      gui  Blog generated: "Revolutionizing Supply Chain Management with AI-Driven Predictive Analytics" (3 sections)
+2026-03-07 00:48:42,445  INFO      gui  Generating LinkedIn post...
+2026-03-07 00:48:42,811  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 00:48:42,811  INFO      gui  LinkedIn post generated.
+2026-03-07 00:48:51,745  INFO      gui  LinkedIn-only pipeline: "Leveraging AI-Driven Predictive Analytics to Revolutionize Supply Chain Management in 2025"
+2026-03-07 00:48:51,745  INFO      gui  LinkedIn Only — using site link: https://www.phoenixsolution.in
+2026-03-07 00:48:51,745  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-leveraging-ai-driven-predictive-analytics-to.txt
+2026-03-07 00:48:51,761  INFO      gui  Tracker entry created — #3
+2026-03-07 00:49:24,191  INFO      gui  Publishing Tracker #3 to LinkedIn profile + company page...
+2026-03-07 00:49:24,191  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 00:49:25,316  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7435766002920931329"}
+2026-03-07 00:49:26,248  WARNING   linkedin_publisher  Company page post failed (personal post succeeded): 403 Client Error: Forbidden for url: https://api.linkedin.com/v2/ugcPosts
+2026-03-07 00:49:26,248  INFO      gui  LinkedIn publish successful — Tracker #3
+2026-03-07 00:50:12,703  INFO      gui  Publishing Tracker #3 to LinkedIn profile + company page...
+2026-03-07 00:50:12,703  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 00:50:13,719  ERROR     gui  LinkedIn publish failed. Check LINKEDIN_ACCESS_TOKEN in .env. — 422 Client Error: Unprocessable Entity for url: https://api.linkedin.com/v2/ugcPosts
+2026-03-07 01:50:02,943  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 01:51:17,103  INFO      gui  Scheduler config saved. Starting scheduler...
+2026-03-07 01:51:17,103  INFO      smart_scheduler  Scheduler started.
+2026-03-07 01:51:17,103  INFO      gui  Scheduler started.
+2026-03-07 01:51:17,117  INFO      smart_scheduler  Next auto-post: Mon 09 Mar 2026  09:00
+2026-03-07 01:51:17,117  INFO      gui  Next auto-post: Mon 09 Mar 2026  09:00
+2026-03-07 01:51:25,560  INFO      smart_scheduler  Scheduler stopped.
+2026-03-07 01:51:25,560  INFO      gui  Scheduler stopped.
+2026-03-07 01:53:01,550  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 01:53:06,392  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 01:53:06,392  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 01:53:07,488  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 01:53:09,321  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 01:53:10,307  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 01:53:11,556  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 01:53:12,743  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 01:53:14,755  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 01:53:14,791  INFO      topic_researcher  Reddit synthesis: 11 topics generated
+2026-03-07 01:53:14,793  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 01:53:16,091  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 01:53:16,091  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 01:53:16,091  INFO      topic_researcher  Saved 19 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 01:53:16,091  INFO      topic_researcher  Research complete: 19 unique topics saved
+2026-03-07 01:53:16,107  INFO      gui  Research results loaded: 19 topics
+2026-03-07 01:53:30,279  INFO      gui  Topic selected from research: "Full-Stack Data Science"
+2026-03-07 01:53:33,541  INFO      gui  Generate requested: "Full-Stack Data Science"
+2026-03-07 01:53:33,556  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 01:53:36,920  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 01:53:36,930  INFO      gui  Blog generated: "Mastering Full-Stack Data Science for Business Success" (5 sections)
+2026-03-07 01:53:36,935  INFO      gui  Generating LinkedIn post...
+2026-03-07 01:53:37,289  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 01:53:37,289  INFO      gui  LinkedIn post generated.
+2026-03-07 01:53:41,740  INFO      gui  LinkedIn-only pipeline: "Full-Stack Data Science"
+2026-03-07 01:53:41,745  INFO      gui  LinkedIn Only — using site link: https://www.phoenixsolution.in
+2026-03-07 01:53:41,747  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-full-stack-data-science.txt
+2026-03-07 01:53:41,747  INFO      gui  Tracker entry created — #4
+2026-03-07 01:53:57,401  INFO      gui  Publishing Tracker #4 to LinkedIn...
+2026-03-07 01:53:57,416  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 01:53:58,544  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7435782248395853824"}
+2026-03-07 01:53:58,544  INFO      gui  LinkedIn publish successful — Tracker #4
+2026-03-07 01:54:18,101  INFO      gui  Scheduler config saved. Starting scheduler...
+2026-03-07 01:54:18,103  INFO      smart_scheduler  Scheduler started.
+2026-03-07 01:54:18,107  INFO      gui  Scheduler started.
+2026-03-07 01:54:18,116  INFO      smart_scheduler  Next auto-post: Sat 07 Mar 2026  02:00
+2026-03-07 01:54:18,116  INFO      gui  Next auto-post: Sat 07 Mar 2026  02:00
+2026-03-07 01:54:25,272  INFO      gui  Scoring all pending posts (this calls Groq AI)...
+2026-03-07 01:54:25,288  INFO      gui  Scoring complete. 0 posts ranked.
+2026-03-07 01:54:34,989  INFO      smart_scheduler  Scheduler stopped.
+2026-03-07 01:54:34,989  INFO      gui  Scheduler stopped.
+2026-03-07 02:23:22,343  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 02:23:44,472  INFO      gui  Batch generate: source=research, mode=li_only, max=5
+2026-03-07 02:23:44,477  INFO      topic_researcher  Loaded 19 saved research topics
+2026-03-07 02:23:44,480  INFO      gui  Generating 1/5: "AI-Powered BI"
+2026-03-07 02:23:49,545  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:23:49,903  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:23:49,911  INFO      gui  Queued as Tracker #5: "AI-Powered BI"
+2026-03-07 02:23:49,915  INFO      gui  Generating 2/5: "Report Management"
+2026-03-07 02:23:52,936  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:23:53,419  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:23:53,451  INFO      gui  Queued as Tracker #6: "Report Management"
+2026-03-07 02:23:53,451  INFO      gui  Generating 3/5: "Data Warehousing"
+2026-03-07 02:23:56,983  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:23:57,434  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:23:57,444  INFO      gui  Queued as Tracker #7: "Data Warehousing"
+2026-03-07 02:23:57,444  INFO      gui  Generating 4/5: "Tech Selection"
+2026-03-07 02:24:01,650  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:01,987  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:01,987  INFO      gui  Queued as Tracker #8: "Tech Selection"
+2026-03-07 02:24:01,987  INFO      gui  Generating 5/5: "Data Analytics Portfolio"
+2026-03-07 02:24:06,066  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:06,404  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:06,436  INFO      gui  Queued as Tracker #9: "Data Analytics Portfolio"
+2026-03-07 02:24:06,437  INFO      gui  Batch complete: 5 posts saved as drafts.
+2026-03-07 02:24:06,761  INFO      gui  Scoring all pending posts via Groq AI...
+2026-03-07 02:24:06,873  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:06,994  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:07,098  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:07,218  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:07,339  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:07,339  INFO      gui  Scoring complete — 5 posts ranked.
+2026-03-07 02:24:32,762  INFO      gui  Batch generate: source=research, mode=li_only, max=20
+2026-03-07 02:24:32,762  INFO      topic_researcher  Loaded 19 saved research topics
+2026-03-07 02:24:32,774  INFO      gui  Generating 1/13: "Predictive Analytics"
+2026-03-07 02:24:38,285  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:38,642  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:38,642  INFO      gui  Queued as Tracker #10: "Predictive Analytics"
+2026-03-07 02:24:38,642  INFO      gui  Generating 2/13: "Model Iteration Management"
+2026-03-07 02:24:43,691  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:44,224  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:44,238  INFO      gui  Queued as Tracker #11: "Model Iteration Management"
+2026-03-07 02:24:44,238  INFO      gui  Generating 3/13: "Technical vs Domain Expertise"
+2026-03-07 02:24:47,511  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:47,979  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:48,009  INFO      gui  Queued as Tracker #12: "Technical vs Domain Expertise"
+2026-03-07 02:24:48,009  INFO      gui  Generating 4/13: "AI for Business"
+2026-03-07 02:24:51,991  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:52,536  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:52,552  INFO      gui  Queued as Tracker #13: "AI for Business"
+2026-03-07 02:24:52,552  INFO      gui  Generating 5/13: "Data Storytelling"
+2026-03-07 02:24:55,856  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:56,262  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:24:56,292  INFO      gui  Queued as Tracker #14: "Data Storytelling"
+2026-03-07 02:24:56,292  INFO      gui  Generating 6/13: "ERP Data Harmony"
+2026-03-07 02:24:59,719  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:00,151  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:00,167  INFO      gui  Queued as Tracker #15: "ERP Data Harmony"
+2026-03-07 02:25:00,167  INFO      gui  Generating 7/13: "Power BI Insights"
+2026-03-07 02:25:00,215  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:00,215  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:25:04,301  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:04,341  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:04,341  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:25:06,741  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:06,773  INFO      gui  Queued as Tracker #16: "Power BI Insights"
+2026-03-07 02:25:06,773  INFO      gui  Generating 8/13: "KPI Mastery"
+2026-03-07 02:25:06,805  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:06,805  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 02:25:12,707  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:12,743  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:12,743  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:25:15,275  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:15,307  INFO      gui  Queued as Tracker #17: "KPI Mastery"
+2026-03-07 02:25:15,307  INFO      gui  Generating 9/13: "Digital Leap"
+2026-03-07 02:25:15,355  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:15,355  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 02:25:21,389  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:21,421  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:21,421  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:25:22,115  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 02:25:22,115  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 02:25:23,343  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 02:25:23,884  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:23,900  INFO      gui  Queued as Tracker #18: "Digital Leap"
+2026-03-07 02:25:23,900  INFO      gui  Generating 10/13: "Data Security"
+2026-03-07 02:25:23,948  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:23,948  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 02:25:25,077  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 02:25:26,111  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 02:25:27,433  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 02:25:28,704  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 02:25:28,833  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:28,833  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 02:25:30,281  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:30,329  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:30,329  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:25:32,684  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:32,700  INFO      gui  Queued as Tracker #19: "Data Security"
+2026-03-07 02:25:32,700  INFO      gui  Generating 11/13: "Analytics Scaling"
+2026-03-07 02:25:32,732  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:32,732  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 02:25:34,878  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:34,878  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 02:25:39,321  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:39,369  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:39,369  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:25:40,931  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:40,931  ERROR     topic_researcher  Reddit topic synthesis failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11678, Requested 1663. Please try again in 6.705s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 02:25:40,931  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 02:25:41,477  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:41,477  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:25:42,396  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:42,396  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 02:25:42,396  INFO      topic_researcher  Saved 8 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 02:25:42,396  INFO      topic_researcher  Research complete: 8 unique topics saved
+2026-03-07 02:25:42,411  INFO      gui  Research results loaded: 8 topics
+2026-03-07 02:25:42,524  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:42,524  WARNING   gui  Skipped "Analytics Scaling": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11975, Requested 353. Please try again in 1.64s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 02:25:42,532  INFO      gui  Generating 12/13: "User Adoption"
+2026-03-07 02:25:42,556  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:42,556  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 02:25:48,115  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 02:25:48,115  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 02:25:49,187  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 02:25:49,557  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:49,589  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:49,605  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:25:50,656  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 02:25:51,702  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 02:25:52,074  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:52,090  INFO      gui  Queued as Tracker #20: "User Adoption"
+2026-03-07 02:25:52,090  INFO      gui  Generating 13/13: "Data Unity"
+2026-03-07 02:25:52,139  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:52,139  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 02:25:52,934  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 02:25:56,994  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 02:25:57,122  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:57,122  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 02:25:58,043  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:25:58,074  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:25:58,074  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 02:26:00,587  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:00,603  INFO      gui  Queued as Tracker #21: "Data Unity"
+2026-03-07 02:26:00,603  INFO      gui  Batch complete: 12 posts saved as drafts.
+2026-03-07 02:26:00,926  INFO      gui  Scoring all pending posts via Groq AI...
+2026-03-07 02:26:01,136  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:01,184  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:01,184  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:02,296  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:02,327  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:02,327  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:03,186  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:03,186  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 7.000000 seconds
+2026-03-07 02:26:03,437  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:03,550  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:03,582  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:03,582  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:04,708  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:04,822  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:04,870  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:04,875  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:05,988  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:06,030  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:06,030  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:07,145  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:07,258  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:07,319  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:07,319  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:08,428  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:08,550  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:08,589  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:08,589  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:09,717  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:09,762  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:09,762  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:10,236  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:10,236  ERROR     topic_researcher  Reddit topic synthesis failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11759, Requested 1663. Please try again in 7.109999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 02:26:10,245  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 02:26:10,874  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:10,874  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:11,535  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:11,535  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 02:26:11,535  INFO      topic_researcher  Saved 8 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 02:26:11,551  INFO      topic_researcher  Research complete: 8 unique topics saved
+2026-03-07 02:26:11,551  INFO      gui  Research results loaded: 8 topics
+2026-03-07 02:26:11,922  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:11,922  WARNING   smart_scheduler  Sentiment scoring failed (using neutral): Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11922, Requested 162. Please try again in 420ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 02:26:11,970  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:11,970  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:13,107  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:13,618  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:13,682  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 02:26:13,682  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 1.000000 seconds
+2026-03-07 02:26:14,923  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:15,054  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:15,064  INFO      gui  Scoring complete — 17 posts ranked.
+2026-03-07 02:26:22,975  INFO      gui  Topic selected from research: "KPIs for Growth"
+2026-03-07 02:26:27,794  INFO      gui  Generate requested: "KPIs for Growth"
+2026-03-07 02:26:27,794  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 02:26:31,009  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:31,009  INFO      gui  Blog generated: "Unlocking Business Potential: Essential KPIs for Growth" (3 sections)
+2026-03-07 02:26:31,025  INFO      gui  Generating LinkedIn post...
+2026-03-07 02:26:31,380  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:26:31,380  INFO      gui  LinkedIn post generated.
+2026-03-07 02:27:05,161  INFO      gui  LinkedIn-only pipeline: "KPIs for Growth"
+2026-03-07 02:27:05,161  INFO      gui  LinkedIn Only — using site link: https://www.phoenixsolution.in
+2026-03-07 02:27:05,161  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-kpis-for-growth.txt
+2026-03-07 02:27:05,174  INFO      gui  Tracker entry created — #22
+2026-03-07 02:28:22,289  INFO      gui  Generate requested: "KPIs for Growth"
+2026-03-07 02:28:32,714  INFO      gui  Fetching trending topics from Groq...
+2026-03-07 02:28:33,150  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:28:45,187  INFO      gui  Generate requested: "Data-Driven Transformation: How Business Intelligence is Reshaping Modern Enterprises"
+2026-03-07 02:28:45,187  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 02:28:49,012  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:28:49,028  INFO      gui  Blog generated: "Data-Driven Transformation: How Business Intelligence is Reshaping Modern Enterprises" (4 sections)
+2026-03-07 02:28:49,028  INFO      gui  Generating LinkedIn post...
+2026-03-07 02:28:49,367  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 02:28:49,383  INFO      gui  LinkedIn post generated.
+2026-03-07 02:28:58,736  INFO      gui  Starting full pipeline for: "Data-Driven Transformation: How Business Intelligence is Reshaping Modern Enterprises"
+2026-03-07 02:28:58,752  INFO      gui  Fetching image from Unsplash for slug: data-driven-transformation
+2026-03-07 02:28:59,849  INFO      image_fetcher  Image saved: c:\Projects\BlogMarketing\Blogs\images\data-driven-transformation.jpg (by Markus Winkler)
+2026-03-07 02:28:59,849  INFO      gui  Image saved: c:\Projects\BlogMarketing\Blogs\images\data-driven-transformation.jpg
+2026-03-07 02:28:59,862  INFO      gui  Rendering and saving blog HTML...
+2026-03-07 02:28:59,862  INFO      gui  Blog HTML saved: c:\Projects\BlogMarketing\Blogs\2026-03-07-data-driven-transformation.html
+2026-03-07 02:28:59,862  INFO      gui  Copying to website repo and updating index + sitemap...
+2026-03-07 02:28:59,878  INFO      website_publisher  Copied blog: c:\Projects\BlogMarketing\Blogs\2026-03-07-data-driven-transformation.html -> C:\Projects\phoenixsolution\blog\data-driven-transformation.html
+2026-03-07 02:28:59,894  INFO      website_publisher  Copied image: c:\Projects\BlogMarketing\Blogs\images\data-driven-transformation.jpg -> C:\Projects\phoenixsolution\blog\images\data-driven-transformation.jpg
+2026-03-07 02:28:59,928  INFO      website_publisher  Updated blog/index.html with card for data-driven-transformation
+2026-03-07 02:28:59,942  INFO      website_publisher  Updated sitemap.xml with https://www.phoenixsolution.in/blog/data-driven-transformation
+2026-03-07 02:28:59,942  INFO      gui  Website updated. Live URL: https://www.phoenixsolution.in/blog/data-driven-transformation
+2026-03-07 02:28:59,942  INFO      gui  Running git add / commit / push...
+2026-03-07 02:29:02,781  INFO      website_publisher  git push: rc=0  
+2026-03-07 02:29:02,781  INFO      gui  Git push successful.
+2026-03-07 02:29:02,781  INFO      gui  Saving LinkedIn post TXT with blog URL...
+2026-03-07 02:29:02,789  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-data-driven-transformation-how-business-intel.txt
+2026-03-07 02:29:02,792  INFO      gui  Writing tracker entry...
+2026-03-07 02:29:02,792  INFO      gui  Pipeline complete — Tracker #23
+2026-03-07 02:30:17,130  INFO      gui  Publishing Tracker #23 to LinkedIn...
+2026-03-07 02:30:17,130  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 02:30:18,099  WARNING   linkedin_publisher  Image upload failed (will post text-only): 426 Client Error: Upgrade Required for url: https://api.linkedin.com/rest/images?action=initializeUpload
+2026-03-07 02:30:19,243  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7435791394859905024"}
+2026-03-07 02:30:19,263  INFO      gui  LinkedIn publish successful — Tracker #23
+2026-03-07 14:42:38,420  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 14:42:44,263  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 14:43:07,084  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 14:43:15,334  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 14:46:49,593  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 14:47:46,123  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 14:47:46,123  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 14:47:47,223  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 14:47:48,616  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 14:47:49,291  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 14:47:50,448  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 14:47:51,533  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 14:47:54,221  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 14:47:54,269  INFO      topic_researcher  Reddit synthesis: 10 topics generated
+2026-03-07 14:47:54,269  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 14:47:55,498  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 14:47:55,507  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 14:47:55,507  INFO      topic_researcher  Saved 18 research topics to C:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 14:47:55,507  INFO      topic_researcher  Research complete: 18 unique topics saved
+2026-03-07 14:47:55,520  INFO      gui  Research results loaded: 18 topics
+2026-03-07 14:48:03,318  INFO      gui  Loading saved research topics...
+2026-03-07 14:48:03,318  INFO      topic_researcher  Loaded 18 saved research topics
+2026-03-07 14:48:03,318  INFO      gui  Research results loaded: 18 topics
+2026-03-07 14:48:06,150  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 14:48:06,152  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 14:48:07,403  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 14:48:08,802  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 14:48:09,958  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 14:48:11,181  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 14:48:12,322  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 14:48:14,434  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 14:48:14,438  INFO      topic_researcher  Reddit synthesis: 11 topics generated
+2026-03-07 14:48:14,438  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 14:48:15,747  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 14:48:15,747  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 14:48:15,756  INFO      topic_researcher  Saved 19 research topics to C:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 14:48:15,756  INFO      topic_researcher  Research complete: 19 unique topics saved
+2026-03-07 14:48:15,756  INFO      gui  Research results loaded: 19 topics
+2026-03-07 14:48:20,367  INFO      gui  Topic selected from research: "Optimizing OLAP Query Times"
+2026-03-07 14:48:24,621  INFO      gui  Generate requested: "Optimizing OLAP Query Times"
+2026-03-07 14:48:24,633  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 14:48:28,298  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 14:48:28,298  INFO      gui  Blog generated: "Optimizing OLAP Query Times for Enhanced Business Intelligence" (4 sections)
+2026-03-07 14:48:28,298  INFO      gui  Generating LinkedIn post...
+2026-03-07 14:48:28,675  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 14:48:28,675  INFO      gui  LinkedIn post generated.
+2026-03-07 14:48:38,047  INFO      gui  Starting full pipeline for: "Optimizing OLAP Query Times"
+2026-03-07 14:48:38,047  INFO      gui  Fetching image from Unsplash for slug: optimizing-olap-query-times
+2026-03-07 14:48:39,015  INFO      image_fetcher  Image saved: C:\Projects\BlogMarketing\Blogs\images\optimizing-olap-query-times.jpg (by Dan Edge)
+2026-03-07 14:48:39,015  INFO      gui  Image saved: C:\Projects\BlogMarketing\Blogs\images\optimizing-olap-query-times.jpg
+2026-03-07 14:48:39,028  INFO      gui  Rendering and saving blog HTML...
+2026-03-07 14:48:39,034  INFO      gui  Blog HTML saved: C:\Projects\BlogMarketing\Blogs\2026-03-07-optimizing-olap-query-times.html
+2026-03-07 14:48:39,034  INFO      gui  Copying to website repo and updating index + sitemap...
+2026-03-07 14:48:39,060  INFO      website_publisher  Copied blog: C:\Projects\BlogMarketing\Blogs\2026-03-07-optimizing-olap-query-times.html -> C:\Projects\phoenixsolution\blog\optimizing-olap-query-times.html
+2026-03-07 14:48:39,060  INFO      website_publisher  Copied image: C:\Projects\BlogMarketing\Blogs\images\optimizing-olap-query-times.jpg -> C:\Projects\phoenixsolution\blog\images\optimizing-olap-query-times.jpg
+2026-03-07 14:48:39,093  INFO      website_publisher  Updated blog/index.html with card for optimizing-olap-query-times
+2026-03-07 14:48:39,108  INFO      website_publisher  Updated sitemap.xml with https://www.phoenixsolution.in/blog/optimizing-olap-query-times
+2026-03-07 14:48:39,108  INFO      gui  Website updated. Live URL: https://www.phoenixsolution.in/blog/optimizing-olap-query-times
+2026-03-07 14:48:39,108  INFO      gui  Running git add / commit / push...
+2026-03-07 14:48:43,302  INFO      website_publisher  git push: rc=0  
+2026-03-07 14:48:43,302  INFO      gui  Git push successful.
+2026-03-07 14:48:43,302  INFO      gui  Saving LinkedIn post TXT with blog URL...
+2026-03-07 14:48:43,311  INFO      gui  LinkedIn TXT saved: C:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-optimizing-olap-query-times.txt
+2026-03-07 14:48:43,318  INFO      gui  Writing tracker entry...
+2026-03-07 14:48:43,318  INFO      gui  Pipeline complete — Tracker #24
+2026-03-07 14:49:23,209  INFO      gui  Publishing Tracker #24 to LinkedIn...
+2026-03-07 14:49:23,209  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 14:49:24,145  WARNING   linkedin_publisher  LinkedIn Images API requires additional access (426) — posting text-only.
+2026-03-07 14:49:25,319  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7435977393384714240"}
+2026-03-07 14:49:25,319  INFO      gui  LinkedIn publish successful — Tracker #24

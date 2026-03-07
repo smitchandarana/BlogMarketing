@@ -5,8 +5,9 @@ from llm_client import get_client, get_model
 
 load_dotenv()
 
-PROMPT_PATH   = os.path.join(os.path.dirname(__file__), 'Prompts', 'blog_prompt.txt')
-CALENDAR_PATH = os.path.join(os.path.dirname(__file__), 'MarketingSchedule', 'Calender.json')
+from paths import resource_dir
+PROMPT_PATH   = os.path.join(resource_dir(), 'Prompts', 'blog_prompt.txt')
+CALENDAR_PATH = os.path.join(resource_dir(), 'MarketingSchedule', 'Calender.json')
 
 
 # ── Calendar helpers ──────────────────────────────────────────────────────────
