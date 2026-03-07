@@ -431,3 +431,11 @@
 2026-03-07 14:49:24,145  WARNING   linkedin_publisher  LinkedIn Images API requires additional access (426) — posting text-only.
 2026-03-07 14:49:25,319  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7435977393384714240"}
 2026-03-07 14:49:25,319  INFO      gui  LinkedIn publish successful — Tracker #24
+2026-03-07 15:28:51,959  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 15:28:55,095  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 15:28:55,095  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 15:28:56,555  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 15:28:58,012  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 15:28:58,742  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 15:28:59,893  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 15:29:01,206  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
