@@ -31,38 +31,72 @@ def load_hashtags() -> list:
 
 def generate_linkedin_post(topic: str, blog_data: dict = None) -> dict:
     """
-    Generate a LinkedIn caption + hashtags via ChatGPT.
-    Hashtags are selected from the approved list in Prompts/Hashtags.txt.
+    Generate a LinkedIn post + hashtags via Groq LLM.
+
+    Standalone mode (blog_data=None):
+        Full self-contained post (300-500 words) with real insight and context.
+        Ends with a CTA to phoenixsolution.in — no blog link needed.
+
+    Blog-linked mode (blog_data provided):
+        Short summary caption (80-150 words) that teases the blog and invites
+        readers to visit the full article link.
 
     Returns:
-        caption   -- post text without hashtags (80-150 words)
+        caption   -- post body without hashtags
         hashtags  -- space-separated '#Tag' string
         full_post -- caption + blank line + hashtags (ready to publish)
+        blog_url  -- empty string; populated by caller after website publish
     """
-    user_prompt = _load_prompt().replace('{topic}', topic)
+    approved_tags = load_hashtags()
+    tags_list_str = ', '.join(f'#{t}' for t in approved_tags)
 
     if blog_data:
+        # ── Blog-linked: short teaser that drives to the article ──────────────
+        user_prompt = _load_prompt().replace('{topic}', topic)
         user_prompt += (
             f'\n\nBlog title: {blog_data["title"]}'
             f'\nBlog intro excerpt: {blog_data["intro"][:300]}'
         )
-
-    approved_tags = load_hashtags()
-    tags_list_str = ', '.join(f'#{t}' for t in approved_tags)
-
-    system_prompt = (
-        'You are a LinkedIn content strategist for Phoenix Solutions, a BI consulting firm.\n'
-        'Return ONLY valid JSON:\n'
-        '{\n'
-        '  "caption": "Post body - hook, key insight, call-to-action. 80-150 words. No hashtags in this field.",\n'
-        '  "selected_hashtags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5", "Tag6"]\n'
-        '}\n'
-        'Rules:\n'
-        '- caption: compelling hook on line 1 -> key insight -> call to action. No # symbols inside caption.\n'
-        f'- selected_hashtags: pick 6 MOST RELEVANT tags from this approved list ONLY: {tags_list_str}\n'
-        '  Return just the tag word without the # symbol.\n'
-        '- Total post length including hashtags must stay under 3000 LinkedIn characters.'
-    )
+        system_prompt = (
+            'You are a LinkedIn content strategist for Phoenix Solutions, a BI consulting firm.\n'
+            'Return ONLY valid JSON:\n'
+            '{\n'
+            '  "caption": "Post body - hook, key insight, call-to-action. 80-150 words. No hashtags in this field.",\n'
+            '  "selected_hashtags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5", "Tag6"]\n'
+            '}\n'
+            'Rules:\n'
+            '- caption: compelling hook on line 1 -> key insight -> invite to read the full article. No # symbols.\n'
+            f'- selected_hashtags: pick 6 MOST RELEVANT tags from this approved list ONLY: {tags_list_str}\n'
+            '  Return just the tag word without the # symbol.\n'
+            '- Total post length including hashtags must stay under 3000 LinkedIn characters.'
+        )
+    else:
+        # ── Standalone: full value post, no blog link needed ──────────────────
+        user_prompt = (
+            f'Write a standalone LinkedIn post about: {topic}\n\n'
+            'This post must deliver complete, actionable value on its own — '
+            'no external article is being linked. The reader should finish the '
+            'post feeling informed and ready to act.'
+        )
+        system_prompt = (
+            'You are a LinkedIn content strategist for Phoenix Solutions, a BI consulting firm.\n'
+            'Return ONLY valid JSON:\n'
+            '{\n'
+            '  "caption": "Full self-contained post. 300-500 words. No hashtags in this field.",\n'
+            '  "selected_hashtags": ["Tag1", "Tag2", "Tag3", "Tag4", "Tag5", "Tag6"]\n'
+            '}\n'
+            'Rules:\n'
+            '- caption structure:\n'
+            '    Line 1: bold hook or provocative question (standalone line)\n'
+            '    Lines 2-N: 3-5 short paragraphs delivering real insight, practical tips, or a '
+            'framework your audience (CFOs, IT managers, ops leaders) can use immediately\n'
+            '    Final paragraph: soft CTA — "Explore more at www.phoenixsolution.in" or similar\n'
+            '- Use short paragraphs (2-4 lines). Add blank lines between sections for readability.\n'
+            '- No # symbols inside caption.\n'
+            f'- selected_hashtags: pick 6 MOST RELEVANT tags from this approved list ONLY: {tags_list_str}\n'
+            '  Return just the tag word without the # symbol.\n'
+            '- Total post length including hashtags must stay under 3000 LinkedIn characters.'
+        )
 
     response = get_client().chat.completions.create(
         model=get_model(),

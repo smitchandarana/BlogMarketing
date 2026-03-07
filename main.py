@@ -35,10 +35,13 @@ def _imports():
     from database import init_db, insert_post, update_post_status, get_post_by_id, get_scheduled_posts, get_all_posts
     from blog_generator import generate_blog
     from html_renderer import save_blog
-    from linkedin_generator import generate_linkedin_post
+    from linkedin_generator import generate_linkedin_post, save_linkedin_post
     from linkedin_publisher import publish_post
     from scheduler import start_scheduler
     from trend_research import get_trending_topics
+    from image_fetcher import fetch_image
+    from website_publisher import publish_to_website, git_push_website
+    from tracker import add_entry as tracker_add_entry
     return {
         'init_db': init_db,
         'insert_post': insert_post,
@@ -49,18 +52,25 @@ def _imports():
         'generate_blog': generate_blog,
         'save_blog': save_blog,
         'generate_linkedin_post': generate_linkedin_post,
+        'save_linkedin_post': save_linkedin_post,
         'publish_post': publish_post,
         'start_scheduler': start_scheduler,
         'get_trending_topics': get_trending_topics,
+        'fetch_image': fetch_image,
+        'publish_to_website': publish_to_website,
+        'git_push_website': git_push_website,
+        'tracker_add_entry': tracker_add_entry,
     }
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
-def _do_publish(m, post_id: int, full_text: str):
+def _do_publish(m, post_id: int, full_text: str, image_path=None):
+    import os
     try:
         print(f'  Publishing post ID {post_id} to LinkedIn...')
-        m['publish_post'](full_text)
+        org_urn = os.getenv('LINKEDIN_ORG_URN', '').strip() or None
+        m['publish_post'](full_text, image_path=image_path, org_urn=org_urn)
         m['update_post_status'](post_id, 'posted')
         logger.info('Published post ID %d', post_id)
         print('  Done — post is live.')
@@ -93,17 +103,47 @@ def cmd_generate(args, m):
 
     print(f'\nGenerating blog: "{topic}"')
     blog_data = m['generate_blog'](topic)
+    slug = blog_data['slug']
     print(f'  Title   : {blog_data["title"]}')
-    print(f'  Slug    : {blog_data["slug"]}')
+    print(f'  Slug    : {slug}')
 
     publish_date = datetime.now().strftime('%Y-%m-%d')
     blog_path = m['save_blog'](blog_data, publish_date)
     print(f'  Saved   : {blog_path}')
 
+    # Fetch image from Unsplash
+    print('  Fetching image...')
+    image_info = m['fetch_image'](blog_data.get('keywords', []), slug)
+    image_local = image_info['local_path'] if image_info else None
+    if image_info:
+        print(f'  Image   : {image_info["public_url"]}')
+    else:
+        print('  Image   : none (UNSPLASH_ACCESS_KEY not set or fetch failed)')
+
+    # Publish to website: copy HTML + image, update blog grid, update sitemap
+    print('  Publishing to website...')
+    pub_result = m['publish_to_website'](blog_data, blog_path, publish_date, image_local)
+    blog_url = pub_result['blog_url']
+    print(f'  Blog URL: {blog_url}')
+
+    # Git push to deploy
+    print('  Pushing to GitHub...')
+    rc, out, err = m['git_push_website'](slug, blog_data['title'])
+    if rc == 0:
+        print('  Deployed.')
+    else:
+        print(f'  Git push failed (rc={rc}): {err[:200]}')
+
+    # Generate LinkedIn post
     print('  Generating LinkedIn post...')
     li = m['generate_linkedin_post'](topic, blog_data)
     print(f'  Caption : {len(li["caption"].split())} words  |  Hashtags: {li["hashtags"]}')
 
+    # Save LinkedIn post TXT file
+    li_path = m['save_linkedin_post'](li, topic, publish_date=publish_date, blog_url=blog_url)
+    print(f'  LI file : {li_path}')
+
+    # Store in SQLite database
     post_id = m['insert_post'](
         topic=topic,
         blog_path=blog_path,
@@ -113,13 +153,23 @@ def cmd_generate(args, m):
         publish_date=publish_date,
     )
 
+    # Store in tracker.csv so smart_scheduler can pick it up
+    m['tracker_add_entry'](
+        topic=topic,
+        blog_path=blog_path,
+        linkedin_path=li_path,
+        hashtags=li['hashtags'],
+        website_url=blog_url,
+    )
+
+    li_full = f'{li["caption"]}\n\nRead the full article: {blog_url}\n\n{li["hashtags"]}'
     print(f'\nStored as post ID {post_id} (status: draft)')
     print('\n--- LinkedIn Preview ---')
-    print(li['full_post'])
+    print(li_full)
     print('------------------------\n')
 
     if args.publish:
-        _do_publish(m, post_id, li['full_post'])
+        _do_publish(m, post_id, li_full, image_local)
 
 
 def cmd_publish(args, m):
