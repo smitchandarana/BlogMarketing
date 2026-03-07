@@ -44,14 +44,24 @@ DEFAULT_CONFIG = {
     'slots':        ['09:00', '17:00'],   # HH:MM 24h slots
     'mode':         'auto',               # 'auto' | 'manual'
     'manual_id':    None,                 # tracker ID when mode=manual
-    'post_target':  'personal',           # 'personal' | 'company' | 'both'
+    'post_target':  'personal',           # always personal (company posting disabled)
     'dry_run':      False,
     'days':         ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
     'last_posted':  None,
+    'day_content_type': {                 # per-day content type
+        'Mon': 'blog_and_li',
+        'Tue': 'li_only',
+        'Wed': 'blog_and_li',
+        'Thu': 'li_only',
+        'Fri': 'li_only',
+        'Sat': 'li_only',
+        'Sun': 'li_only',
+    },
 }
 
 _scheduler_thread: Optional[threading.Thread] = None
 _stop_event = threading.Event()
+_pause_event = threading.Event()          # set = paused
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -211,9 +221,11 @@ def score_post(row: dict, use_ai: bool = True) -> dict:
     }
 
 
-def score_all_pending(use_ai: bool = True) -> List[dict]:
+def score_all_pending(use_ai: bool = True, cancel_event=None) -> List[dict]:
     """
     Load all draft/scheduled tracker rows, score each one, return sorted list.
+    If cancel_event is provided and gets set, scoring stops early and returns
+    whatever has been scored so far.
     """
     from tracker import read_all
     rows = [r for r in read_all() if r.get('status') in ('draft', 'scheduled')]
@@ -221,6 +233,8 @@ def score_all_pending(use_ai: bool = True) -> List[dict]:
         return []
     scored = []
     for i, r in enumerate(rows):
+        if cancel_event and cancel_event.is_set():
+            break
         scored.append(score_post(r, use_ai=use_ai))
         if use_ai and i < len(rows) - 1:
             time.sleep(_SCORE_DELAY)
@@ -228,9 +242,16 @@ def score_all_pending(use_ai: bool = True) -> List[dict]:
     return scored
 
 
-def pick_best(use_ai: bool = True) -> Optional[dict]:
-    """Return the highest-scoring pending post, or None if none available."""
+def pick_best(use_ai: bool = True, content_type: str = 'li_only') -> Optional[dict]:
+    """Return the highest-scoring pending post, filtered by content_type.
+
+    content_type:
+        'li_only'     — posts with linkedin_path (any post qualifies)
+        'blog_and_li' — posts that have both blog_path AND linkedin_path
+    """
     scored = score_all_pending(use_ai=use_ai)
+    if content_type == 'blog_and_li':
+        scored = [s for s in scored if s.get('blog_path')]
     return scored[0] if scored else None
 
 
@@ -265,10 +286,7 @@ def _do_post(row: dict, cfg: dict, on_log: Optional[Callable] = None):
     image_path = os.path.join(app_dir(), 'Blogs', 'images', slug_part + '.jpg')
     image_path = image_path if os.path.exists(image_path) else None
 
-    target = cfg.get('post_target', 'personal')
-    org_urn = None
-    if target in ('company', 'both'):
-        org_urn = os.getenv('LINKEDIN_ORG_URN', '').strip() or None
+    org_urn = None  # company posting disabled — personal profile only
 
     if cfg.get('dry_run'):
         log('[DRY RUN] Would post Tracker #{}: "{}" — score {}'.format(
@@ -328,8 +346,23 @@ def _scheduler_loop(on_log: Optional[Callable] = None,
         if on_log:
             on_log(msg, lvl)
 
+    day_names = {0: 'Mon', 1: 'Tue', 2: 'Wed', 3: 'Thu', 4: 'Fri', 5: 'Sat', 6: 'Sun'}
+
     log('Scheduler started.')
     while not _stop_event.is_set():
+        # ── Handle pause ────────────────────────────────────────────────
+        if _pause_event.is_set():
+            log('Scheduler paused.')
+            if on_status_change:
+                on_status_change('paused', None)
+            while _pause_event.is_set() and not _stop_event.is_set():
+                _stop_event.wait(5)
+            if _stop_event.is_set():
+                break
+            log('Scheduler resumed.')
+            if on_status_change:
+                on_status_change('resumed', None)
+
         cfg  = load_config()
         if not cfg.get('enabled'):
             log('Scheduler disabled — stopping.')
@@ -344,20 +377,25 @@ def _scheduler_loop(on_log: Optional[Callable] = None,
         if on_status_change:
             on_status_change('next', next_dt)
 
-        # Sleep in 30-second increments so we can detect stop/config changes
-        while not _stop_event.is_set():
+        # Sleep in 30-second increments so we can detect stop/config/pause changes
+        while not _stop_event.is_set() and not _pause_event.is_set():
             remaining = (next_dt - datetime.now()).total_seconds()
             if remaining <= 0:
                 break
             _stop_event.wait(min(30, remaining))
 
-        if _stop_event.is_set():
-            break
+        if _stop_event.is_set() or _pause_event.is_set():
+            continue  # re-enter loop top to handle pause or stop
 
         # Fire!
         cfg = load_config()                              # reload in case changed
         if not cfg.get('enabled'):
             break
+
+        # Determine content type for today
+        day_types = cfg.get('day_content_type', {})
+        today_name = day_names.get(datetime.now().weekday(), 'Mon')
+        content_type = day_types.get(today_name, 'li_only')
 
         try:
             if cfg.get('mode') == 'manual' and cfg.get('manual_id'):
@@ -369,7 +407,7 @@ def _scheduler_loop(on_log: Optional[Callable] = None,
                 else:
                     log('Manual post ID {} not found.'.format(cfg['manual_id']), 'warning')
             else:
-                best = pick_best(use_ai=True)
+                best = pick_best(use_ai=True, content_type=content_type)
                 if best:
                     _do_post(best, cfg, on_log)
                 else:
@@ -393,10 +431,11 @@ def _scheduler_loop(on_log: Optional[Callable] = None,
 # ══════════════════════════════════════════════════════════════════════════════
 
 def start_scheduler(on_log=None, on_status_change=None):
-    global _scheduler_thread, _stop_event
+    global _scheduler_thread, _stop_event, _pause_event
     if _scheduler_thread and _scheduler_thread.is_alive():
         return
     _stop_event = threading.Event()
+    _pause_event = threading.Event()
     _scheduler_thread = threading.Thread(
         target=_scheduler_loop,
         args=(on_log, on_status_change),
@@ -407,9 +446,24 @@ def start_scheduler(on_log=None, on_status_change=None):
 
 
 def stop_scheduler():
-    global _stop_event
+    global _stop_event, _pause_event
+    _pause_event.clear()
     _stop_event.set()
+
+
+def pause_scheduler():
+    """Pause the scheduler — thread stays alive but skips firing."""
+    _pause_event.set()
+
+
+def resume_scheduler():
+    """Resume a paused scheduler."""
+    _pause_event.clear()
 
 
 def is_running() -> bool:
     return bool(_scheduler_thread and _scheduler_thread.is_alive())
+
+
+def is_paused() -> bool:
+    return _pause_event.is_set() and is_running()

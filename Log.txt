@@ -439,3 +439,589 @@
 2026-03-07 15:28:58,742  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
 2026-03-07 15:28:59,893  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
 2026-03-07 15:29:01,206  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 19:25:29,149  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 19:25:34,279  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 19:25:34,280  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 19:25:35,398  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 19:25:36,680  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 19:25:37,364  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 19:25:38,411  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 19:25:39,561  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 19:25:41,710  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:25:41,727  INFO      topic_researcher  Reddit synthesis: 10 topics generated
+2026-03-07 19:25:41,727  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 19:25:42,958  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:25:42,958  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 19:25:42,958  INFO      topic_researcher  Saved 18 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 19:25:42,974  INFO      topic_researcher  Research complete: 18 unique topics saved
+2026-03-07 19:25:42,975  INFO      gui  Research results loaded: 18 topics
+2026-03-07 19:25:52,045  INFO      gui  Loading saved research topics...
+2026-03-07 19:25:52,045  INFO      topic_researcher  Loaded 18 saved research topics
+2026-03-07 19:25:52,045  INFO      gui  Research results loaded: 18 topics
+2026-03-07 19:26:03,564  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 19:26:03,564  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 19:26:04,553  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 19:26:06,013  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 19:26:06,762  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 19:26:07,778  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 19:26:08,944  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 19:26:10,960  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:26:10,960  INFO      topic_researcher  Reddit synthesis: 11 topics generated
+2026-03-07 19:26:10,960  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 19:26:12,342  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:26:12,342  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 19:26:12,342  INFO      topic_researcher  Saved 19 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 19:26:12,342  INFO      topic_researcher  Research complete: 19 unique topics saved
+2026-03-07 19:26:12,357  INFO      gui  Research results loaded: 19 topics
+2026-03-07 19:26:19,538  INFO      gui  Fetching trending topics from Groq...
+2026-03-07 19:26:20,094  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:26:27,318  INFO      gui  Loading saved research topics...
+2026-03-07 19:26:27,318  INFO      topic_researcher  Loaded 19 saved research topics
+2026-03-07 19:26:27,318  INFO      gui  Research results loaded: 19 topics
+2026-03-07 19:26:28,274  INFO      gui  Loading saved research topics...
+2026-03-07 19:26:28,274  INFO      topic_researcher  Loaded 19 saved research topics
+2026-03-07 19:26:28,274  INFO      gui  Research results loaded: 19 topics
+2026-03-07 19:29:17,404  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 19:29:17,404  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 19:29:18,792  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 19:29:20,400  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 19:29:21,211  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 19:29:22,202  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 19:29:23,310  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 19:29:25,450  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:29:25,450  INFO      topic_researcher  Reddit synthesis: 10 topics generated
+2026-03-07 19:29:25,450  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 19:29:26,820  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:29:26,820  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 19:29:26,820  INFO      topic_researcher  Saved 18 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 19:29:26,838  INFO      topic_researcher  Research complete: 18 unique topics saved
+2026-03-07 19:29:26,838  INFO      gui  Research results loaded: 18 topics
+2026-03-07 19:29:35,755  INFO      gui  Topic selected from research: "The Future of Technical Skills"
+2026-03-07 19:29:38,498  INFO      gui  Generate requested: "The Future of Technical Skills"
+2026-03-07 19:29:38,510  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 19:29:42,063  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:29:42,063  INFO      gui  Blog generated: "The Future of Technical Skills: Navigating the Ever-Changing Landscape" (4 sections)
+2026-03-07 19:29:42,063  INFO      gui  Generating LinkedIn post...
+2026-03-07 19:29:42,465  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:29:42,475  INFO      gui  LinkedIn post generated.
+2026-03-07 19:29:58,326  INFO      gui  Generate requested: "The Future of Technical Skills"
+2026-03-07 19:29:58,326  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 19:30:02,047  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:30:02,047  INFO      gui  Blog generated: "The Future of Technical Skills: Navigating the Evolving Landscape" (5 sections)
+2026-03-07 19:30:02,047  INFO      gui  Generating LinkedIn post...
+2026-03-07 19:30:02,565  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:30:02,565  INFO      gui  LinkedIn post generated.
+2026-03-07 19:30:08,753  INFO      gui  LinkedIn-only pipeline: "The Future of Technical Skills"
+2026-03-07 19:30:08,769  INFO      gui  LinkedIn Only — using site link: https://www.phoenixsolution.in
+2026-03-07 19:30:08,772  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-the-future-of-technical-skills.txt
+2026-03-07 19:30:08,772  INFO      gui  Tracker entry created — #25
+2026-03-07 19:30:47,337  INFO      gui  Generate requested: "The Future of Technical Skills"
+2026-03-07 19:30:50,765  INFO      gui  Fetching trending topics from Groq...
+2026-03-07 19:30:51,459  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:30:54,742  INFO      gui  Generate requested: "Unlocking Data-Driven Decision Making: A Comprehensive Guide to Implementing Cloud-Based Business Intelligence Solutions"
+2026-03-07 19:30:54,742  INFO      gui  Calling Groq API — blog generation...
+2026-03-07 19:30:58,435  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:30:58,435  INFO      gui  Blog generated: "Unlocking Data-Driven Decision Making: A Comprehensive Guide to Implementing Cloud-Based Business Intelligence Solutions" (5 sections)
+2026-03-07 19:30:58,448  INFO      gui  Generating LinkedIn post...
+2026-03-07 19:30:58,822  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:30:58,822  INFO      gui  LinkedIn post generated.
+2026-03-07 19:31:08,425  INFO      gui  Starting full pipeline for: "Unlocking Data-Driven Decision Making: A Comprehensive Guide to Implementing Cloud-Based Business Intelligence Solutions"
+2026-03-07 19:31:08,425  INFO      gui  Fetching image from Unsplash for slug: cloud-based-business-intelligence
+2026-03-07 19:31:09,524  INFO      image_fetcher  Image saved: c:\Projects\BlogMarketing\Blogs\images\cloud-based-business-intelligence.jpg (by Clayton Cardinalli)
+2026-03-07 19:31:09,524  INFO      gui  Image saved: c:\Projects\BlogMarketing\Blogs\images\cloud-based-business-intelligence.jpg
+2026-03-07 19:31:09,524  INFO      gui  Rendering and saving blog HTML...
+2026-03-07 19:31:09,556  INFO      gui  Blog HTML saved: c:\Projects\BlogMarketing\Blogs\2026-03-07-cloud-based-business-intelligence.html
+2026-03-07 19:31:09,556  INFO      gui  Copying to website repo and updating index + sitemap...
+2026-03-07 19:31:09,588  INFO      website_publisher  Copied blog: c:\Projects\BlogMarketing\Blogs\2026-03-07-cloud-based-business-intelligence.html -> C:\Projects\phoenixsolution\blog\cloud-based-business-intelligence.html
+2026-03-07 19:31:09,603  INFO      website_publisher  Copied image: c:\Projects\BlogMarketing\Blogs\images\cloud-based-business-intelligence.jpg -> C:\Projects\phoenixsolution\blog\images\cloud-based-business-intelligence.jpg
+2026-03-07 19:31:09,603  INFO      website_publisher  Updated blog/index.html with card for cloud-based-business-intelligence
+2026-03-07 19:31:09,619  INFO      website_publisher  Updated sitemap.xml with https://www.phoenixsolution.in/blog/cloud-based-business-intelligence
+2026-03-07 19:31:09,619  INFO      gui  Website updated. Live URL: https://www.phoenixsolution.in/blog/cloud-based-business-intelligence
+2026-03-07 19:31:09,619  INFO      gui  Running git add / commit / push...
+2026-03-07 19:31:13,365  INFO      gui  Starting full pipeline for: "Unlocking Data-Driven Decision Making: A Comprehensive Guide to Implementing Cloud-Based Business Intelligence Solutions"
+2026-03-07 19:31:13,365  INFO      gui  Fetching image from Unsplash for slug: cloud-based-business-intelligence
+2026-03-07 19:31:13,589  INFO      image_fetcher  Image saved: c:\Projects\BlogMarketing\Blogs\images\cloud-based-business-intelligence.jpg (by Clayton Cardinalli)
+2026-03-07 19:31:13,589  INFO      gui  Image saved: c:\Projects\BlogMarketing\Blogs\images\cloud-based-business-intelligence.jpg
+2026-03-07 19:31:13,589  INFO      gui  Rendering and saving blog HTML...
+2026-03-07 19:31:13,589  INFO      gui  Blog HTML saved: c:\Projects\BlogMarketing\Blogs\2026-03-07-cloud-based-business-intelligence.html
+2026-03-07 19:31:13,589  INFO      gui  Copying to website repo and updating index + sitemap...
+2026-03-07 19:31:13,621  INFO      website_publisher  Copied blog: c:\Projects\BlogMarketing\Blogs\2026-03-07-cloud-based-business-intelligence.html -> C:\Projects\phoenixsolution\blog\cloud-based-business-intelligence.html
+2026-03-07 19:31:13,637  INFO      website_publisher  Copied image: c:\Projects\BlogMarketing\Blogs\images\cloud-based-business-intelligence.jpg -> C:\Projects\phoenixsolution\blog\images\cloud-based-business-intelligence.jpg
+2026-03-07 19:31:13,653  INFO      website_publisher  Updated blog/index.html with card for cloud-based-business-intelligence
+2026-03-07 19:31:13,669  INFO      website_publisher  Updated sitemap.xml with https://www.phoenixsolution.in/blog/cloud-based-business-intelligence
+2026-03-07 19:31:13,669  INFO      gui  Website updated. Live URL: https://www.phoenixsolution.in/blog/cloud-based-business-intelligence
+2026-03-07 19:31:13,669  INFO      gui  Running git add / commit / push...
+2026-03-07 19:31:14,582  INFO      website_publisher  git push: rc=0  
+2026-03-07 19:31:14,582  INFO      gui  Git push successful.
+2026-03-07 19:31:14,582  INFO      gui  Saving LinkedIn post TXT with blog URL...
+2026-03-07 19:31:14,582  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-unlocking-data-driven-decision-making-a-compr.txt
+2026-03-07 19:31:14,582  INFO      gui  Writing tracker entry...
+2026-03-07 19:31:14,582  INFO      gui  Pipeline complete — Tracker #26
+2026-03-07 19:31:15,921  INFO      website_publisher  git push: rc=0  
+2026-03-07 19:31:15,921  INFO      gui  Git push successful.
+2026-03-07 19:31:15,921  INFO      gui  Saving LinkedIn post TXT with blog URL...
+2026-03-07 19:31:15,921  INFO      gui  LinkedIn TXT saved: c:\Projects\BlogMarketing\LinkedIn Posts\2026-03-07-unlocking-data-driven-decision-making-a-compr.txt
+2026-03-07 19:31:15,921  INFO      gui  Writing tracker entry...
+2026-03-07 19:31:15,941  INFO      gui  Pipeline complete — Tracker #27
+2026-03-07 19:31:37,821  INFO      gui  Publishing Tracker #27 to LinkedIn...
+2026-03-07 19:31:37,821  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 19:31:38,678  WARNING   linkedin_publisher  LinkedIn Images API requires additional access (426) — posting text-only.
+2026-03-07 19:31:39,771  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7436048424849825792"}
+2026-03-07 19:31:39,785  INFO      gui  LinkedIn publish successful — Tracker #27
+2026-03-07 19:31:56,666  INFO      gui  Batch generate: source=research, mode=li_only, max=20
+2026-03-07 19:31:56,666  INFO      topic_researcher  Loaded 18 saved research topics
+2026-03-07 19:31:56,677  INFO      gui  Generating 1/17: "Simplifying Report Management"
+2026-03-07 19:32:00,141  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:00,685  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:00,685  INFO      gui  Queued as Tracker #28: "Simplifying Report Management"
+2026-03-07 19:32:00,685  INFO      gui  Generating 2/17: "Optimizing OLAP Query Time"
+2026-03-07 19:32:04,083  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:04,471  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:04,484  INFO      gui  Queued as Tracker #29: "Optimizing OLAP Query Time"
+2026-03-07 19:32:04,484  INFO      gui  Generating 3/17: "Effective Workforce Data Management"
+2026-03-07 19:32:07,710  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:08,318  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:08,334  INFO      gui  Queued as Tracker #30: "Effective Workforce Data Management"
+2026-03-07 19:32:08,334  INFO      gui  Generating 4/17: "AI in Business Analytics"
+2026-03-07 19:32:12,455  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:12,996  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:13,026  INFO      gui  Queued as Tracker #31: "AI in Business Analytics"
+2026-03-07 19:32:13,026  INFO      gui  Generating 5/17: "Automating Monthly Reports"
+2026-03-07 19:32:16,291  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:16,855  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:16,871  INFO      gui  Queued as Tracker #32: "Automating Monthly Reports"
+2026-03-07 19:32:16,871  INFO      gui  Generating 6/17: "Implementing Predictive Analytics"
+2026-03-07 19:32:20,446  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:20,993  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:21,009  INFO      gui  Queued as Tracker #33: "Implementing Predictive Analytics"
+2026-03-07 19:32:21,025  INFO      gui  Generating 7/17: "Streamlining Data Pipelines"
+2026-03-07 19:32:24,386  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:25,004  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:25,034  INFO      gui  Queued as Tracker #34: "Streamlining Data Pipelines"
+2026-03-07 19:32:25,034  INFO      gui  Generating 8/17: "Evaluating Data Science Projects"
+2026-03-07 19:32:28,441  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:28,989  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:29,011  INFO      gui  Queued as Tracker #35: "Evaluating Data Science Projects"
+2026-03-07 19:32:29,012  INFO      gui  Generating 9/17: "Managing Model Iterations"
+2026-03-07 19:32:33,112  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:33,522  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:33,544  INFO      gui  Queued as Tracker #36: "Managing Model Iterations"
+2026-03-07 19:32:33,545  INFO      gui  Generating 10/17: "Unified ERP Reporting"
+2026-03-07 19:32:33,595  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:33,596  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:32:39,168  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:39,245  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:39,246  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:32:41,614  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:41,635  INFO      gui  Queued as Tracker #37: "Unified ERP Reporting"
+2026-03-07 19:32:41,636  INFO      gui  Generating 11/17: "KPI-Driven Decision Making"
+2026-03-07 19:32:41,691  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:41,692  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:32:48,276  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:48,345  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:48,347  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:32:50,800  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:50,810  INFO      gui  Queued as Tracker #38: "KPI-Driven Decision Making"
+2026-03-07 19:32:50,810  INFO      gui  Generating 12/17: "Digital Transformation Metrics"
+2026-03-07 19:32:50,872  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:50,872  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:32:57,342  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:57,399  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:57,400  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:32:59,852  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:32:59,883  INFO      gui  Queued as Tracker #39: "Digital Transformation Metrics"
+2026-03-07 19:32:59,884  INFO      gui  Generating 13/17: "Single Source of Truth"
+2026-03-07 19:32:59,944  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:32:59,946  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:33:06,019  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:06,079  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:06,080  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:33:08,449  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:08,484  INFO      gui  Queued as Tracker #40: "Single Source of Truth"
+2026-03-07 19:33:08,484  INFO      gui  Generating 14/17: "KPI Identification"
+2026-03-07 19:33:08,540  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:08,542  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:33:15,499  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:15,566  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:15,567  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:33:17,979  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:18,006  INFO      gui  Queued as Tracker #41: "KPI Identification"
+2026-03-07 19:33:18,006  INFO      gui  Generating 15/17: "Power BI Dashboard Design"
+2026-03-07 19:33:18,056  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:18,056  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:33:23,849  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:23,908  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:23,909  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:33:26,236  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:26,260  INFO      gui  Queued as Tracker #42: "Power BI Dashboard Design"
+2026-03-07 19:33:26,264  INFO      gui  Generating 16/17: "Data-Driven Business"
+2026-03-07 19:33:26,323  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:26,324  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:33:32,772  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:32,833  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:32,836  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:33:35,215  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:35,225  INFO      gui  Queued as Tracker #43: "Data-Driven Business"
+2026-03-07 19:33:35,225  INFO      gui  Generating 17/17: "Data Security Best"
+2026-03-07 19:33:35,288  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:35,289  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 19:33:41,223  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:41,286  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:33:41,286  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:33:43,716  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:43,733  INFO      gui  Queued as Tracker #44: "Data Security Best"
+2026-03-07 19:33:43,735  INFO      gui  Batch complete: 17 posts saved as drafts.
+2026-03-07 19:33:44,065  INFO      gui  Scoring all pending posts via Groq AI...
+2026-03-07 19:33:44,185  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:45,835  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:47,536  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:49,177  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:50,813  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:52,462  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:54,095  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:55,749  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:57,384  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:33:59,107  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:00,749  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:02,371  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:04,029  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:05,681  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:07,325  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:08,976  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:10,632  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:12,269  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:13,893  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:15,527  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:17,230  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:18,868  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:20,522  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:22,153  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:23,803  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:25,445  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:27,074  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:28,716  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:30,352  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:31,991  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:33,553  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:33,554  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:35,686  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:37,278  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:37,278  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:39,401  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:40,965  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:40,965  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:43,097  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:44,669  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:44,669  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:46,812  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:48,385  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:48,386  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:50,507  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:52,079  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:52,079  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:54,196  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:55,778  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 19:34:55,779  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 19:34:57,885  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 19:34:57,901  INFO      gui  Scoring complete — 37 posts ranked.
+2026-03-07 19:35:09,166  INFO      gui  Scheduler config saved. Starting...
+2026-03-07 19:35:09,166  INFO      smart_scheduler  Scheduler started.
+2026-03-07 19:35:09,176  INFO      gui  Scheduler started.
+2026-03-07 19:35:09,182  INFO      smart_scheduler  Next auto-post: Sat 07 Mar 2026  20:00
+2026-03-07 19:35:09,182  INFO      gui  Next auto-post: Sat 07 Mar 2026  20:00
+2026-03-07 19:35:15,342  INFO      gui  Scheduler config saved. Starting...
+2026-03-07 19:35:19,296  INFO      smart_scheduler  Scheduler stopped.
+2026-03-07 19:35:19,296  INFO      gui  Scheduler stopped.
+2026-03-07 20:06:26,288  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 20:06:54,904  INFO      gui  Batch generate: source=calendar, mode=li_only, max=20
+2026-03-07 20:06:54,904  INFO      gui  Generating 1/20: "Data Modeling Fundamentals"
+2026-03-07 20:06:59,168  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:06:59,757  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:06:59,773  INFO      gui  Queued as Tracker #45: "Data Modeling Fundamentals"
+2026-03-07 20:06:59,773  INFO      gui  Generating 2/20: "Power BI Architecture Explained"
+2026-03-07 20:07:04,039  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:04,657  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:04,673  INFO      gui  Queued as Tracker #46: "Power BI Architecture Explained"
+2026-03-07 20:07:04,673  INFO      gui  Generating 3/20: "Automating Data Pipelines"
+2026-03-07 20:07:08,147  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:08,693  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:08,708  INFO      gui  Queued as Tracker #47: "Automating Data Pipelines"
+2026-03-07 20:07:08,708  INFO      gui  Generating 4/20: "AI in Business Intelligence"
+2026-03-07 20:07:11,638  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:12,106  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:12,122  INFO      gui  Queued as Tracker #48: "AI in Business Intelligence"
+2026-03-07 20:07:12,122  INFO      gui  Generating 5/20: "Data Governance for Modern Organizations"
+2026-03-07 20:07:15,136  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:15,176  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:07:15,176  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:07:21,856  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:21,880  INFO      gui  Queued as Tracker #49: "Data Governance for Modern Organizations"
+2026-03-07 20:07:21,887  INFO      gui  Generating 6/20: "Dashboard Design Principles"
+2026-03-07 20:07:21,941  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:07:21,941  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:07:30,777  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:30,838  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:07:30,838  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:07:37,498  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:37,514  INFO      gui  Queued as Tracker #50: "Dashboard Design Principles"
+2026-03-07 20:07:37,514  INFO      gui  Generating 7/20: "Automation for BI Consultants"
+2026-03-07 20:07:37,546  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:07:37,546  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:07:45,336  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:45,397  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:07:45,397  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:07:51,969  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:07:51,985  INFO      gui  Queued as Tracker #51: "Automation for BI Consultants"
+2026-03-07 20:07:51,985  INFO      gui  Generating 8/20: "SQL Optimization Techniques"
+2026-03-07 20:07:52,049  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:07:52,049  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:07:58,541  INFO      gui  Scheduler stopped.
+2026-03-07 20:08:00,884  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:00,974  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:00,975  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:08:04,381  INFO      gui  Batch generate: source=calendar, mode=li_only, max=20
+2026-03-07 20:08:04,397  INFO      gui  Generating 1/20: "SQL Optimization Techniques"
+2026-03-07 20:08:04,458  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:04,458  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:08:07,090  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:07,090  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:08:09,894  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:09,955  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:09,955  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:08:12,171  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:12,171  WARNING   gui  Skipped "SQL Optimization Techniques": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11546, Requested 1080. Please try again in 3.13s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:08:12,171  INFO      gui  Generating 9/20: "Modern Data Warehousing"
+2026-03-07 20:08:12,236  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:12,236  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 20:08:16,062  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:16,062  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:08:19,531  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:19,596  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:19,596  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:08:21,134  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:21,134  WARNING   gui  Skipped "SQL Optimization Techniques": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11680, Requested 1074. Please try again in 3.77s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:08:21,134  INFO      gui  Generating 2/20: "Modern Data Warehousing"
+2026-03-07 20:08:21,198  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:21,198  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:08:25,694  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:25,709  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:08:31,277  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:31,277  INFO      gui  Queued as Tracker #52: "Modern Data Warehousing"
+2026-03-07 20:08:31,277  INFO      gui  Generating 10/20: "Building Data Products"
+2026-03-07 20:08:31,375  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:31,375  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:08:33,063  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:33,112  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:33,112  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:08:35,462  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:35,462  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 20:08:39,223  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:39,223  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:08:41,584  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:41,638  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:41,639  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:08:44,286  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:44,302  WARNING   gui  Skipped "Modern Data Warehousing": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11457, Requested 1079. Please try again in 2.68s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:08:44,302  INFO      gui  Generating 3/20: "Building Data Products"
+2026-03-07 20:08:44,350  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:44,350  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 3.000000 seconds
+2026-03-07 20:08:47,796  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:47,796  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:08:50,972  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:51,032  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:51,032  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:08:51,876  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:51,876  WARNING   gui  Skipped "Building Data Products": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11819, Requested 1075. Please try again in 4.47s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:08:51,887  INFO      gui  Generating 11/20: "AI Agents for Analytics"
+2026-03-07 20:08:51,935  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:51,935  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:08:57,138  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:57,140  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:08:59,168  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:08:59,240  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:08:59,240  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:09:02,201  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:02,201  WARNING   gui  Skipped "Building Data Products": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11394, Requested 1079. Please try again in 2.365s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:02,201  INFO      gui  Generating 4/20: "AI Agents for Analytics"
+2026-03-07 20:09:02,266  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:02,266  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:09:05,365  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:05,365  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:09:08,011  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:08,058  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:08,058  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:09:09,451  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:09,451  WARNING   gui  Skipped "AI Agents for Analytics": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11712, Requested 1077. Please try again in 3.945s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:09,453  INFO      gui  Generating 12/20: "Data Engineering Basics for BI"
+2026-03-07 20:09:09,500  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:09,500  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:09:14,219  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:14,219  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:09:17,371  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:17,435  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:17,435  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:09:18,301  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:18,301  WARNING   gui  Skipped "AI Agents for Analytics": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11815, Requested 1077. Please try again in 4.46s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:18,301  INFO      gui  Generating 5/20: "Data Engineering Basics for BI"
+2026-03-07 20:09:18,375  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:18,376  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 4.000000 seconds
+2026-03-07 20:09:23,547  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:23,547  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 5.000000 seconds
+2026-03-07 20:09:25,391  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:25,448  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:25,448  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 6.000000 seconds
+2026-03-07 20:09:28,621  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:28,621  WARNING   gui  Skipped "Data Engineering Basics for BI": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 11353, Requested 1073. Please try again in 2.13s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:28,621  INFO      gui  Generating 13/20: "Predictive Analytics in Business"
+2026-03-07 20:09:28,684  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:28,684  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:09:31,575  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,576  WARNING   gui  Skipped "Data Engineering Basics for BI": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99272, Requested 1081. Please try again in 5m4.992s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,577  INFO      gui  Generating 6/20: "Predictive Analytics in Business"
+2026-03-07 20:09:31,621  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,622  WARNING   gui  Skipped "Predictive Analytics in Business": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 964. Please try again in 3m23.04s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,623  INFO      gui  Generating 7/20: "Business Process Automation"
+2026-03-07 20:09:31,658  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,658  WARNING   gui  Skipped "Business Process Automation": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 961. Please try again in 3m20.448s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,658  INFO      gui  Generating 8/20: "Self-Service Analytics"
+2026-03-07 20:09:31,708  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,708  WARNING   gui  Skipped "Self-Service Analytics": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 964. Please try again in 3m23.04s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,712  INFO      gui  Generating 9/20: "Data Storytelling for Executives"
+2026-03-07 20:09:31,753  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,753  WARNING   gui  Skipped "Data Storytelling for Executives": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 968. Please try again in 3m26.496s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,758  INFO      gui  Generating 10/20: "AI-Powered Reporting"
+2026-03-07 20:09:31,795  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,796  WARNING   gui  Skipped "AI-Powered Reporting": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 960. Please try again in 3m19.584s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,798  INFO      gui  Generating 11/20: "BI Consulting Framework"
+2026-03-07 20:09:31,836  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,837  WARNING   gui  Skipped "BI Consulting Framework": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 958. Please try again in 3m17.856s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,839  INFO      gui  Generating 12/20: "Real-Time Analytics"
+2026-03-07 20:09:31,880  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,881  WARNING   gui  Skipped "Real-Time Analytics": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 961. Please try again in 3m20.448s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,886  INFO      gui  Generating 13/20: "Data Lake vs Data Warehouse"
+2026-03-07 20:09:31,923  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,923  WARNING   gui  Skipped "Data Lake vs Data Warehouse": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 962. Please try again in 3m21.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,927  INFO      gui  Generating 14/20: "Automation with APIs"
+2026-03-07 20:09:31,979  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:31,980  WARNING   gui  Skipped "Automation with APIs": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 959. Please try again in 3m18.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:31,982  INFO      gui  Generating 15/20: "Data Monetization Strategies"
+2026-03-07 20:09:32,024  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:32,024  WARNING   gui  Skipped "Data Monetization Strategies": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 962. Please try again in 3m21.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:32,027  INFO      gui  Generating 16/20: "AI for Decision Making"
+2026-03-07 20:09:32,074  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:32,074  WARNING   gui  Skipped "AI for Decision Making": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 961. Please try again in 3m20.448s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:32,077  INFO      gui  Generating 17/20: "Becoming a BI Consultant"
+2026-03-07 20:09:32,124  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:32,124  WARNING   gui  Skipped "Becoming a BI Consultant": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 962. Please try again in 3m21.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:32,127  INFO      gui  Generating 18/20: "Analytics Maturity Model"
+2026-03-07 20:09:32,174  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:32,174  WARNING   gui  Skipped "Analytics Maturity Model": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 960. Please try again in 3m19.584s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:32,175  INFO      gui  Generating 19/20: "AI + BI Integration"
+2026-03-07 20:09:32,218  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:32,218  WARNING   gui  Skipped "AI + BI Integration": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 960. Please try again in 3m19.584s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:32,220  INFO      gui  Generating 20/20: "Automation Platforms for Consultants"
+2026-03-07 20:09:32,265  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:32,265  WARNING   gui  Skipped "Automation Platforms for Consultants": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99271, Requested 960. Please try again in 3m19.584s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:32,270  INFO      gui  Batch complete: 0 posts saved as drafts.
+2026-03-07 20:09:34,007  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:34,078  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,078  WARNING   gui  Skipped "Predictive Analytics in Business": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 1075. Please try again in 15m28.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,078  INFO      gui  Generating 14/20: "Business Process Automation"
+2026-03-07 20:09:34,142  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,143  WARNING   gui  Skipped "Business Process Automation": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 961. Please try again in 13m50.304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,147  INFO      gui  Generating 15/20: "Self-Service Analytics"
+2026-03-07 20:09:34,204  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,205  WARNING   gui  Skipped "Self-Service Analytics": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 964. Please try again in 13m52.896s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,208  INFO      gui  Generating 16/20: "Data Storytelling for Executives"
+2026-03-07 20:09:34,263  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,265  WARNING   gui  Skipped "Data Storytelling for Executives": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 968. Please try again in 13m56.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,267  INFO      gui  Generating 17/20: "AI-Powered Reporting"
+2026-03-07 20:09:34,311  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,311  WARNING   gui  Skipped "AI-Powered Reporting": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 960. Please try again in 13m49.44s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,323  INFO      gui  Generating 18/20: "BI Consulting Framework"
+2026-03-07 20:09:34,384  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,384  WARNING   gui  Skipped "BI Consulting Framework": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 958. Please try again in 13m47.712s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,387  INFO      gui  Generating 19/20: "Real-Time Analytics"
+2026-03-07 20:09:34,443  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,444  WARNING   gui  Skipped "Real-Time Analytics": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 961. Please try again in 13m50.304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,445  INFO      gui  Generating 20/20: "Data Lake vs Data Warehouse"
+2026-03-07 20:09:34,500  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:09:34,501  WARNING   gui  Skipped "Data Lake vs Data Warehouse": Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kk169rt5f3r945804292v4z3` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 100000, Requested 962. Please try again in 13m51.168s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2026-03-07 20:09:34,508  INFO      gui  Batch complete: 8 posts saved as drafts.
+2026-03-07 20:09:34,822  INFO      gui  Scoring all pending posts via Groq AI...
+2026-03-07 20:09:34,942  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:36,576  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:38,192  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:39,800  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:41,420  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:43,047  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:44,668  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:46,292  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:47,905  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:49,554  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:51,172  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:52,806  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:54,419  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:56,037  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:57,674  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:09:59,412  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:01,051  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:02,693  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:04,324  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:05,954  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:07,577  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:09,223  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:10,836  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:12,455  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:14,064  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:15,688  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:17,305  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:18,929  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:20,538  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:22,166  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:23,721  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:23,721  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:25,842  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:27,412  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:27,413  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:29,529  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:31,097  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:31,098  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:33,250  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:34,816  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:34,816  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:37,085  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:38,653  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:38,654  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:40,770  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:42,344  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:42,344  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:44,494  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:46,063  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:46,063  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:48,195  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:49,768  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:49,769  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:51,904  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:53,453  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:53,453  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:55,587  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:10:57,158  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:10:57,159  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:10:59,342  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:11:00,909  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:11:00,909  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:11:03,044  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:11:04,597  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:11:04,597  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:11:06,730  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:11:08,316  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:11:08,318  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:11:10,456  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:11:12,021  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:11:12,022  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:11:14,128  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:11:15,691  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-03-07 20:11:15,692  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
+2026-03-07 20:11:17,813  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 20:11:17,825  INFO      gui  Scoring complete — 45 posts ranked.

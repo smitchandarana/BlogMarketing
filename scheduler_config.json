@@ -10,14 +10,23 @@
   "mode": "auto",
   "manual_id": null,
   "post_target": "personal",
-  "dry_run": false,
+  "dry_run": true,
   "days": [
     "Mon",
     "Tue",
     "Wed",
     "Thu",
     "Fri",
-    "Sat"
+    "Sat",
+    "Sun"
   ],
-  "last_posted": null
+  "day_content_type": {
+    "Mon": "blog_and_li",
+    "Tue": "li_only",
+    "Wed": "blog_and_li",
+    "Thu": "li_only",
+    "Fri": "li_only",
+    "Sat": "li_only",
+    "Sun": "li_only"
+  }
 }

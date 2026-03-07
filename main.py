@@ -3,10 +3,11 @@
 Blog Marketing Automation — CLI entry point.
 
 Commands:
-    python main.py generate [--topic "..."] [--publish]
-    python main.py publish  [--id <post_id>]
-    python main.py schedule [--list] [--set-id <id> --status <status>]
-                            [--hour <h>] [--minute <m>]
+    python main.py generate  [--topic "..."] [--publish]
+    python main.py linkedin  [--topic "..."] [--publish]
+    python main.py publish   [--id <post_id>]
+    python main.py schedule  [--list] [--set-id <id> --status <status>]
+                             [--hour <h>] [--minute <m>]
 """
 
 import argparse
@@ -66,11 +67,9 @@ def _imports():
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def _do_publish(m, post_id: int, full_text: str, image_path=None):
-    import os
     try:
         print(f'  Publishing post ID {post_id} to LinkedIn...')
-        org_urn = os.getenv('LINKEDIN_ORG_URN', '').strip() or None
-        m['publish_post'](full_text, image_path=image_path, org_urn=org_urn)
+        m['publish_post'](full_text, image_path=image_path)
         m['update_post_status'](post_id, 'posted')
         logger.info('Published post ID %d', post_id)
         print('  Done — post is live.')
@@ -191,6 +190,61 @@ def cmd_publish(args, m):
         _do_publish(m, post['id'], full_text)
 
 
+def cmd_linkedin(args, m):
+    """Generate a standalone LinkedIn post (no blog needed)."""
+    topic = args.topic
+
+    if not topic:
+        print('Fetching trending topic ideas...')
+        topics = m['get_trending_topics']()
+        print()
+        for i, t in enumerate(topics, 1):
+            print(f'  {i}. {t}')
+        print()
+        choice = input('Select a number or type your own topic: ').strip()
+        if choice.isdigit() and 1 <= int(choice) <= len(topics):
+            topic = topics[int(choice) - 1]
+        else:
+            topic = choice
+
+    if not topic:
+        print('No topic provided. Exiting.')
+        return
+
+    print(f'\nGenerating standalone LinkedIn post: "{topic}"')
+    li = m['generate_linkedin_post'](topic, None)  # standalone mode
+    print(f'  Caption : {len(li["caption"].split())} words  |  Hashtags: {li["hashtags"]}')
+
+    publish_date = datetime.now().strftime('%Y-%m-%d')
+    li_path = m['save_linkedin_post'](li, topic, publish_date=publish_date)
+    print(f'  LI file : {li_path}')
+
+    post_id = m['insert_post'](
+        topic=topic,
+        blog_path='',
+        linkedin_text=li['caption'],
+        hashtags=li['hashtags'],
+        status='draft',
+        publish_date=publish_date,
+    )
+
+    m['tracker_add_entry'](
+        topic=topic,
+        blog_path='',
+        linkedin_path=li_path,
+        hashtags=li['hashtags'],
+        website_url='',
+    )
+
+    print(f'\nStored as post ID {post_id} (status: draft)')
+    print('\n--- LinkedIn Preview ---')
+    print(li['full_post'])
+    print('------------------------\n')
+
+    if args.publish:
+        _do_publish(m, post_id, li['full_post'])
+
+
 def cmd_schedule(args, m):
     if args.list:
         posts = m['get_all_posts']()
@@ -229,6 +283,11 @@ def main():
     gen.add_argument('--topic', '-t', help='Blog topic (omit to pick from trending list)')
     gen.add_argument('--publish', '-p', action='store_true', help='Publish to LinkedIn immediately')
 
+    # linkedin (standalone post, no blog)
+    li_cmd = sub.add_parser('linkedin', help='Generate standalone LinkedIn post (no blog)')
+    li_cmd.add_argument('--topic', '-t', help='Post topic (omit to pick from trending list)')
+    li_cmd.add_argument('--publish', '-p', action='store_true', help='Publish to LinkedIn immediately')
+
     # publish
     pub = sub.add_parser('publish', help='Publish post(s) to LinkedIn')
     pub.add_argument('--id', type=int, help='Publish a specific post by ID (otherwise publishes all scheduled)')
@@ -248,6 +307,8 @@ def main():
 
     if args.command == 'generate':
         cmd_generate(args, m)
+    elif args.command == 'linkedin':
+        cmd_linkedin(args, m)
     elif args.command == 'publish':
         cmd_publish(args, m)
     elif args.command == 'schedule':

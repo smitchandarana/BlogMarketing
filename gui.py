@@ -133,6 +133,7 @@ class PhoenixApp(tk.Tk):
         self._blog_url       = ''
         self._log_widget     = None
         self._research_topics = []    # list of topic dicts from last research run
+        self._cancel_event   = threading.Event()  # shared cancel for long operations
 
         self._build_ui()
         self._setup_logging()
@@ -269,6 +270,9 @@ class PhoenixApp(tk.Tk):
         self._lbl(left, 'ACTIONS')
         self._btn_research = self._btn(left, 'Run Research', self._on_run_research)
         self._btn_research.pack(fill='x', pady=(0, 4))
+        self._btn_research_stop = self._btn(left, 'Stop Research',
+                                             self._on_stop_operation, style='ghost')
+        self._btn_research_stop.pack(fill='x', pady=(0, 4))
         self._btn(left, 'Load Saved', self._on_load_saved_research,
                   style='ghost').pack(fill='x', pady=(0, 4))
         self._btn(left, 'Clear Results', self._on_clear_research,
@@ -343,6 +347,10 @@ class PhoenixApp(tk.Tk):
             act_row, '  Use This Topic  \u2192', self._on_use_research_topic)
         self._btn_use_topic.pack(side='left', padx=(0, 8))
         self._btn_use_topic.configure(state='disabled', fg=WHITE40, cursor='')
+        self._btn_send_to_sched = self._btn(
+            act_row, 'Send All to Scheduler', self._on_send_research_to_scheduler,
+            style='ghost')
+        self._btn_send_to_sched.pack(side='left', padx=(0, 8))
 
     def _on_run_research(self):
         selected_subs = [sub for sub, var in self._research_sub_vars.items() if var.get()]
@@ -352,6 +360,7 @@ class PhoenixApp(tk.Tk):
             messagebox.showwarning('No sources', 'Select at least one source.')
             return
 
+        self._cancel_event.clear()
         self._log('Starting research: {} subreddits + LinkedIn={}'.format(
             len(selected_subs), include_li))
         self._research_progress.start(12)
@@ -367,14 +376,17 @@ class PhoenixApp(tk.Tk):
 
         def _fail(err):
             self._research_progress.stop()
-            self._set_status('Research error', RED)
-            self._log('Research failed: {}'.format(err), 'error')
-            from tkinter import messagebox
-            messagebox.showerror('Research Failed', str(err))
+            self._set_status('Research error — will retry in 60s', RED)
+            self._log('Research failed: {} — waiting 60s before allowing retry.'.format(err), 'error')
 
         def _worker():
             try:
+                if self._cancel_event.is_set():
+                    return
                 result = _work()
+                if self._cancel_event.is_set():
+                    self.after(0, lambda: self._set_status('Cancelled', ORANGE))
+                    return
                 self.after(0, lambda r=result: _done(r))
             except Exception as exc:
                 self.after(0, lambda e=exc: _fail(e))
@@ -461,6 +473,26 @@ class PhoenixApp(tk.Tk):
         self._research_last_run_lbl.configure(
             text='Last run: {}'.format(last) if last else 'Last run: never')
 
+    def _on_stop_operation(self):
+        """Cancel any in-progress long-running operation (research, batch gen, scoring)."""
+        self._cancel_event.set()
+        self._log('Operation cancelled by user.')
+        self._progress.stop()
+        self._research_progress.stop()
+        self._sched_progress.stop()
+        self._set_status('Cancelled', ORANGE)
+
+    def _on_send_research_to_scheduler(self):
+        """Carry research topics forward to scheduler batch generate."""
+        if not self._research_topics:
+            messagebox.showinfo('No topics', 'Run Research first to discover topics.')
+            return
+        # Switch to scheduler tab and set source to 'research'
+        self._sched_gen_source.set('research')
+        count = len(self._research_topics)
+        self._nb.select(4)  # scheduler tab index
+        self._log('{} research topics available for batch generate.'.format(count))
+
     # ══════════════════════════════════════════════════════════════════════════
     # TAB 2 — GENERATE
     # ══════════════════════════════════════════════════════════════════════════
@@ -521,6 +553,9 @@ class PhoenixApp(tk.Tk):
         self._lbl(left, 'ACTIONS')
         self._btn_gen = self._btn(left, 'Generate Blog + LinkedIn Post', self._on_generate)
         self._btn_gen.pack(fill='x', pady=(0, 4))
+        self._btn_li_only = self._btn(left, 'Generate LinkedIn Post Only',
+                                       self._on_generate_li_only, style='ghost')
+        self._btn_li_only.pack(fill='x', pady=(0, 4))
 
         self._btn_edit = self._btn(left, 'Edit Blog Sections', self._on_edit_blog,
                                    style='ghost')
@@ -705,6 +740,61 @@ class PhoenixApp(tk.Tk):
         for btn, fg in [(self._btn_approve, WHITE), (self._btn_edit, WHITE)]:
             btn.configure(state='normal', fg=fg, cursor='hand2')
         self._set_status('Generated: {}'.format(blog['title'][:50]), GREEN)
+
+    # ── LinkedIn-only generation ────────────────────────────────────────────
+
+    def _on_generate_li_only(self):
+        """Generate a standalone LinkedIn post without a blog."""
+        topic = self._topic_var.get().strip()
+        if not topic:
+            messagebox.showwarning('No topic',
+                'Select a calendar day, a trending topic, or enter a custom topic.')
+            return
+
+        self._log('LinkedIn-only post requested: "{}"'.format(topic))
+
+        def _work():
+            m  = _m()
+            self._log('Calling Groq API — standalone LinkedIn post...')
+            li = m['generate_linkedin_post'](topic, None)  # standalone mode
+            self._log('LinkedIn post generated ({} words).'.format(
+                len(li['caption'].split())))
+
+            # Save and track
+            from datetime import datetime
+            publish_date = datetime.now().strftime('%Y-%m-%d')
+            li_path = m['save_linkedin_post'](li, topic, publish_date=publish_date)
+            post_id = m['insert_post'](
+                topic=topic, blog_path='',
+                linkedin_text=li['caption'], hashtags=li['hashtags'],
+                status='draft', publish_date=publish_date,
+            )
+            m['tracker_add_entry'](
+                topic=topic, blog_path='', linkedin_path=li_path,
+                hashtags=li['hashtags'], website_url='',
+            )
+            return li, li_path, post_id
+
+        self._run_async(
+            fn=_work,
+            callback=self._on_generate_li_only_done,
+            label='Generating LinkedIn post via Groq...',
+            err='LinkedIn generation failed. Check GROQ_API_KEY in your .env file.',
+        )
+
+    def _on_generate_li_only_done(self, result):
+        li, li_path, post_id = result
+        self._blog_data  = None
+        self._li_data    = li
+        self._image_info = None
+        self._blog_url   = ''
+
+        self._set_text(self._blog_prev,
+                       '(No blog generated — LinkedIn-only post)\n\n'
+                       'Post ID: {}\nSaved: {}'.format(post_id, li_path),
+                       readonly=True)
+        self._set_text(self._li_prev, li['full_post'])
+        self._set_status('LinkedIn post generated (ID {})'.format(post_id), GREEN)
 
     # ── Edit blog dialog ──────────────────────────────────────────────────────
 
@@ -1551,34 +1641,35 @@ SUPPORT
                  highlightbackground=BORDER).pack(side='left', padx=(6, 0))
         self._sched_manual_row.pack_forget()   # hidden by default
 
-        # ── Post target ───────────────────────────────────────────────────────
-        self._lbl(left, 'POST TARGET')
-        tgt_card = self._card(left, pady=(0, 4))
+        # ── Post target (personal only — company posting disabled) ────────────
         self._sched_target = tk.StringVar(value='personal')
-        for label, val in [('Personal Profile only', 'personal'),
-                            ('Company Page only',    'company'),
-                            ('Personal + Company',   'both')]:
-            tk.Radiobutton(
-                tgt_card, text=label, variable=self._sched_target, value=val,
-                bg=NAVY_MID, fg=WHITE, selectcolor=NAVY_LIGHT,
-                activebackground=NAVY_MID, activeforeground=CYAN,
-                font=(FONT, 9), anchor='w', borderwidth=0, highlightthickness=0,
-            ).pack(fill='x', padx=10, pady=2)
 
-        # ── Active days ───────────────────────────────────────────────────────
-        self._lbl(left, 'ACTIVE DAYS')
+        # ── Active days + content type per day ────────────────────────────────
+        self._lbl(left, 'ACTIVE DAYS & CONTENT TYPE')
         days_card = self._card(left, pady=(0, 4))
         self._sched_day_vars = {}
+        self._sched_day_type_vars = {}
         default_days = {'Mon', 'Tue', 'Wed', 'Thu', 'Fri'}
+        default_blog_days = {'Mon', 'Wed'}
         for day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']:
+            row = tk.Frame(days_card, bg=NAVY_MID)
+            row.pack(fill='x', padx=8, pady=1)
             var = tk.BooleanVar(value=day in default_days)
             self._sched_day_vars[day] = var
             tk.Checkbutton(
-                days_card, text=day, variable=var,
+                row, text=day, variable=var, width=4,
                 bg=NAVY_MID, fg=WHITE, selectcolor=NAVY_LIGHT,
                 activebackground=NAVY_MID, activeforeground=CYAN,
                 font=(FONT, 9), anchor='w', borderwidth=0, highlightthickness=0,
-            ).pack(side='left', padx=(8, 0), pady=4)
+            ).pack(side='left')
+            type_var = tk.StringVar(
+                value='blog_and_li' if day in default_blog_days else 'li_only')
+            self._sched_day_type_vars[day] = type_var
+            ttk.Combobox(
+                row, textvariable=type_var, width=15,
+                values=['LinkedIn Only', 'Blog + LinkedIn'],
+                state='readonly',
+            ).pack(side='left', padx=(4, 0))
 
         # ── Options ───────────────────────────────────────────────────────────
         self._lbl(left, 'OPTIONS')
@@ -1596,6 +1687,9 @@ SUPPORT
         self._btn_sched_start = self._btn(left, '  Start Scheduler  ',
                                           self._on_sched_start)
         self._btn_sched_start.pack(fill='x', pady=(0, 4))
+        self._btn_sched_pause = self._btn(left, 'Pause Scheduler',
+                                          self._on_sched_pause, style='ghost')
+        self._btn_sched_pause.pack(fill='x', pady=(0, 4))
         self._btn_sched_stop = self._btn(left, 'Stop Scheduler',
                                          self._on_sched_stop, style='ghost')
         self._btn_sched_stop.pack(fill='x', pady=(0, 4))
@@ -1684,6 +1778,8 @@ SUPPORT
                  bg=NAVY_MID, fg=WHITE40).pack(side='left', padx=(0, 14))
         self._btn(cnt_row, 'Generate & Queue',
                   self._on_sched_generate_batch, style='ghost').pack(side='left')
+        self._btn(cnt_row, 'Stop',
+                  self._on_stop_operation, style='ghost').pack(side='left', padx=(4, 0))
         self._sched_gen_lbl = tk.Label(cnt_row, text='', font=(FONT, 8),
                                        bg=NAVY_MID, fg=CYAN)
         self._sched_gen_lbl.pack(side='left', padx=(10, 0))
@@ -1783,11 +1879,16 @@ SUPPORT
         self._on_sched_mode_change()
         if cfg.get('manual_id'):
             self._sched_manual_id.set(str(cfg['manual_id']))
-        self._sched_target.set(cfg.get('post_target', 'personal'))
+        self._sched_target.set('personal')  # always personal
         self._sched_dry_run.set(cfg.get('dry_run', False))
         days = set(cfg.get('days', []))
+        day_types = cfg.get('day_content_type', {})
         for d, var in self._sched_day_vars.items():
             var.set(d in days)
+        # Restore day content types
+        for d, tvar in self._sched_day_type_vars.items():
+            saved = day_types.get(d, 'li_only')
+            tvar.set('Blog + LinkedIn' if saved == 'blog_and_li' else 'LinkedIn Only')
         # Restore saved slots
         saved_slots = cfg.get('slots', [])
         if saved_slots:
@@ -1805,14 +1906,18 @@ SUPPORT
             val = var.get().strip()
             if val:
                 slots.append(val)
+        day_content_type = {}
+        for d, tvar in self._sched_day_type_vars.items():
+            day_content_type[d] = 'blog_and_li' if 'Blog' in tvar.get() else 'li_only'
         return {
-            'enabled':     True,
-            'slots':       slots,
-            'mode':        self._sched_mode.get(),
-            'manual_id':   self._sched_manual_id.get().strip() or None,
-            'post_target': self._sched_target.get(),
-            'dry_run':     self._sched_dry_run.get(),
-            'days':        [d for d, var in self._sched_day_vars.items() if var.get()],
+            'enabled':           True,
+            'slots':             slots,
+            'mode':              self._sched_mode.get(),
+            'manual_id':         self._sched_manual_id.get().strip() or None,
+            'post_target':       'personal',
+            'dry_run':           self._sched_dry_run.get(),
+            'days':              [d for d, var in self._sched_day_vars.items() if var.get()],
+            'day_content_type':  day_content_type,
         }
 
     # ── Scheduler-specific async runner ──────────────────────────────────────
@@ -1870,10 +1975,20 @@ SUPPORT
                         self._sched_next_lbl.configure(
                             text='Last fired: {}'.format(
                                 dt.strftime('%H:%M') if dt else '—'))
+                    elif event == 'paused':
+                        self._sched_status_lbl.configure(
+                            text='Scheduler: PAUSED', fg=ORANGE)
+                        self._sched_next_lbl.configure(text='Paused — click Resume to continue')
+                        self._btn_sched_pause.configure(text='Resume Scheduler')
+                    elif event == 'resumed':
+                        self._sched_status_lbl.configure(
+                            text='Scheduler: RUNNING', fg=GREEN)
+                        self._btn_sched_pause.configure(text='Pause Scheduler')
                     elif event == 'stopped':
                         self._sched_status_lbl.configure(
                             text='Scheduler: stopped', fg=WHITE40)
                         self._sched_next_lbl.configure(text='')
+                        self._btn_sched_pause.configure(text='Pause Scheduler')
                 self.after(0, _update)
 
             sched.start_scheduler(on_log=_on_log, on_status_change=_on_status)
@@ -1895,19 +2010,42 @@ SUPPORT
             sched.stop_scheduler()
             self._sched_status_lbl.configure(text='Scheduler: stopped', fg=WHITE40)
             self._sched_next_lbl.configure(text='')
+            self._btn_sched_pause.configure(text='Pause Scheduler')
             self._log('Scheduler stopped.')
         except Exception as exc:
             self._log('Scheduler stop failed: {}'.format(exc), 'error')
             messagebox.showerror('Scheduler Error', str(exc))
 
+    def _on_sched_pause(self):
+        try:
+            import smart_scheduler as sched
+            if sched.is_paused():
+                sched.resume_scheduler()
+                self._sched_status_lbl.configure(text='Scheduler: RUNNING', fg=GREEN)
+                self._btn_sched_pause.configure(text='Pause Scheduler')
+                self._log('Scheduler resumed.')
+            elif sched.is_running():
+                sched.pause_scheduler()
+                self._sched_status_lbl.configure(text='Scheduler: PAUSED', fg=ORANGE)
+                self._sched_next_lbl.configure(text='Paused — click Resume to continue')
+                self._btn_sched_pause.configure(text='Resume Scheduler')
+                self._log('Scheduler paused.')
+            else:
+                self._log('Scheduler is not running.', 'warning')
+        except Exception as exc:
+            self._log('Scheduler pause/resume failed: {}'.format(exc), 'error')
+            messagebox.showerror('Scheduler Error', str(exc))
+
     def _on_sched_score(self):
+        self._cancel_event.clear()
         self._log('Scoring all pending posts via Groq AI...')
 
         def _work():
             import smart_scheduler as sched
-            return sched.score_all_pending(use_ai=True)
+            return sched.score_all_pending(use_ai=True, cancel_event=self._cancel_event)
 
         def _done(scored):
+            cancelled = self._cancel_event.is_set()
             self._score_tree.delete(*self._score_tree.get_children())
             self._sched_scored_cache = scored
             for i, row in enumerate(scored, 1):
@@ -1924,9 +2062,13 @@ SUPPORT
                 ), tags=(tag,))
             count = len(scored)
             self._sched_score_count.configure(
-                text='{} post{} scored'.format(count, 's' if count != 1 else ''))
-            self._log('Scoring complete — {} posts ranked.'.format(count))
-            if count == 0:
+                text='{} post{} scored{}'.format(count, 's' if count != 1 else '',
+                                                  ' (cancelled)' if cancelled else ''))
+            if cancelled:
+                self._log('Scoring cancelled — {} posts scored before stop.'.format(count))
+            else:
+                self._log('Scoring complete — {} posts ranked.'.format(count))
+            if count == 0 and not cancelled:
                 messagebox.showinfo('No posts', 'No draft/scheduled posts found.\nGenerate some posts first.')
 
         self._sched_run_async(fn=_work, callback=_done,
@@ -1941,6 +2083,7 @@ SUPPORT
         except ValueError:
             max_count = 5
 
+        self._cancel_event.clear()  # reset cancel flag
         self._log('Batch generate: source={}, mode={}, max={}'.format(
             source, mode, max_count or 'all'))
         self._sched_gen_lbl.configure(text='Working…', fg=ORANGE)
@@ -1976,12 +2119,19 @@ SUPPORT
                 raise ValueError('No new topics to generate (all already in tracker).')
 
             generated = []
+            import time as _time
             for i, td in enumerate(topics_data, 1):
+                if self._cancel_event.is_set():
+                    self._log('Batch generate cancelled by user.')
+                    break
                 topic = td['topic']
                 self._log('Generating {}/{}: "{}"'.format(
                     i, len(topics_data), topic[:50]))
                 try:
                     blog = m['generate_blog'](topic, td['angle'], td['keywords'])
+                    _time.sleep(2)  # rate limit between API calls
+                    if self._cancel_event.is_set():
+                        break
                     li   = m['generate_linkedin_post'](topic, blog)
                     full_post = li.get('full_post', '')
                     parts_ = full_post.rsplit('\n\n', 1)
@@ -2010,8 +2160,13 @@ SUPPORT
 
                     generated.append({'id': tid, 'topic': topic})
                     self._log('Queued as Tracker #{}: "{}"'.format(tid, topic[:50]))
+                    # Rate limit between posts
+                    if i < len(topics_data):
+                        _time.sleep(2)
                 except Exception as exc:
-                    self._log('Skipped "{}": {}'.format(topic[:40], exc), 'warning')
+                    self._log('Failed "{}": {} — waiting 60s before next attempt.'.format(
+                        topic[:40], exc), 'warning')
+                    _time.sleep(60)  # wait 60s on failure before continuing
 
             return generated
 
