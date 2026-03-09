@@ -1,42 +1,200 @@
 [
   {
     "type": "rss",
-    "category": "digital-marketing",
+    "category": "data-analytics",
     "feeds": [
-      "https://feeds.feedburner.com/MarketingLand",
-      "https://searchengineland.com/feed",
-      "https://www.searchenginejournal.com/feed",
-      "https://neilpatel.com/blog/rss",
-      "https://blog.hubspot.com/marketing/rss.xml"
+      "https://towardsdatascience.com/feed",
+      "https://www.kdnuggets.com/feed",
+      "https://analyticsvidhya.com/blog/feed/",
+      "https://www.datanami.com/feed/",
+      "https://www.dataversity.net/feed/",
+      "https://www.information-management.com/feed",
+      "https://tdwi.org/rss-feeds/articles.aspx"
     ]
   },
   {
     "type": "rss",
-    "category": "ai-tech",
+    "category": "ai-ml",
     "feeds": [
+      "https://openai.com/news/rss.xml",
+      "https://blog.google/technology/ai/rss/",
+      "https://huggingface.co/blog/feed.xml",
+      "https://venturebeat.com/category/ai/feed/",
+      "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "https://machinelearningmastery.com/blog/feed/",
+      "https://www.deepmind.com/blog/rss.xml"
+    ]
+  },
+  {
+    "type": "rss",
+    "category": "digital-marketing",
+    "feeds": [
+      "https://blog.hubspot.com/marketing/rss.xml",
+      "https://neilpatel.com/blog/rss",
+      "https://www.searchenginejournal.com/feed/",
+      "https://searchengineland.com/feed",
+      "https://ahrefs.com/blog/feed/",
+      "https://www.semrush.com/blog/feed/",
+      "https://moz.com/blog/feed",
+      "https://contentmarketinginstitute.com/feed/",
+      "https://buffer.com/resources/rss/",
+      "https://sproutsocial.com/insights/feed/"
+    ]
+  },
+  {
+    "type": "rss",
+    "category": "business-tech",
+    "feeds": [
+      "https://feeds.hbr.org/harvardbusiness",
+      "https://www.mckinsey.com/featured-insights/rss",
+      "https://www.entrepreneur.com/latest.rss",
       "https://techcrunch.com/feed/",
-      "https://venturebeat.com/feed/",
-      "https://www.theverge.com/rss/index.xml"
+      "https://www.infoq.com/feed/?utm_source=infoq&utm_medium=rss",
+      "https://www.cio.com/feed/",
+      "https://www.computerworld.com/feed/"
+    ]
+  },
+  {
+    "type": "rss",
+    "category": "cloud-data-engineering",
+    "feeds": [
+      "https://aws.amazon.com/blogs/big-data/feed/",
+      "https://azure.microsoft.com/en-us/blog/topics/analytics/feed/",
+      "https://engineering.linkedin.com/blog.rss",
+      "https://databricks.com/blog/feed",
+      "https://www.snowflake.com/blog/feed/"
+    ]
+  },
+  {
+    "type": "rss",
+    "category": "india-tech",
+    "feeds": [
+      "https://yourstory.com/feed",
+      "https://inc42.com/feed/",
+      "https://economictimes.indiatimes.com/tech/rss"
     ]
   },
   {
     "type": "reddit",
-    "category": "marketing",
+    "category": "data-science",
+    "subreddits": [
+      "datascience",
+      "dataengineering",
+      "BusinessIntelligence",
+      "analytics",
+      "PowerBI",
+      "tableau",
+      "learnmachinelearning",
+      "MLOps",
+      "statistics",
+      "bigdata",
+      "dataisbeautiful",
+      "deeplearning",
+      "rstats",
+      "SQL"
+    ],
+    "limit": 15
+  },
+  {
+    "type": "reddit",
+    "category": "ai-ml",
+    "subreddits": [
+      "MachineLearning",
+      "artificial",
+      "ChatGPT",
+      "LocalLLaMA",
+      "singularity",
+      "OpenAI",
+      "LLMDevs",
+      "ArtificialIntelligence",
+      "AItools",
+      "StableDiffusion",
+      "PromptEngineering",
+      "AutoGPT",
+      "LangChain"
+    ],
+    "limit": 15
+  },
+  {
+    "type": "reddit",
+    "category": "digital-marketing",
     "subreddits": [
       "digital_marketing",
       "SEO",
-      "socialmedia"
+      "marketing",
+      "content_marketing",
+      "socialmedia",
+      "PPC",
+      "EmailMarketing",
+      "copywriting",
+      "GoogleAnalytics",
+      "AskMarketing",
+      "Blogging",
+      "AffiliateMarketing",
+      "LinkedInMarketing",
+      "seogrowth"
+    ],
+    "limit": 12
+  },
+  {
+    "type": "reddit",
+    "category": "business-startup",
+    "subreddits": [
+      "entrepreneur",
+      "startups",
+      "smallbusiness",
+      "SideProject",
+      "AskMarketing",
+      "sales",
+      "consulting",
+      "freelance",
+      "business",
+      "indiebiz",
+      "fintech",
+      "SaaS"
     ],
     "limit": 10
   },
   {
-    "type": "reddit",
-    "category": "ai-tech",
-    "subreddits": [
-      "artificial",
-      "MachineLearning",
-      "webdev"
-    ],
+    "type": "hackernews",
+    "category": "tech-trending",
+    "feed": "topstories",
+    "limit": 25
+  },
+  {
+    "type": "hackernews",
+    "category": "product-launches",
+    "feed": "showstories",
+    "limit": 15
+  },
+  {
+    "type": "github_trending",
+    "category": "ai-ml",
+    "language": "python",
+    "since": "daily",
+    "limit": 15
+  },
+  {
+    "type": "github_trending",
+    "category": "web-dev",
+    "language": "javascript",
+    "since": "weekly",
     "limit": 10
+  },
+  {
+    "type": "google_trends",
+    "category": "trending",
+    "geo": "IN",
+    "limit": 20
+  },
+  {
+    "type": "producthunt",
+    "category": "product-launches",
+    "limit": 15
+  },
+  {
+    "type": "linkedin_hashtags",
+    "category": "linkedin-trends",
+    "hashtags_file": "Prompts/Hashtags.txt"
   }
 ]

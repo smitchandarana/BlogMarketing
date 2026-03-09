@@ -86,8 +86,8 @@ def _validate_source(source_def: dict, index: int) -> str | None:
     # Type-specific validation
     if source_type == "rss" and not source_def.get("feeds"):
         return f"entry #{index} (type=rss): missing 'feeds' field"
-    if source_type == "reddit" and not source_def.get("subreddit"):
-        return f"entry #{index} (type=reddit): missing 'subreddit' field"
+    if source_type == "reddit" and not source_def.get("subreddits"):
+        return f"entry #{index} (type=reddit): missing 'subreddits' field"
     return None
 
 
