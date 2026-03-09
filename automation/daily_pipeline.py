@@ -256,10 +256,10 @@ def run(
                 from website_publisher import publish_to_website, git_push_website
                 try:
                     blog_url = publish_to_website(
-                        blog_path=blog_path,
-                        image_path=image_info['local_path'] if image_info else None,
                         blog_data=blog_data,
+                        src_html_path=blog_path,
                         publish_date=publish_date,
+                        image_local=image_info['local_path'] if image_info else None,
                     )
                     result['blog_url'] = blog_url
                     result['published_website'] = True
@@ -296,7 +296,7 @@ def run(
             from linkedin_generator import generate_linkedin_post, save_linkedin_post
             li_data = generate_linkedin_post(topic, blog_data=blog_data)
             li_path = save_linkedin_post(
-                li_data, topic, publish_date, blog_url or ''
+                li_data, topic, publish_date=publish_date, blog_url=blog_url or ''
             )
             result['linkedin_path'] = li_path
             log(f'LinkedIn post saved: {li_path}')

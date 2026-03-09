@@ -1095,3 +1095,4 @@
 2026-03-07 23:37:01,389  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
 2026-03-07 23:37:02,562  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7436110176379891714"}
 2026-03-07 23:37:02,562  INFO      gui  LinkedIn publish successful — Tracker #29
+2026-03-09 21:37:15,873  INFO      gui  Phoenix Blog Marketing started
