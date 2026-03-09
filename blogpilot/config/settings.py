@@ -16,6 +16,13 @@ import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
+# Load .env before any os.getenv() calls so secrets are available at import time.
+try:
+    from dotenv import load_dotenv as _load_dotenv
+    _load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
+except ImportError:
+    pass  # python-dotenv not installed — rely on process environment
+
 logger = logging.getLogger(__name__)
 
 _ROOT = Path(__file__).resolve().parents[2]

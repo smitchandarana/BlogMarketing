@@ -1,0 +1,390 @@
+{
+  "timestamp": "2026-03-09T23:30:11.868864",
+  "results": [
+    {
+      "test": "page-title",
+      "status": "PASS",
+      "detail": "Phoenix Intelligence Engine"
+    },
+    {
+      "test": "sidebar-exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "nav-links-count",
+      "status": "PASS",
+      "detail": "11 links"
+    },
+    {
+      "test": "dashboard-default-active",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "server-badge",
+      "status": "PASS",
+      "detail": "\u25cf Server Online"
+    },
+    {
+      "test": "statusbar-exists",
+      "status": "PASS",
+      "detail": "\u25cf Online v1.0.0\n|\n\u25cf sign 4h\n\u25cf insi 6h\n\u25cf cont 12h\n\u25cf dist 15m\n"
+    },
+    {
+      "test": "no-js-errors-on-load",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "stat-card-stat-signals",
+      "status": "PASS",
+      "detail": "3769"
+    },
+    {
+      "test": "stat-card-stat-insights",
+      "status": "PASS",
+      "detail": "62"
+    },
+    {
+      "test": "stat-card-stat-content",
+      "status": "PASS",
+      "detail": "28"
+    },
+    {
+      "test": "stat-card-stat-queue",
+      "status": "PASS",
+      "detail": "0"
+    },
+    {
+      "test": "dashboard-refresh-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "dashboard-log-populated",
+      "status": "PASS",
+      "detail": "[11:28:53 PM] API v1.0.0 \u2014 online\n[11:29:00 PM] API v1.0.0 \u2014 online"
+    },
+    {
+      "test": "statusbar-workers",
+      "status": "WARN",
+      "detail": "\u25cf sign 4h\n\u25cf insi 6h\n\u25cf cont 12h\n\u25cf dist 15m\n\u25cf anal 12h"
+    },
+    {
+      "test": "signals-worker-status-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "signals-list-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "signals-table-populated",
+      "status": "PASS",
+      "detail": "21 rows"
+    },
+    {
+      "test": "signals-no-js-errors",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "insights-worker-status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "insights-table-populated",
+      "status": "PASS",
+      "detail": "21 rows"
+    },
+    {
+      "test": "content-topic-input-exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "content-topic-input-type",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "content-checkbox-ct-blog",
+      "status": "PASS",
+      "detail": "checked=True"
+    },
+    {
+      "test": "content-checkbox-ct-linkedin",
+      "status": "PASS",
+      "detail": "checked=True"
+    },
+    {
+      "test": "content-checkbox-ct-linked",
+      "status": "PASS",
+      "detail": "checked=False"
+    },
+    {
+      "test": "content-publish-pub-website",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "content-publish-pub-linkedin",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "content-worker-status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "content-list-populated",
+      "status": "PASS",
+      "detail": "21 rows"
+    },
+    {
+      "test": "dist-worker-status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "dist-queue-table-exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "analytics-dashboard-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "analytics-top-content-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "analytics-worker-status-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-daily-topic-input",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-daily-mode",
+      "status": "PASS",
+      "detail": "options: ['Blog + LinkedIn', 'LinkedIn Only', 'Blog Only']"
+    },
+    {
+      "test": "pipeline-cb-daily-publish-web",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-cb-daily-publish-li",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-cb-daily-dry-run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-worker-rows",
+      "status": "PASS",
+      "detail": "5 rows"
+    },
+    {
+      "test": "pipeline-step-checks",
+      "status": "PASS",
+      "detail": "7 checkboxes"
+    },
+    {
+      "test": "pipeline-dry-run-cb",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-sched-sched-hour",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-sched-sched-minute",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-sched-sched-enabled",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-load-schedule",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "pipeline-sched-status",
+      "status": "PASS",
+      "detail": "Status: Stopped [DRY RUN]"
+    },
+    {
+      "test": "pipeline-select-all-steps",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "sources-table-populated",
+      "status": "PASS",
+      "detail": "24 sources"
+    },
+    {
+      "test": "sources-row-columns",
+      "status": "PASS",
+      "detail": "5 cols: ['rss', 'data-analytics', '', '']"
+    },
+    {
+      "test": "sources-inline-form",
+      "status": "PASS",
+      "detail": "visible=False"
+    },
+    {
+      "test": "sources-new-row-added",
+      "status": "PASS",
+      "detail": "now 25 rows"
+    },
+    {
+      "test": "db-table-selector",
+      "status": "PASS",
+      "detail": "8 tables: ['signals', 'insights', 'content', 'distribution_queue', 'metrics', 'posts', 'schema_version', 'schedule_preferences']"
+    },
+    {
+      "test": "db-limit-input",
+      "status": "PASS",
+      "detail": "50"
+    },
+    {
+      "test": "db-load-signals",
+      "status": "PASS",
+      "detail": "51 rows"
+    },
+    {
+      "test": "db-load-content",
+      "status": "PASS",
+      "detail": "29 rows"
+    },
+    {
+      "test": "db-count-element",
+      "status": "PASS",
+      "detail": "28 rows \u2014 content"
+    },
+    {
+      "test": "growth-influencer-table",
+      "status": "PASS",
+      "detail": "1 influencers"
+    },
+    {
+      "test": "growth-stats-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "growth-engagement-log-btn",
+      "status": "PASS",
+      "detail": ",\n      \"post_likes\": 0,\n      \"post_comments\": 0,\n      \"post_shares\": 0\n    }\n  ],\n  \"count\": 20\n}"
+    },
+    {
+      "test": "growth-viral-posts-btn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "growth-interval-input",
+      "status": "PASS",
+      "detail": "2"
+    },
+    {
+      "test": "growth-add-influencer-form-opens",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "growth-add-influencer-form-cancel",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "settings-form-exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "settings-form-fields",
+      "status": "PASS",
+      "detail": "46 elements rendered"
+    },
+    {
+      "test": "settings-conf-thresh",
+      "status": "PASS",
+      "detail": "value=0.5"
+    },
+    {
+      "test": "settings-max-content",
+      "status": "PASS",
+      "detail": "value=7"
+    },
+    {
+      "test": "settings-load-config",
+      "status": "PASS",
+      "detail": "[11:29:48 PM] Config loaded: confidence=0.5, max=7\n[11:29:52 PM] Config loaded: "
+    },
+    {
+      "test": "settings-no-js-errors",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "responsive-768-sidebar-visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "responsive-restored",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "xss-escaping-db-table",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "worker-stop-btn-clicked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "worker-start-btn-clicked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "api-error-shows-in-log",
+      "status": "PASS",
+      "detail": "error shown in UI"
+    },
+    {
+      "test": "final-no-js-errors",
+      "status": "WARN",
+      "detail": "1: http://127.0.0.1:8000/api/nonexistent-endpoint - Failed to load resource: the server responded with "
+    }
+  ]
+}

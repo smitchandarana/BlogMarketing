@@ -53,6 +53,7 @@ def run_now(db_path: str | None = None, headless: bool = True) -> dict:
             PlaywrightLoginRequired,
             scan,
         )
+        from blogpilot.engagement_engine.services.hashtag_scanner import scan_hashtags
         from blogpilot.engagement_engine.services.relevance_classifier import classify
         from blogpilot.engagement_engine.services.viral_detector import detect, update_author_metrics
         from blogpilot.engagement_engine.services.engagement_strategy import decide
@@ -68,12 +69,26 @@ def run_now(db_path: str | None = None, headless: bool = True) -> dict:
             SessionExpiredError,
         )
 
-        # 1. Scan feed
+        # 1a. Scan home feed
         try:
             feed_posts = scan(scrolls=3, headless=headless)
         except PlaywrightLoginRequired as exc:
             logger.error("Engagement worker: %s", exc)
             return {"error": str(exc), "timestamp": _now()}
+
+        # 1b. Scan hashtag feeds (supplement home feed with targeted discovery)
+        hashtag_posts: list[LinkedInPost] = []
+        try:
+            hashtag_posts = scan_hashtags(headless=headless)
+            logger.info(
+                "Engagement worker: hashtag scan yielded %d posts.", len(hashtag_posts)
+            )
+        except Exception as exc:
+            logger.warning("Engagement worker: hashtag scan failed (non-fatal): %s", exc)
+
+        # Merge home feed + hashtag posts (deduplicated by URN, home feed first)
+        _home_urns: set[str] = {p.post_urn for p in feed_posts}
+        feed_posts = feed_posts + [p for p in hashtag_posts if p.post_urn not in _home_urns]
 
         # 2. Influencer posts (high priority)
         influencers = get_influencers(db_path)

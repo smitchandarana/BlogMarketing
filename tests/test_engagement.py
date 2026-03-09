@@ -32,7 +32,7 @@ class TestEngagementWorker:
 
 class TestEngagementRun:
     def test_run_returns_valid_schema(self, api: requests.Session) -> None:
-        r = api.post(f"{BASE}/api/engagement/run", timeout=30)
+        r = api.post(f"{BASE}/api/engagement/run", timeout=120)
         body = assert_ok(r)
         assert_has_keys(body, "posts_scanned", "posts_engaged",
                         "comments_posted", "likes_given", "timestamp")

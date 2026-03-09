@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phoenix Intelligence Engine</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>%E2%9A%A1</text></svg>">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -324,8 +325,37 @@ tr:hover td{background:var(--surface2)}
   <div class="subtitle">Manage RSS feeds and Reddit subreddits for signal collection</div>
   <div class="btn-row">
     <button class="btn btn-secondary btn-sm" onclick="loadSources()">↺ Load</button>
-    <button class="btn btn-primary btn-sm" onclick="addSource()">+ Add Source</button>
+    <button class="btn btn-primary btn-sm" onclick="toggleAddSourceForm()">+ Add Source</button>
     <button class="btn btn-secondary btn-sm" onclick="saveSources()">💾 Save to File</button>
+  </div>
+  <!-- Inline add-source form (hidden by default) -->
+  <div id="add-source-form" class="card" style="display:none;margin-bottom:12px">
+    <div class="card-title">Add Signal Source</div>
+    <div class="field-row" style="flex-wrap:wrap;gap:10px;align-items:flex-end">
+      <div class="field" style="min-width:100px">
+        <label>Type</label>
+        <select id="src-type" onchange="toggleSrcType()" style="width:100px">
+          <option value="rss">RSS</option>
+          <option value="reddit">Reddit</option>
+        </select>
+      </div>
+      <div class="field" style="min-width:160px">
+        <label>Category</label>
+        <input id="src-cat" placeholder="digital-marketing" style="width:160px">
+      </div>
+      <div class="field" style="flex:1;min-width:200px">
+        <label id="src-url-label">RSS Feed URL</label>
+        <input id="src-url" placeholder="https://example.com/feed">
+      </div>
+      <div class="field" id="src-limit-field" style="min-width:70px;display:none">
+        <label>Limit</label>
+        <input id="src-limit" type="number" value="10" min="1" max="100" style="width:70px">
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:6px">
+      <button class="btn btn-primary btn-sm" onclick="submitAddSource()">Add</button>
+      <button class="btn btn-secondary btn-sm" onclick="toggleAddSourceForm()">Cancel</button>
+    </div>
   </div>
   <div class="card">
     <div class="table-wrap">
@@ -367,7 +397,20 @@ tr:hover td{background:var(--surface2)}
     <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/engagement/viral','growth')">Viral Posts</button>
   </div>
   <div class="card">
-    <div class="card-title">Influencer Targets <button class="btn btn-primary btn-sm" style="float:right" onclick="addInfluencer()">+ Add</button></div>
+    <div class="card-title">Influencer Targets <button class="btn btn-primary btn-sm" style="float:right" onclick="toggleInfluencerForm()">+ Add</button></div>
+    <!-- Inline add-influencer form -->
+    <div id="add-influencer-form" style="display:none;margin-bottom:10px;padding:10px;background:var(--surface2);border-radius:4px;border:1px solid var(--border)">
+      <div class="field-row" style="flex-wrap:wrap;gap:8px;align-items:flex-end">
+        <div class="field" style="min-width:140px"><label>Name</label><input id="inf-name" placeholder="John Smith"></div>
+        <div class="field" style="flex:1;min-width:200px"><label>LinkedIn URL</label><input id="inf-url" placeholder="https://linkedin.com/in/..."></div>
+        <div class="field" style="min-width:130px"><label>Category</label><input id="inf-cat" placeholder="thought-leader"></div>
+        <div class="field" style="min-width:60px"><label>Priority</label><input id="inf-priority" type="number" value="3" min="1" max="5" style="width:60px"></div>
+      </div>
+      <div class="btn-row" style="margin-top:6px">
+        <button class="btn btn-primary btn-sm" onclick="submitAddInfluencer()">Add</button>
+        <button class="btn btn-secondary btn-sm" onclick="toggleInfluencerForm()">Cancel</button>
+      </div>
+    </div>
     <div class="table-wrap"><table><thead><tr><th>Name</th><th>URL</th><th>Category</th><th>Priority</th><th></th></tr></thead>
     <tbody id="influencer-tbody"></tbody></table></div>
     <button class="btn btn-secondary btn-sm" style="margin-top:8px" onclick="loadInfluencers()">↺ Refresh</button>
@@ -482,17 +525,22 @@ async function apiPost(path, logKey, body = {}) {
   return d;
 }
 
+// ── HTML escaping helper ──────────────────────────────────────────────────────
+function escHtml(v) {
+  return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
 // ── Table renderer ───────────────────────────────────────────────────────────
 function showTable(containerId, rows) {
   const el = document.getElementById(containerId);
   if (!el || !rows || !rows.length) return;
   const cols = Object.keys(rows[0]);
   let html = '<div class="card" style="padding:0"><div class="table-wrap"><table><thead><tr>';
-  cols.forEach(c => html += `<th>${c}</th>`);
+  cols.forEach(c => html += `<th>${escHtml(c)}</th>`);
   html += '</tr></thead><tbody>';
   rows.forEach(row => {
     html += '<tr>';
-    cols.forEach(c => { const v = row[c] ?? ''; html += `<td title="${String(v).replace(/"/g,'')}">${String(v).substring(0,80)}</td>`; });
+    cols.forEach(c => { const v = row[c] ?? ''; html += `<td title="${escHtml(v)}">${escHtml(String(v).substring(0,80))}</td>`; });
     html += '</tr>';
   });
   html += '</tbody></table></div></div>';
@@ -524,16 +572,15 @@ async function checkHealth() {
 async function refreshDashboard() {
   const alive = await checkHealth();
   if (!alive) return;
-  const [sig, ins, cont, q] = await Promise.all([
-    apiFetch('/api/signals?limit=1'),
-    apiFetch('/api/insights?limit=1'),
-    apiFetch('/api/content?limit=1'),
+  // Use /api/system/metrics for accurate total counts (not limit-capped list endpoints)
+  const [metrics, q] = await Promise.all([
+    apiFetch('/api/system/metrics'),
     apiFetch('/api/distribution/queue?limit=1'),
   ]);
-  document.getElementById('stat-signals').textContent  = sig._err  ? '—' : sig.total;
-  document.getElementById('stat-insights').textContent = ins._err  ? '—' : ins.total;
-  document.getElementById('stat-content').textContent  = cont._err ? '—' : cont.total;
-  document.getElementById('stat-queue').textContent    = q._err    ? '—' : q.total;
+  document.getElementById('stat-signals').textContent  = metrics._err ? '—' : (metrics.db_signals_count ?? '—');
+  document.getElementById('stat-insights').textContent = metrics._err ? '—' : (metrics.db_insights_count ?? '—');
+  document.getElementById('stat-content').textContent  = metrics._err ? '—' : (metrics.db_content_count ?? '—');
+  document.getElementById('stat-queue').textContent    = q._err       ? '—' : (q.total ?? '—');
 
   const workers = await apiFetch('/api/system/workers');
   if (!workers._err) updateWorkerStatus(workers);
@@ -826,18 +873,42 @@ function removeSource(i) {
   renderSources();
 }
 
-function addSource() {
-  const type = prompt('Type (rss or reddit):', 'rss');
-  if (!type) return;
-  const cat = prompt('Category:', 'digital-marketing') || '';
-  const url = prompt(type === 'rss' ? 'RSS URL:' : 'Subreddit (without /r/):', '');
-  if (!url) return;
+function toggleAddSourceForm() {
+  const form = document.getElementById('add-source-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  if (form.style.display === 'block') {
+    document.getElementById('src-url').focus();
+  }
+}
+
+function toggleSrcType() {
+  const type = document.getElementById('src-type').value;
+  document.getElementById('src-url-label').textContent = type === 'rss' ? 'RSS Feed URL' : 'Subreddit (without /r/)';
+  document.getElementById('src-url').placeholder = type === 'rss' ? 'https://example.com/feed' : 'marketing';
+  document.getElementById('src-limit-field').style.display = type === 'reddit' ? 'block' : 'none';
+}
+
+function submitAddSource() {
+  const type = document.getElementById('src-type').value;
+  const cat  = document.getElementById('src-cat').value.trim() || 'general';
+  const url  = document.getElementById('src-url').value.trim();
+  if (!url) { document.getElementById('src-url').focus(); return; }
   const entry = {type, category: cat};
-  if (type === 'rss') entry.url = url;
-  else { entry.subreddit = url; entry.limit = 10; }
+  if (type === 'rss') {
+    entry.url = url;
+  } else {
+    entry.subreddit = url;
+    entry.limit = +(document.getElementById('src-limit').value) || 10;
+  }
   sourcesData.push(entry);
   renderSources();
+  // Reset form
+  document.getElementById('src-url').value = '';
+  document.getElementById('src-cat').value = '';
+  document.getElementById('add-source-form').style.display = 'none';
 }
+
+function addSource() { toggleAddSourceForm(); }
 
 async function saveSources() {
   const d = await apiPost('/api/sources', 'settings', {sources: sourcesData});
@@ -854,9 +925,9 @@ async function loadDb() {
   const wrap = document.getElementById('db-table-wrap');
   if (!d.rows.length) { wrap.innerHTML = '<div style="padding:16px;color:var(--muted)">No rows.</div>'; return; }
   const cols = d.columns;
-  let html = '<table><thead><tr>' + cols.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
+  let html = '<table><thead><tr>' + cols.map(c => `<th>${escHtml(c)}</th>`).join('') + '</tr></thead><tbody>';
   d.rows.forEach(row => {
-    html += '<tr>' + cols.map(c => `<td title="${String(row[c]??'').replace(/"/g,'')}">${String(row[c]??'').substring(0,100)}</td>`).join('') + '</tr>';
+    html += '<tr>' + cols.map(c => `<td title="${escHtml(row[c]??'')}">${escHtml(String(row[c]??'').substring(0,100))}</td>`).join('') + '</tr>';
   });
   html += '</tbody></table>';
   wrap.innerHTML = html;
@@ -877,15 +948,32 @@ async function loadInfluencers() {
   ).join('') || '<tr><td colspan="5" style="color:var(--muted)">No influencers added yet.</td></tr>';
 }
 
-async function addInfluencer() {
-  const name = prompt('Name:');
-  if (!name) return;
-  const url = prompt('LinkedIn URL:');
-  if (!url) return;
-  const cat = prompt('Category (optional):') || '';
-  const d = await apiPost('/api/engagement/influencers', 'growth', {name, linkedin_url: url, category: cat});
-  if (d) loadInfluencers();
+function toggleInfluencerForm() {
+  const form = document.getElementById('add-influencer-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  if (form.style.display === 'block') {
+    document.getElementById('inf-name').focus();
+  }
 }
+
+async function submitAddInfluencer() {
+  const name     = document.getElementById('inf-name').value.trim();
+  const url      = document.getElementById('inf-url').value.trim();
+  const cat      = document.getElementById('inf-cat').value.trim();
+  const priority = +(document.getElementById('inf-priority').value) || 3;
+  if (!name) { document.getElementById('inf-name').focus(); return; }
+  if (!url)  { document.getElementById('inf-url').focus(); return; }
+  const d = await apiPost('/api/engagement/influencers', 'growth', {name, linkedin_url: url, category: cat, priority});
+  if (d && !d._err) {
+    // Reset form fields
+    ['inf-name','inf-url','inf-cat'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('inf-priority').value = '3';
+    document.getElementById('add-influencer-form').style.display = 'none';
+    loadInfluencers();
+  }
+}
+
+async function addInfluencer() { toggleInfluencerForm(); }
 
 async function removeInfluencer(id) {
   if (!confirm('Remove this influencer?')) return;
@@ -951,6 +1039,7 @@ async function saveSettings() {
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 buildStepChecks();
+buildDayGrid();
 buildSettingsForm();
 
 // Auto-refresh every 30s

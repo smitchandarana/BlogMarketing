@@ -67,18 +67,21 @@ def scan(
     path = cookies_path or _COOKIES_PATH
     posts: list[LinkedInPost] = []
 
+    # Fast-fail before launching a browser when there is no session at all.
+    if not os.path.exists(path):
+        raise PlaywrightLoginRequired(
+            f"No LinkedIn session cookies found at '{path}'. "
+            "Please re-authenticate via the Settings tab."
+        )
+
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=headless)
         context = browser.new_context()
 
-        # Load stored session cookies
-        if os.path.exists(path):
-            import json
-            with open(path, encoding="utf-8") as f:
-                cookies = json.load(f)
-            context.add_cookies(cookies)
-        else:
-            logger.warning("No LinkedIn session cookies found at %s.", path)
+        import json
+        with open(path, encoding="utf-8") as f:
+            cookies = json.load(f)
+        context.add_cookies(cookies)
 
         page = context.new_page()
         page.goto(_FEED_URL, timeout=30_000)
