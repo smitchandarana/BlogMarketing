@@ -1,0 +1,1 @@
+# blogpilot common

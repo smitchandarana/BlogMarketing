@@ -1,32 +1,96 @@
 Write a LinkedIn post that teases and drives clicks to a blog article about: {topic}
 
-You are writing for Phoenix Solution (phoenixsolution.in) — a BI and data consulting firm. The goal is to create CURIOSITY that makes people click through to read the full article.
+You are writing for Phoenix Solution (phoenixsolution.in) — a BI and data consulting firm.
+Goal: create a CURIOSITY GAP that makes people stop scrolling and click through to the article.
 
-HOOK (Line 1 — this determines if anyone reads the rest):
-Use ONE of these proven formulas:
-- Curiosity gap: "Most companies get [topic] completely wrong. Here's what they miss."
-- Contrarian: "Unpopular opinion: [bold claim about topic]."
-- Story: "A client came to us with [relatable problem]. What we found surprised us."
-- Value: "How to [desirable outcome] without [common pain]:"
-- Stat: "[Surprising number or percentage] — and most companies don't even know it."
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT FORMAT — Return ONLY valid JSON:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{
+  "caption": "80-120 word post body (no hashtags — those go in 'hashtags')",
+  "hashtags": ["#Hashtag1", "#Hashtag2", "#Hashtag3", "#Hashtag4", "#Hashtag5"],
+  "full_post": "caption + blank line + hashtags joined as a single string"
+}
 
-BODY (3-5 short lines after the hook):
-- Tease 1-2 key insights from the blog WITHOUT giving away the full answer
-- Create an information gap: hint at the solution, don't deliver it
-- Use "→" arrows or short bullet points for scanability
-- Keep paragraphs to 1-2 lines max (LinkedIn rewards white space)
-- Address the reader with "you/your"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HOOK FORMULAS — use exactly ONE for line 1:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. CURIOSITY GAP
+   "Most companies do [common thing] — and it's costing them more than they realise."
+   "We looked at 40 Power BI implementations. One mistake appeared in 80% of them."
 
-CTA (Final line):
-- Direct but not pushy: "Full breakdown in the article below" or "Link in the comments"
-- Optional: end with a question to boost engagement ("What's your biggest challenge with [topic]?")
+2. CONTRARIAN
+   "Unpopular opinion: your BI tool isn't the problem. Your data process is."
+   "Stop buying dashboards. Fix the data first."
 
-FORMATTING RULES:
-- Total length: 80-150 words (teaser, not a full essay)
-- Line break after the hook line
-- Blank line between each short paragraph
-- NO hashtags in the caption (they go separately)
-- NO emojis unless they add real meaning (max 1-2)
-- NO generic phrases like "In today's fast-paced world" or "It's no secret that"
+3. CLIENT STORY (most powerful — use often)
+   "A CFO came to us with a reporting problem. It took us 3 hours to fix what her team had spent 6 months on."
+   "Last month a client's month-end close took 18 days. This month: 4."
 
-VOICE: Like a trusted senior consultant sharing a key insight — confident, direct, generous with value.
+4. SURPRISING STAT
+   "68% of ERP users say they still export to Excel for reporting. The ERP vendors don't advertise this."
+   "The average mid-market company has 14 data sources. Only 3 are connected."
+
+5. DIRECT QUESTION
+   "What does your team do every Monday morning that could be automated by Friday?"
+   "If your CFO asked for last week's margins right now, how long would it take?"
+
+6. VALUE PROMISE
+   "How to cut report generation time by 80% without changing your ERP."
+   "3 changes that turn a passive dashboard into a decision-making tool."
+
+7. BOLD CLAIM
+   "Manual reporting will be a competitive disadvantage by 2026. Most companies are still building spreadsheets."
+
+8. INSIDER KNOWLEDGE
+   "After working on 50+ BI implementations, here's the thing no one tells you about data warehouses."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INFORMATION GAP RULE (critical):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NEVER reveal the full answer in the post. Only hint at:
+- The problem exists and is common
+- A solution exists
+- The full explanation is in the article
+
+WRONG: "You can fix this by connecting Power BI to your ERP using a direct query connection."
+RIGHT: "There's a fix that most consultants overlook. The article walks through exactly how we did it."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BODY (3-4 short lines after the hook):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Tease 1-2 key problems or insights from the blog WITHOUT giving the solution
+- Use "you/your" to address the reader directly
+- Use short paragraphs (1-2 lines max) — LinkedIn rewards white space
+- Use "—" dashes or short bullet lines for rhythm
+- Make the reader feel "I need to know the rest of this"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CLOSING LINE — choose ONE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Engagement question options (pick the most natural):
+- "What's your biggest reporting headache right now?"
+- "Has your team dealt with this? Drop a comment."
+- "What would you do with 10 extra hours a week?"
+- "Is this something you're working through? Happy to share what we've seen work."
+- "Full breakdown in the article — link below."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HASHTAGS — pick 5-7 from this approved list:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#BusinessIntelligence #DataAnalytics #PowerBI #AI #Automation #DataEngineering
+#Analytics #DataStrategy #AIConsulting #DigitalTransformation #ERPIntegration
+#DataWarehousing #CloudBI #SelfServiceBI #DataGovernance #DataDrivenDecisions
+#ReportAutomation #DashboardDesign #GenerativeAI #ModernDataStack
+#BIConsulting #DataVisualization #PredictiveAnalytics #DataQuality
+#BusinessAnalytics #EnterpriseData #SmartReporting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BEFORE-YOU-SUBMIT CHECKLIST:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Line 1 works as a standalone hook — would a CFO stop scrolling?
+- Post is 80-120 words (not 150, not 60)
+- No hashtags appear in the caption body
+- Ends with a question or clear invitation
+- No generic phrases: "In today's digital world", "leverage synergies", "it's no secret"
+- At most 1 emoji — and only if it adds meaning

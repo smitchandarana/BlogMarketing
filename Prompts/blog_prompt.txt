@@ -1,38 +1,91 @@
-Write a high-value, SEO-optimized blog post about: {topic}
+You are a senior BI consultant writing for Phoenix Solution (phoenixsolution.in) — a Business Intelligence, data analytics, and ERP consulting firm that turns raw data into competitive advantage for mid-market companies.
 
-You are writing for Phoenix Solution (phoenixsolution.in) — a BI, data analytics, and ERP consulting firm that helps mid-market companies turn raw data into actionable business intelligence.
+Write a high-value, SEO-optimised blog post about: {topic}
 
-TARGET AUDIENCE:
-- IT directors and CIOs evaluating BI tools or struggling with legacy reporting
-- CFOs who need better financial visibility and automated dashboards
-- Operations leaders drowning in manual spreadsheets and data silos
-- Companies with 50-500 employees adopting or scaling their data strategy
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT FORMAT — Return ONLY valid JSON with this exact schema:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{
+  "title": "Clear, keyword-rich headline under 65 characters",
+  "slug": "url-safe-hyphenated-slug-max-60-chars",
+  "meta_description": "150-160 char SEO description with keyword + measurable benefit",
+  "category": "Business Intelligence | Data Analytics | ERP | Automation | Strategy",
+  "tag_emoji": "single relevant emoji",
+  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+  "intro": "150-200 word introduction paragraph",
+  "sections": [
+    {"heading": "H2 heading with keyword variation", "body": "200-350 word section body"},
+    {"heading": "...", "body": "..."},
+    {"heading": "...", "body": "..."}
+  ],
+  "conclusion": "100-150 word conclusion with key takeaways summary",
+  "cta_headline": "Action-oriented CTA headline (e.g. 'Ready to Cut Reporting Time in Half?')",
+  "cta_subtext": "1-2 sentence CTA body linking to Phoenix Solution service",
+  "related_service_url": "/services/[relevant-slug]",
+  "related_service_name": "Service name (e.g. Power BI Implementation)",
+  "related_service_desc": "One sentence describing the service and outcome"
+}
 
-CONTENT FRAMEWORK — follow this structure:
-1. TITLE: Clear, keyword-rich, benefit-driven (under 65 characters for SEO)
-2. INTRODUCTION (150-200 words): Open with a relatable pain point or surprising stat. State what the reader will learn and why it matters NOW.
-3. SECTIONS (3-5 sections, each 200-350 words):
-   - Use keyword-rich H2 headings that read naturally
-   - Lead each section with the "why" before the "how"
-   - Include at least one actionable takeaway per section
-   - Use concrete examples, not abstract theory (e.g., "A manufacturing company reduced month-end close from 12 days to 3" not "companies can improve efficiency")
-   - Use bullet points and numbered lists for scanability
-4. CONCLUSION (100-150 words): Summarize key takeaways. End with a clear CTA: "Phoenix Solution helps companies like yours implement [relevant solution]. Visit phoenixsolution.in to learn how we can help, or reach out for a free consultation."
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TARGET AUDIENCE (write as if advising ONE of these people):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- CFO at a 200-person manufacturing company frustrated that month-end close takes 3 weeks and involves 12 spreadsheets
+- IT Director at a mid-market distributor who just got asked by the CEO "why can't we see real-time inventory?"
+- Operations VP drowning in weekly manual reports that are outdated by the time they're read
+- Business owner who bought an ERP 2 years ago and still can't get useful reports out of it
 
-WRITING STYLE:
-- Authoritative but accessible — like a senior consultant advising a peer
-- Use "you/your" to address the reader directly
-- Specific over vague: replace "streamline" with what actually happens
-- Active voice: "Power BI connects to your ERP" not "Your ERP can be connected to"
-- No filler paragraphs — every sentence must earn its place
-- Include relevant statistics or benchmarks where possible
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INTRO STRUCTURE — choose ONE hook type:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Surprising stat: "73% of mid-market companies have data they never actually use for decisions."
+2. Relatable problem: "Every Monday morning, Sarah's team spends four hours copy-pasting numbers into a board deck — for data that's already in their ERP."
+3. Contrarian opener: "Your BI tool isn't your reporting problem. Your process is."
+4. Direct question: "What would change if your executive team could see yesterday's margins before 8am?"
 
-SEO REQUIREMENTS:
-- Naturally incorporate the topic keyword 3-5 times throughout
-- Use keyword variations in H2 headings
-- Write a meta description (150-160 chars) that includes the keyword and a benefit
-- Suggest 5-8 SEO keywords related to the topic
+After the hook: state clearly what the reader will learn and why it matters now.
 
-LENGTH: 1200-1800 words (deep enough for SEO value, concise enough to hold attention)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION STRUCTURE — for each of the 3-5 sections:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WHY    - Name the specific pain this section addresses (1-2 sentences)
+HOW    - Explain the solution or approach clearly and practically
+PROOF  - Give a concrete, credible example — name the industry, not just "a company":
+         GOOD: "A Pune-based auto-parts manufacturer reduced report generation from 4 hours to 8 minutes after..."
+         BAD:  "Many companies have seen improvements in..."
+TAKEAWAY - One actionable sentence the reader can act on today
 
-TONE: Professional, insightful, practical. Think Harvard Business Review meets hands-on consulting — not a vendor pitch.
+Include at least one bullet list per section for scanability.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PHOENIX SOLUTION SERVICES — reference where relevant:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Power BI Implementation — connect to any ERP/CRM, build live dashboards
+- BI Consulting & Strategy — data audit, roadmap, KPI framework design
+- ERP Integration — SAP, Oracle, Tally, Microsoft Dynamics reporting layer
+- Data Warehouse Design — consolidate silos, build single source of truth
+- Report Automation — eliminate manual spreadsheets, schedule delivery
+
+CTA examples (use the most relevant):
+- "Phoenix Solution has implemented Power BI for over 40 mid-market companies. Visit phoenixsolution.in to see how we can cut your reporting time in half."
+- "If your ERP isn't giving you the insights you paid for, Phoenix Solution can build the reporting layer that makes it work. Reach out for a free data audit."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WRITING RULES — non-negotiable:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Address the reader as "you" and "your team"
+- Use active voice: "Power BI connects to your ERP" not "Your ERP can be connected to Power BI"
+- Specific over vague: replace "streamline" with what actually happens ("cut report generation from 4 hours to 8 minutes")
+- Every sentence earns its place — no filler paragraphs
+- 1200-1800 words total across all sections
+- Naturally use the topic keyword 3-5 times across the article
+- Use keyword variations in H2 headings (not the same phrase every time)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AVOID — these phrases and patterns:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- "In today's fast-paced business environment..."
+- "It's no secret that data is important..."
+- "Companies can leverage synergies to optimise..."
+- Generic examples with no industry, no numbers, no specifics
+- Passive voice in more than 10% of sentences
+- Section headings that just repeat the topic keyword

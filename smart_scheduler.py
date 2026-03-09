@@ -406,12 +406,26 @@ def _scheduler_loop(on_log: Optional[Callable] = None,
                     _do_post(row, cfg, on_log)
                 else:
                     log('Manual post ID {} not found.'.format(cfg['manual_id']), 'warning')
+            elif content_type == 'off':
+                log('Content type for {} is "off" — skipping slot.'.format(today_name))
             else:
-                best = pick_best(use_ai=True, content_type=content_type)
-                if best:
-                    _do_post(best, cfg, on_log)
+                # Run the full daily pipeline: research → generate → publish
+                log('Running daily pipeline (mode: {})...'.format(content_type))
+                from automation.daily_pipeline import run as run_daily
+                pipeline_content_types = (
+                    ['blog_and_linkedin'] if content_type == 'blog_and_li'
+                    else ['li_only']
+                )
+                result = run_daily(
+                    content_types=pipeline_content_types,
+                    publish=not cfg.get('dry_run', False),
+                    dry_run=cfg.get('dry_run', False),
+                    on_log=on_log,
+                )
+                if result.get('error'):
+                    log('Pipeline error: {}'.format(result['error']), 'warning')
                 else:
-                    log('No pending posts to publish — skipping slot.', 'warning')
+                    log('Pipeline complete — topic: {}'.format(result.get('topic', '?')))
         except Exception as exc:
             log('Auto-post failed: {}'.format(exc), 'warning')
 

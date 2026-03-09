@@ -30,10 +30,14 @@ echo Cleaning previous build...
 if exist "dist\PhoenixMarketing" rmdir /s /q "dist\PhoenixMarketing"
 if exist "build"                 rmdir /s /q "build"
 
-:: Run PyInstaller
+:: Run PyInstaller (prefer venv binary so the correct Python is used)
 echo.
 echo Building exe...
-pyinstaller phoenix.spec --clean --noconfirm
+if exist ".venv\Scripts\pyinstaller.exe" (
+    .venv\Scripts\pyinstaller.exe phoenix.spec --clean --noconfirm
+) else (
+    pyinstaller phoenix.spec --clean --noconfirm
+)
 if errorlevel 1 (
     echo.
     echo [ERROR] Build failed. Check output above.

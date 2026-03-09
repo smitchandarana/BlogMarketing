@@ -1,32 +1,18 @@
 {
   "enabled": false,
-  "slots": [
-    "2:00",
-    "12:00",
-    "17:00",
-    "20:00",
-    "22:00"
-  ],
+  "slots": ["09:00"],
   "mode": "auto",
   "manual_id": null,
   "post_target": "personal",
   "dry_run": true,
-  "days": [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-    "Sun"
-  ],
+  "days": ["Mon", "Wed", "Thu", "Fri"],
   "day_content_type": {
     "Mon": "blog_and_li",
-    "Tue": "li_only",
+    "Tue": "off",
     "Wed": "blog_and_li",
     "Thu": "li_only",
-    "Fri": "li_only",
-    "Sat": "li_only",
-    "Sun": "li_only"
+    "Fri": "blog_and_li",
+    "Sat": "off",
+    "Sun": "off"
   }
 }

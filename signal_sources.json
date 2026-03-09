@@ -1,0 +1,42 @@
+[
+  {
+    "type": "rss",
+    "category": "digital-marketing",
+    "feeds": [
+      "https://feeds.feedburner.com/MarketingLand",
+      "https://searchengineland.com/feed",
+      "https://www.searchenginejournal.com/feed",
+      "https://neilpatel.com/blog/rss",
+      "https://blog.hubspot.com/marketing/rss.xml"
+    ]
+  },
+  {
+    "type": "rss",
+    "category": "ai-tech",
+    "feeds": [
+      "https://techcrunch.com/feed/",
+      "https://venturebeat.com/feed/",
+      "https://www.theverge.com/rss/index.xml"
+    ]
+  },
+  {
+    "type": "reddit",
+    "category": "marketing",
+    "subreddits": [
+      "digital_marketing",
+      "SEO",
+      "socialmedia"
+    ],
+    "limit": 10
+  },
+  {
+    "type": "reddit",
+    "category": "ai-tech",
+    "subreddits": [
+      "artificial",
+      "MachineLearning",
+      "webdev"
+    ],
+    "limit": 10
+  }
+]

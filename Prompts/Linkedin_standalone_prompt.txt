@@ -1,0 +1,88 @@
+Write a standalone LinkedIn post about: {topic}
+
+You are writing for Phoenix Solution (phoenixsolution.in) — a BI and data consulting firm.
+This post has NO linked article. It must deliver complete, standalone value.
+Goal: establish expertise, generate engagement, and create warm interest in Phoenix Solution.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT FORMAT — Return ONLY valid JSON:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{
+  "caption": "300-500 word standalone post body (no hashtags)",
+  "hashtags": ["#Hashtag1", "#Hashtag2", "#Hashtag3", "#Hashtag4", "#Hashtag5", "#Hashtag6"],
+  "full_post": "caption + blank line + hashtags as a single string"
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+POST STRUCTURE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LINE 1 — HOOK (the only line visible before "see more"):
+Choose one of these proven formats:
+- Numbered insight: "5 things nobody tells you about building a BI strategy."
+- Contrarian: "Most BI projects fail in the first 90 days. Here's the real reason."
+- Story open: "Three months ago, a client's finance team was doing 47 reports manually every week."
+- Stat: "80% of dashboards built by in-house teams are never used after 6 months."
+- Question: "When was the last time a report actually changed a decision in your company?"
+
+[Blank line after hook]
+
+SECTION 1 — THE PROBLEM (3-4 lines):
+Name the specific pain clearly. Make the reader think "this is exactly us."
+Use short sentences. No jargon.
+
+[Blank line]
+
+SECTION 2 — THE INSIGHT (6-10 lines, the core of the post):
+Share 3-5 specific, actionable insights or lessons. Use arrows or numbers:
+- "1. Start with the decision, not the data..."
+- "2. One source of truth beats five dashboards..."
+- "3. The tool matters less than the process..."
+Each point should be 1-2 lines. Concrete. Specific. Something the reader didn't already know.
+
+[Blank line]
+
+SECTION 3 — PROOF / RESULT (2-3 lines):
+Ground it with a real-feeling outcome. Name the industry.
+"A manufacturing client applied these 3 changes. Month-end reporting went from 14 days to 3."
+"A retail chain connected their ERP to Power BI this way. Their buyer team now sees live margins before 9am."
+
+[Blank line]
+
+SOFT CTA (2-3 lines):
+Do NOT use a hard sell. Instead:
+- Share what Phoenix Solution does in 1 sentence
+- Invite a specific action (question, DM, comment)
+- End with an engaging question
+
+Examples:
+"At Phoenix Solution, we help mid-market companies build BI systems that actually get used.
+If you're working through something like this — happy to share what we've seen work.
+What's the biggest friction point in your current reporting setup?"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FORMATTING RULES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Short paragraphs (2-3 lines max) separated by blank lines — LinkedIn rewards white space
+- Use numbered lists or arrows (1. / ->) for the insight section
+- "You/your" throughout — address the reader directly
+- NO external link (this is standalone — no blog URL)
+- NO generic openers: "In today's world", "It's no secret", "leverage synergies"
+- At most 2 emojis, only if they add meaning
+- 300-500 words in the caption body (not more, not less)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HASHTAGS — pick 5-8 from this approved list:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#BusinessIntelligence #DataAnalytics #PowerBI #AI #Automation #DataEngineering
+#Analytics #DataStrategy #AIConsulting #DigitalTransformation #ERPIntegration
+#DataWarehousing #CloudBI #SelfServiceBI #DataGovernance #DataDrivenDecisions
+#ReportAutomation #DashboardDesign #GenerativeAI #ModernDataStack
+#BIConsulting #DataVisualization #PredictiveAnalytics #DataQuality
+#BusinessAnalytics #EnterpriseData #SmartReporting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+VOICE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Think: a senior consultant sharing a lesson from the field — generous, confident, specific.
+NOT a vendor pitch. NOT a listicle. A peer sharing what they've actually seen work.

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix Intelligence Engine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0b0b0c;--surface:#111111;--surface2:#161618;--border:#1e293b;
+  --accent:#ff6a3d;--accent2:#ff4d2d;--text:#ffffff;--muted:#64748b;
+  --success:#4ade80;--warning:#facc15;--error:#f87171;--blue:#60a5fa;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;overflow:hidden}
+/* Sidebar */
+#sidebar{width:210px;min-width:210px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.logo{padding:16px;border-bottom:1px solid var(--border)}
+.logo-title{font-size:13px;font-weight:700;color:var(--text)}
+.logo-sub{font-size:10px;color:var(--muted)}
+#srv-badge{padding:8px 16px;font-size:11px;font-weight:700;color:var(--error);border-bottom:1px solid var(--border)}
+.nav-label{padding:8px 16px;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.08em}
+nav a{display:block;padding:8px 20px;font-size:11px;color:var(--muted);text-decoration:none;cursor:pointer;transition:background .1s}
+nav a:hover{background:var(--surface2);color:var(--text)}
+nav a.active{background:var(--surface2);color:var(--accent)}
+.sidebar-bottom{margin-top:auto;border-top:1px solid var(--border);padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+/* Main */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#content{flex:1;overflow-y:auto;padding:24px}
+/* Status bar */
+#statusbar{height:28px;background:var(--surface2);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 12px;font-size:11px;color:var(--muted);gap:12px;flex-shrink:0}
+#statusbar span{display:flex;align-items:center;gap:4px}
+/* Pages */
+.page{display:none}.page.active{display:block}
+h1{font-size:22px;font-weight:700;margin-bottom:4px}
+.subtitle{font-size:12px;color:var(--muted);margin-bottom:20px}
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px;margin-bottom:12px}
+.card-title{font-size:12px;font-weight:700;margin-bottom:10px;color:var(--text)}
+/* Stat cards */
+.stats-row{display:flex;gap:10px;margin-bottom:16px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;flex:1}
+.stat-label{font-size:10px;color:var(--muted);margin-bottom:4px}
+.stat-value{font-size:30px;font-weight:700;color:var(--accent)}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:4px;border:none;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;transition:background .1s}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-secondary:hover{background:var(--border)}
+.btn-danger{background:#7f1d1d;color:var(--error)}.btn-danger:hover{background:#991b1b}
+.btn-sm{padding:4px 10px;font-size:10px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+/* Log */
+.log-box{background:#0a0a0b;border:1px solid var(--border);border-radius:4px;padding:10px;height:220px;overflow-y:auto;font-family:'Consolas',monospace;font-size:11px;color:#94a3b8;white-space:pre-wrap}
+.log-box .accent{color:var(--accent)}.log-box .success{color:var(--success)}.log-box .error{color:var(--error)}.log-box .warning{color:var(--warning)}.log-box .blue{color:var(--blue)}.log-box .muted{color:var(--muted)}
+/* Form */
+label{display:block;font-size:10px;color:var(--muted);margin-bottom:3px}
+input,select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:inherit;font-size:12px;padding:6px 8px;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+.field{margin-bottom:10px}
+.field-row{display:flex;gap:10px;align-items:flex-end}
+input[type=checkbox]{width:auto;accent-color:var(--accent);margin-right:4px;cursor:pointer}
+input[type=number]{width:80px}
+/* Table */
+.table-wrap{overflow-x:auto;max-height:380px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:var(--surface2);color:var(--muted);padding:6px 10px;text-align:left;position:sticky;top:0;font-weight:700;white-space:nowrap}
+td{padding:5px 10px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap;max-width:300px;overflow:hidden;text-overflow:ellipsis}
+tr:hover td{background:var(--surface2)}
+/* Worker rows */
+.worker-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border)}
+.worker-row:last-child{border-bottom:none}
+.worker-name{width:130px;font-size:11px;font-weight:600}
+.dot{font-size:12px}
+.dot.on{color:var(--success)}.dot.off{color:var(--error)}
+.interval-input{width:60px;padding:4px 6px;font-size:11px;text-align:center}
+/* Pill */
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.pill-success{background:#14532d;color:var(--success)}.pill-warn{background:#713f12;color:var(--warning)}.pill-error{background:#7f1d1d;color:var(--error)}.pill-muted{background:var(--border);color:var(--muted)}
+/* Checkbox list */
+.check-list label{display:flex;align-items:center;padding:4px 0;cursor:pointer;font-size:11px;color:var(--text)}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="logo">
+    <div style="font-size:20px;color:var(--accent);margin-bottom:4px">⚡</div>
+    <div class="logo-title">Phoenix</div>
+    <div class="logo-sub">Intelligence Engine v1.0</div>
+  </div>
+  <div id="srv-badge">● Server Online</div>
+  <div class="nav-label">NAVIGATION</div>
+  <nav id="nav">
+    <a href="#" data-page="dashboard" class="active">◈ Dashboard</a>
+    <a href="#" data-page="signals">📡 Signals</a>
+    <a href="#" data-page="insights">💡 Insights</a>
+    <a href="#" data-page="content">✍ Content</a>
+    <a href="#" data-page="distribution">📬 Distribution</a>
+    <a href="#" data-page="analytics">📊 Analytics</a>
+    <a href="#" data-page="pipeline">⚙ Pipeline</a>
+    <a href="#" data-page="sources">📋 Signal Sources</a>
+    <a href="#" data-page="database">🗄 Database</a>
+    <a href="#" data-page="growth">📈 LinkedIn Growth</a>
+    <a href="#" data-page="settings">⚙ Settings</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="btn btn-primary" onclick="checkHealth()">↺ Refresh</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+<div id="content">
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <h1>Dashboard</h1>
+  <div class="subtitle">System overview — Signals → Insights → Content → Distribution → Analytics</div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-label">Signals</div><div class="stat-value" id="stat-signals">—</div></div>
+    <div class="stat-card"><div class="stat-label">Insights</div><div class="stat-value" id="stat-insights">—</div></div>
+    <div class="stat-card"><div class="stat-label">Content</div><div class="stat-value" id="stat-content">—</div></div>
+    <div class="stat-card"><div class="stat-label">Queued</div><div class="stat-value" id="stat-queue">—</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">System Log</div>
+    <div class="log-box" id="log-dashboard"></div>
+    <div style="margin-top:8px"><button class="btn btn-secondary btn-sm" onclick="refreshDashboard()">Refresh Stats</button></div>
+  </div>
+</div>
+
+<!-- SIGNALS -->
+<div class="page" id="page-signals">
+  <h1>📡 Signals</h1>
+  <div class="subtitle">Collect market intelligence from RSS feeds and Reddit</div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-sm" onclick="apiPost('/api/signals/collect','signals')">Collect Now</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/signals/worker','signals')">Worker Status</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/signals?limit=20','signals').then(r=>r&&showTable('signals-table',r.signals))">List Signals</button>
+  </div>
+  <div id="signals-table"></div>
+  <div class="card"><div class="card-title">Output</div><div class="log-box" id="log-signals"></div></div>
+</div>
+
+<!-- INSIGHTS -->
+<div class="page" id="page-insights">
+  <h1>💡 Insights</h1>
+  <div class="subtitle">Generate decision intelligence from collected signals</div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-sm" onclick="apiPost('/api/insights/generate','insights')">Generate Now</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/insights/worker','insights')">Worker Status</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/insights?limit=20','insights').then(r=>r&&showTable('insights-table',r.insights))">List Insights</button>
+  </div>
+  <div id="insights-table"></div>
+  <div class="card"><div class="card-title">Output</div><div class="log-box" id="log-insights"></div></div>
+</div>
+
+<!-- CONTENT -->
+<div class="page" id="page-content">
+  <h1>✍ Content</h1>
+  <div class="subtitle">Generate blog posts and LinkedIn content</div>
+  <div class="card">
+    <div class="card-title">Generate for Topic</div>
+    <div class="field-row" style="flex-wrap:wrap;gap:12px">
+      <div class="field" style="flex:1;min-width:200px">
+        <label>Topic</label>
+        <input id="topic-input" placeholder="e.g. AI trends in 2025">
+      </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">Content Types</div>
+      <div class="check-list" style="display:flex;gap:16px;flex-wrap:wrap">
+        <label><input type="checkbox" id="ct-blog" checked> Blog Post</label>
+        <label><input type="checkbox" id="ct-linkedin" checked> LinkedIn (standalone)</label>
+        <label><input type="checkbox" id="ct-linked"> LinkedIn (blog-linked)</label>
+      </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">Publish to</div>
+      <div class="check-list" style="display:flex;gap:16px">
+        <label><input type="checkbox" id="pub-website"> Website</label>
+        <label><input type="checkbox" id="pub-linkedin"> LinkedIn</label>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="generateContent()">Generate Selected</button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-secondary btn-sm" onclick="apiPost('/api/content/generate','content')">Auto-Generate from Insights</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/content/worker','content')">Worker Status</button>
+    <button class="btn btn-secondary btn-sm" onclick="loadContentList()">List Content</button>
+  </div>
+  <div id="content-table"></div>
+  <div class="card"><div class="card-title">Output</div><div class="log-box" id="log-content"></div></div>
+</div>
+
+<!-- DISTRIBUTION -->
+<div class="page" id="page-distribution">
+  <h1>📬 Distribution</h1>
+  <div class="subtitle">Publish content to LinkedIn and the website</div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-sm" onclick="apiPost('/api/distribution/run','distribution')">Run Worker</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/distribution/worker','distribution')">Worker Status</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/distribution/queue?limit=20','distribution').then(r=>r&&showTable('dist-table',r.queue))">View Queue</button>
+  </div>
+  <div id="dist-table"></div>
+  <div class="card"><div class="card-title">Output</div><div class="log-box" id="log-distribution"></div></div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="page" id="page-analytics">
+  <h1>📊 Analytics</h1>
+  <div class="subtitle">Collect metrics, score performance, update feedback signals</div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-sm" onclick="apiPost('/api/analytics/collect','analytics')">Collect Now</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/analytics/dashboard','analytics')">Dashboard Data</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/analytics/top-content','analytics')">Top Content</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/analytics/worker','analytics')">Worker Status</button>
+  </div>
+  <div class="card"><div class="card-title">Output</div><div class="log-box" id="log-analytics"></div></div>
+</div>
+
+<!-- PIPELINE -->
+<div class="page" id="page-pipeline">
+  <h1>⚙ Pipeline</h1>
+  <div class="subtitle">Research topics, generate content, publish, and schedule</div>
+
+  <!-- DAILY PIPELINE -->
+  <div class="card">
+    <div class="card-title">Daily Content Pipeline</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Research → Pick Topic → Generate Blog + LinkedIn → Publish</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div>
+        <label style="font-size:11px;color:var(--muted)">Topic (blank = auto-pick from research)</label>
+        <input id="daily-topic" type="text" placeholder="e.g. Power BI dashboards for manufacturing" style="width:100%;margin-top:4px">
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--muted)">Mode</label>
+        <select id="daily-mode" style="width:100%;margin-top:4px">
+          <option value="blog_and_linkedin">Blog + LinkedIn</option>
+          <option value="li_only">LinkedIn Only</option>
+          <option value="blog_only">Blog Only</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+      <label style="display:inline-flex;align-items:center;cursor:pointer;font-size:11px">
+        <input type="checkbox" id="daily-publish-web" checked style="width:auto;margin-right:6px"> Publish to Website
+      </label>
+      <label style="display:inline-flex;align-items:center;cursor:pointer;font-size:11px">
+        <input type="checkbox" id="daily-publish-li" checked style="width:auto;margin-right:6px"> Publish to LinkedIn
+      </label>
+      <label style="display:inline-flex;align-items:center;cursor:pointer;color:var(--warning);font-size:11px">
+        <input type="checkbox" id="daily-dry-run" style="width:auto;margin-right:6px"> Dry Run (generate only)
+      </label>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="runDailyPipeline()">▶ Run Pipeline Now</button>
+      <button class="btn btn-secondary" onclick="runResearch()">🔍 Research Topics</button>
+    </div>
+    <div id="daily-status" style="font-size:11px;color:var(--muted);margin-top:6px">Status: Idle</div>
+  </div>
+
+  <!-- DAILY SCHEDULE -->
+  <div class="card">
+    <div class="card-title">Daily Schedule</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <span style="font-size:11px;color:var(--muted)">Run at:</span>
+      <input id="sched-hour" type="number" min="0" max="23" value="9" style="width:52px">
+      <span style="font-size:13px">:</span>
+      <input id="sched-minute" type="number" min="0" max="59" value="0" style="width:52px">
+      <span style="font-size:11px;color:var(--muted)">(24h local time)</span>
+      <label style="display:inline-flex;align-items:center;cursor:pointer;color:var(--accent);font-size:11px;font-weight:600">
+        <input type="checkbox" id="sched-enabled" style="width:auto;margin-right:6px"> Enable Scheduler
+      </label>
+    </div>
+    <div id="day-grid" style="display:grid;grid-template-columns:60px 60px 160px;gap:4px 8px;align-items:center">
+      <b style="font-size:10px;color:var(--muted)">Day</b>
+      <b style="font-size:10px;color:var(--muted)">Active</b>
+      <b style="font-size:10px;color:var(--muted)">Content Type</b>
+    </div>
+    <div class="btn-row" style="margin-top:10px">
+      <button class="btn btn-primary btn-sm" onclick="saveSchedule()">Save Schedule</button>
+      <button class="btn btn-secondary btn-sm" onclick="loadSchedule()">Load Current</button>
+    </div>
+    <div class="btn-row" style="margin-top:6px">
+      <button class="btn btn-primary btn-sm" onclick="startScheduler()">▶ Start</button>
+      <button class="btn btn-secondary btn-sm" onclick="stopScheduler()">■ Stop</button>
+      <button class="btn btn-secondary btn-sm" onclick="pauseScheduler()">⏸ Pause</button>
+      <button class="btn btn-secondary btn-sm" onclick="resumeScheduler()">▶ Resume</button>
+      <button class="btn btn-secondary btn-sm" onclick="refreshSchedStatus()">⟳ Status</button>
+    </div>
+    <div id="sched-status-bar" style="font-size:11px;color:var(--muted);margin-top:6px">Status: unknown — click ⟳ Status</div>
+  </div>
+
+  <!-- WORKER SCHEDULES (existing) -->
+  <div class="card">
+    <div class="card-title">Worker Schedules <button class="btn btn-secondary btn-sm" style="float:right" onclick="refreshWorkers()">↺ Refresh</button></div>
+    <div id="worker-rows"></div>
+  </div>
+
+  <!-- PIPELINE STEPS (existing) -->
+  <div class="card">
+    <div class="card-title">7-Step Automation Pipeline</div>
+    <div class="check-list" id="step-checks"></div>
+    <div style="margin:10px 0 6px">
+      <label style="display:inline-flex;align-items:center;cursor:pointer;color:var(--warning);font-size:11px">
+        <input type="checkbox" id="dry-run-chk" style="width:auto;margin-right:6px"> Dry Run (log only)
+      </label>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="runPipeline()">▶ Run Selected Steps</button>
+      <button class="btn btn-secondary btn-sm" onclick="selectAllSteps(true)">All</button>
+      <button class="btn btn-secondary btn-sm" onclick="selectAllSteps(false)">None</button>
+    </div>
+    <div id="pipeline-status" style="font-size:11px;color:var(--muted);margin-top:6px">Status: Idle</div>
+  </div>
+
+  <div class="card"><div class="card-title">Pipeline Log</div><div class="log-box" id="log-pipeline"></div></div>
+</div>
+
+<!-- SOURCES -->
+<div class="page" id="page-sources">
+  <h1>📋 Signal Sources</h1>
+  <div class="subtitle">Manage RSS feeds and Reddit subreddits for signal collection</div>
+  <div class="btn-row">
+    <button class="btn btn-secondary btn-sm" onclick="loadSources()">↺ Load</button>
+    <button class="btn btn-primary btn-sm" onclick="addSource()">+ Add Source</button>
+    <button class="btn btn-secondary btn-sm" onclick="saveSources()">💾 Save to File</button>
+  </div>
+  <div class="card">
+    <div class="table-wrap">
+      <table><thead><tr><th>Type</th><th>Category</th><th>URL / Subreddit</th><th>Limit</th><th>Action</th></tr></thead>
+      <tbody id="sources-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- DATABASE -->
+<div class="page" id="page-database">
+  <h1>🗄 Database Browser</h1>
+  <div class="subtitle">View records in any table directly</div>
+  <div class="field-row" style="align-items:center;margin-bottom:12px;gap:10px">
+    <select id="db-table" style="width:200px">
+      <option>signals</option><option>insights</option><option>content</option>
+      <option>distribution_queue</option><option>metrics</option><option>posts</option>
+      <option>schema_version</option><option>schedule_preferences</option>
+    </select>
+    <input type="number" id="db-limit" value="50" min="10" max="500" style="width:70px">
+    <span style="font-size:11px;color:var(--muted)">rows</span>
+    <button class="btn btn-primary btn-sm" onclick="loadDb()">Load</button>
+    <span id="db-count" style="font-size:11px;color:var(--muted)"></span>
+  </div>
+  <div class="card" style="padding:0">
+    <div class="table-wrap" id="db-table-wrap"></div>
+  </div>
+</div>
+
+<!-- GROWTH -->
+<div class="page" id="page-growth">
+  <h1>📈 LinkedIn Growth</h1>
+  <div class="subtitle">AI-powered engagement automation — scan, classify, comment, track viral posts</div>
+  <div class="btn-row">
+    <button class="btn btn-primary btn-sm" onclick="apiPost('/api/engagement/feed','growth')">Scan Feed Now</button>
+    <button class="btn btn-primary btn-sm" onclick="apiPost('/api/engagement/run','growth')">Run Engagement</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/engagement/stats','growth')">Stats</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/engagement/log?limit=20','growth')">Engagement Log</button>
+    <button class="btn btn-secondary btn-sm" onclick="apiGet('/api/engagement/viral','growth')">Viral Posts</button>
+  </div>
+  <div class="card">
+    <div class="card-title">Influencer Targets <button class="btn btn-primary btn-sm" style="float:right" onclick="addInfluencer()">+ Add</button></div>
+    <div class="table-wrap"><table><thead><tr><th>Name</th><th>URL</th><th>Category</th><th>Priority</th><th></th></tr></thead>
+    <tbody id="influencer-tbody"></tbody></table></div>
+    <button class="btn btn-secondary btn-sm" style="margin-top:8px" onclick="loadInfluencers()">↺ Refresh</button>
+  </div>
+  <div class="card">
+    <div class="card-title">Worker Interval</div>
+    <div class="field-row" style="align-items:center;gap:8px">
+      <input type="number" id="growth-interval" value="2" min="1" max="24" style="width:70px">
+      <span style="font-size:11px;color:var(--muted)">hours</span>
+      <button class="btn btn-secondary btn-sm" onclick="applyGrowthInterval()">Apply</button>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">Output</div><div class="log-box" id="log-growth"></div></div>
+</div>
+
+<!-- SETTINGS -->
+<div class="page" id="page-settings">
+  <h1>⚙ Settings</h1>
+  <div class="subtitle">API keys, environment variables, and runtime thresholds</div>
+  <div id="settings-form"></div>
+  <div class="card">
+    <div class="card-title">Runtime Thresholds</div>
+    <div class="field-row" style="flex-wrap:wrap;gap:16px">
+      <div class="field"><label>Content Confidence Min (0.1–1.0)</label><input type="number" id="conf-thresh" step="0.1" min="0.1" max="1.0" value="0.5" style="width:80px"></div>
+      <div class="field"><label>Max Content per Cycle</label><input type="number" id="max-content" min="1" max="100" value="20" style="width:80px"></div>
+    </div>
+    <button class="btn btn-secondary btn-sm" onclick="applyThresholds()">Apply Thresholds</button>
+  </div>
+  <div class="card">
+    <div class="card-title">LinkedIn OAuth</div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:8px">Use the Tkinter GUI or CLI (<code style="color:var(--accent)">python linkedin_auth.py</code>) to complete the OAuth flow, then paste the token below.</p>
+  </div>
+  <div style="margin-top:16px;display:flex;gap:10px">
+    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+    <button class="btn btn-secondary" onclick="loadConfig()">↺ Load Config</button>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="card-title">Output</div><div class="log-box" id="log-settings"></div></div>
+</div>
+
+</div><!-- /content -->
+
+<!-- STATUS BAR -->
+<div id="statusbar">
+  <span id="sb-server">● Offline</span>
+  <span style="color:var(--border)">|</span>
+  <span id="sb-workers">Workers: loading...</span>
+  <span style="color:var(--border)">|</span>
+  <span id="sb-pipeline">Pipeline: never run</span>
+  <span style="margin-left:auto;color:var(--muted)">API: <a href="/" style="color:var(--accent)">http://127.0.0.1:8000</a></span>
+</div>
+</div><!-- /main -->
+
+<script>
+const API = '';  // same origin
+
+// ── Navigation ──────────────────────────────────────────────────────────────
+document.querySelectorAll('#nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const page = a.dataset.page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('#nav a').forEach(n => n.classList.remove('active'));
+    a.classList.add('active');
+    if (page === 'pipeline') refreshWorkers();
+    if (page === 'sources') loadSources();
+    if (page === 'growth') loadInfluencers();
+    if (page === 'settings') loadConfig();
+  });
+});
+
+// ── API helpers ──────────────────────────────────────────────────────────────
+async function apiFetch(path, opts = {}) {
+  try {
+    const r = await fetch(API + path, {
+      headers: {'Content-Type':'application/json'},
+      ...opts
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.detail || data.error || JSON.stringify(data));
+    return data;
+  } catch(e) {
+    return {_err: e.message};
+  }
+}
+
+function ts() { return new Date().toLocaleTimeString(); }
+
+function logTo(id, msg, cls='') {
+  const el = document.getElementById('log-' + id);
+  if (!el) return;
+  const span = document.createElement('span');
+  span.className = cls;
+  span.textContent = msg + '\n';
+  el.appendChild(span);
+  el.scrollTop = el.scrollHeight;
+}
+
+async function apiGet(path, logKey) {
+  logTo(logKey, `[${ts()}] GET ${path}`, 'blue');
+  const d = await apiFetch(path);
+  if (d._err) { logTo(logKey, '  Error: ' + d._err, 'error'); return null; }
+  logTo(logKey, JSON.stringify(d, null, 2));
+  return d;
+}
+
+async function apiPost(path, logKey, body = {}) {
+  logTo(logKey, `[${ts()}] POST ${path}`, 'accent');
+  const d = await apiFetch(path, {method:'POST', body: JSON.stringify(body)});
+  if (d._err) { logTo(logKey, '  Error: ' + d._err, 'error'); return null; }
+  logTo(logKey, JSON.stringify(d, null, 2), 'success');
+  return d;
+}
+
+// ── Table renderer ───────────────────────────────────────────────────────────
+function showTable(containerId, rows) {
+  const el = document.getElementById(containerId);
+  if (!el || !rows || !rows.length) return;
+  const cols = Object.keys(rows[0]);
+  let html = '<div class="card" style="padding:0"><div class="table-wrap"><table><thead><tr>';
+  cols.forEach(c => html += `<th>${c}</th>`);
+  html += '</tr></thead><tbody>';
+  rows.forEach(row => {
+    html += '<tr>';
+    cols.forEach(c => { const v = row[c] ?? ''; html += `<td title="${String(v).replace(/"/g,'')}">${String(v).substring(0,80)}</td>`; });
+    html += '</tr>';
+  });
+  html += '</tbody></table></div></div>';
+  el.innerHTML = html;
+}
+
+// ── Dashboard ────────────────────────────────────────────────────────────────
+async function checkHealth() {
+  const d = await apiFetch('/health');
+  const alive = !d._err;
+  const badge = document.getElementById('srv-badge');
+  const sbSrv = document.getElementById('sb-server');
+  if (alive) {
+    badge.style.color = 'var(--success)';
+    badge.textContent = '● Server Online';
+    sbSrv.style.color = 'var(--success)';
+    sbSrv.textContent = '● Online v' + (d.version || '?');
+    logTo('dashboard', `[${ts()}] API v${d.version} — online`, 'success');
+  } else {
+    badge.style.color = 'var(--error)';
+    badge.textContent = '● Server Offline';
+    sbSrv.style.color = 'var(--error)';
+    sbSrv.textContent = '● Offline';
+    logTo('dashboard', `[${ts()}] Server offline`, 'error');
+  }
+  return alive;
+}
+
+async function refreshDashboard() {
+  const alive = await checkHealth();
+  if (!alive) return;
+  const [sig, ins, cont, q] = await Promise.all([
+    apiFetch('/api/signals?limit=1'),
+    apiFetch('/api/insights?limit=1'),
+    apiFetch('/api/content?limit=1'),
+    apiFetch('/api/distribution/queue?limit=1'),
+  ]);
+  document.getElementById('stat-signals').textContent  = sig._err  ? '—' : sig.total;
+  document.getElementById('stat-insights').textContent = ins._err  ? '—' : ins.total;
+  document.getElementById('stat-content').textContent  = cont._err ? '—' : cont.total;
+  document.getElementById('stat-queue').textContent    = q._err    ? '—' : q.total;
+
+  const workers = await apiFetch('/api/system/workers');
+  if (!workers._err) updateWorkerStatus(workers);
+
+  const status = await apiFetch('/api/system/status');
+  if (!status._err && status.last_run) {
+    document.getElementById('sb-pipeline').textContent = 'Pipeline: ' + status.last_run.substring(11,16);
+  }
+}
+
+function updateWorkerStatus(workers) {
+  const parts = Object.entries(workers).map(([name, info]) => {
+    const dot = info.running ? '●' : '○';
+    const interval = info.interval_hours ? info.interval_hours + 'h' : info.interval_minutes + 'm';
+    return `<span style="color:${info.running ? 'var(--success)' : 'var(--muted)'}">${dot} ${name.substring(0,4)} ${interval}</span>`;
+  });
+  document.getElementById('sb-workers').innerHTML = parts.join(' ');
+}
+
+// ── Content generation ───────────────────────────────────────────────────────
+async function generateContent() {
+  const topic = document.getElementById('topic-input').value.trim();
+  if (!topic) { alert('Enter a topic first.'); return; }
+  const types = [];
+  if (document.getElementById('ct-blog').checked)     types.push('blog_post');
+  if (document.getElementById('ct-linkedin').checked) types.push('linkedin_post');
+  if (document.getElementById('ct-linked').checked)   types.push('linkedin_post_linked');
+  if (!types.length) { alert('Select at least one content type.'); return; }
+  const channels = [];
+  if (document.getElementById('pub-website').checked)  channels.push('website');
+  if (document.getElementById('pub-linkedin').checked) channels.push('linkedin');
+  for (const ct of types) {
+    const body = {topic, content_type: ct};
+    if (channels.length) body.channels = channels;
+    await apiPost('/api/content/generate', 'content', body);
+  }
+}
+
+async function loadContentList() {
+  const d = await apiFetch('/api/content?limit=20');
+  if (!d._err) showTable('content-table', d.content || d.items || []);
+  logTo('content', JSON.stringify(d, null, 2));
+}
+
+// ── Pipeline ─────────────────────────────────────────────────────────────────
+function buildStepChecks() {
+  const steps = [
+    '1  Collect Signals','2  Generate Insights','3  Generate Content',
+    '4  Schedule Distribution','5  Publish Content','6  Collect Analytics',
+    '7  Update Feedback Signals'
+  ];
+  const el = document.getElementById('step-checks');
+  el.innerHTML = steps.map((s, i) =>
+    `<label><input type="checkbox" class="step-chk" value="${i+1}" checked style="width:auto;margin-right:6px"> ${s}</label>`
+  ).join('');
+}
+
+function selectAllSteps(v) {
+  document.querySelectorAll('.step-chk').forEach(c => c.checked = v);
+}
+
+async function runPipeline() {
+  const steps = [...document.querySelectorAll('.step-chk:checked')].map(c => +c.value);
+  const dryRun = document.getElementById('dry-run-chk').checked;
+  if (!steps.length) { alert('Select at least one step.'); return; }
+  document.getElementById('pipeline-status').textContent = 'Status: Running...';
+  logTo('pipeline', `\n[${ts()}] === Pipeline Starting (steps: ${steps.join(',')}) ===`, 'accent');
+  const d = await apiPost('/api/pipeline/run', 'pipeline', {steps, dry_run: dryRun});
+  if (d) {
+    document.getElementById('pipeline-status').textContent =
+      `Status: Done in ${d.elapsed_seconds || 0}s`;
+    document.getElementById('sb-pipeline').textContent =
+      'Pipeline: ' + new Date().toLocaleTimeString().substring(0,5);
+    await refreshDashboard();
+  } else {
+    document.getElementById('pipeline-status').textContent = 'Status: Error';
+  }
+}
+
+async function refreshWorkers() {
+  const d = await apiFetch('/api/system/workers');
+  if (d._err) { logTo('pipeline', 'Workers unavailable: ' + d._err, 'error'); return; }
+  updateWorkerStatus(d);
+  const container = document.getElementById('worker-rows');
+  const runEndpoints = {
+    signal:'POST /api/signals/collect', insight:'POST /api/insights/generate',
+    content:'POST /api/content/generate', distribution:'POST /api/distribution/run',
+    analytics:'POST /api/analytics/collect'
+  };
+  container.innerHTML = Object.entries(d).map(([engine, info]) => {
+    const dot = info.running ? '<span class="dot on">●</span>' : '<span class="dot off">●</span>';
+    const interval = info.interval_hours !== undefined ? info.interval_hours : info.interval_minutes;
+    const unit = info.interval_hours !== undefined ? 'h' : 'm';
+    const ikey = info.interval_hours !== undefined ? 'interval_hours' : 'interval_minutes';
+    return `<div class="worker-row">
+      <span class="worker-name">${dot} ${engine}</span>
+      <input class="interval-input" type="number" id="wi-${engine}" value="${interval}" min="1" max="720">
+      <span style="font-size:10px;color:var(--muted)">${unit}</span>
+      <button class="btn btn-primary btn-sm" onclick="restartWorker('${engine}','${ikey}')">Apply</button>
+      <button class="btn btn-secondary btn-sm" onclick="workerAction('${engine}','stop')">Stop</button>
+      <button class="btn btn-secondary btn-sm" onclick="workerAction('${engine}','start')">Start</button>
+      <button class="btn btn-secondary btn-sm" onclick="runWorkerNow('${engine}')">Run Now</button>
+    </div>`;
+  }).join('');
+}
+
+async function restartWorker(engine, ikey) {
+  const val = +document.getElementById('wi-' + engine).value;
+  const d = await apiPost(`/api/system/workers/${engine}/restart`, 'pipeline', {[ikey]: val});
+  if (d) { logTo('pipeline', `${engine} restarted at ${val}`, 'success'); refreshWorkers(); }
+}
+async function workerAction(engine, action) {
+  await apiPost(`/api/system/workers/${engine}/${action}`, 'pipeline');
+  setTimeout(refreshWorkers, 500);
+}
+async function runWorkerNow(engine) {
+  const ep = {
+    signal:'/api/signals/collect', insight:'/api/insights/generate',
+    content:'/api/content/generate', distribution:'/api/distribution/run',
+    analytics:'/api/analytics/collect'
+  };
+  await apiPost(ep[engine], 'pipeline');
+}
+
+// ── Daily Pipeline ────────────────────────────────────────────────────────────
+async function runDailyPipeline() {
+  const topic   = document.getElementById('daily-topic').value.trim() || null;
+  const mode    = document.getElementById('daily-mode').value;
+  const dryRun  = document.getElementById('daily-dry-run').checked;
+  const pubWeb  = document.getElementById('daily-publish-web').checked;
+  const pubLi   = document.getElementById('daily-publish-li').checked;
+  const publish = !dryRun && (pubWeb || pubLi);
+
+  document.getElementById('daily-status').textContent = 'Status: Running...';
+  logTo('pipeline', `\n[${ts()}] === Daily Pipeline Starting ===`, 'accent');
+  logTo('pipeline', `  Topic: ${topic || '(auto-pick)'}  Mode: ${mode}  DryRun: ${dryRun}`, 'muted');
+
+  const d = await apiPost('/api/pipeline/daily', 'pipeline', {
+    topic, content_types: [mode], publish, dry_run: dryRun
+  });
+
+  if (d && !d._err) {
+    const status = d.error ? `Error: ${d.error}` : `Done — topic: ${d.topic}`;
+    document.getElementById('daily-status').textContent = 'Status: ' + status;
+    document.getElementById('sb-pipeline').textContent = 'Pipeline: ' + new Date().toLocaleTimeString().substring(0,5);
+    if (d.blog_url)       logTo('pipeline', `  Blog URL: ${d.blog_url}`, 'success');
+    if (d.linkedin_path)  logTo('pipeline', `  LinkedIn: ${d.linkedin_path}`, 'success');
+  } else {
+    document.getElementById('daily-status').textContent = 'Status: Error';
+  }
+}
+
+async function runResearch() {
+  document.getElementById('daily-status').textContent = 'Status: Researching...';
+  logTo('pipeline', `\n[${ts()}] Running topic research...`, 'accent');
+  const d = await apiPost('/api/research/run', 'pipeline', {});
+  if (d && !d._err) {
+    document.getElementById('daily-status').textContent = `Status: Research done — ${d.count} topics`;
+    logTo('pipeline', `Research complete — ${d.count} topics`, 'success');
+    (d.topics || []).slice(0, 5).forEach(t =>
+      logTo('pipeline', `  [${String(t.reddit_score||0).padStart(4)}] ${t.generated_title}`, 'muted'));
+  } else {
+    document.getElementById('daily-status').textContent = 'Status: Research failed';
+  }
+}
+
+// Build day-grid on load
+const DAY_DEFAULTS = {Mon:'blog_and_li',Tue:'off',Wed:'blog_and_li',Thu:'li_only',Fri:'blog_and_li',Sat:'off',Sun:'off'};
+function buildDayGrid() {
+  const grid = document.getElementById('day-grid');
+  if (!grid) return;
+  for (const day of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']) {
+    const def = DAY_DEFAULTS[day];
+    grid.insertAdjacentHTML('beforeend', `
+      <span style="font-size:11px">${day}</span>
+      <input type="checkbox" id="day-active-${day}" ${def !== 'off' ? 'checked' : ''} style="width:auto;margin:0">
+      <select id="day-mode-${day}" style="font-size:11px;padding:2px 4px">
+        <option value="blog_and_li" ${def==='blog_and_li'?'selected':''}>Blog + LinkedIn</option>
+        <option value="li_only" ${def==='li_only'?'selected':''}>LinkedIn Only</option>
+        <option value="off" ${def==='off'?'selected':''}>Off</option>
+      </select>
+    `);
+  }
+}
+
+async function saveSchedule() {
+  const h = document.getElementById('sched-hour').value.padStart(2,'0');
+  const m = document.getElementById('sched-minute').value.padStart(2,'0');
+  const slot = `${h}:${m}`;
+  const enabled = document.getElementById('sched-enabled').checked;
+  const dayContent = {};
+  const activeDays = [];
+  for (const day of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']) {
+    const active = document.getElementById(`day-active-${day}`).checked;
+    const ct = document.getElementById(`day-mode-${day}`).value;
+    dayContent[day] = active ? ct : 'off';
+    if (active && ct !== 'off') activeDays.push(day);
+  }
+  const d = await apiPost('/api/schedule/config', 'pipeline', {
+    enabled, slots: [slot], days: activeDays, day_content_type: dayContent
+  });
+  if (d && !d._err) logTo('pipeline', `[${ts()}] Schedule saved — ${slot}`, 'success');
+}
+
+async function loadSchedule() {
+  const d = await apiFetch('/api/schedule/config');
+  if (d._err) { logTo('pipeline', 'Load error: ' + d._err, 'error'); return; }
+  const slots = d.slots || ['09:00'];
+  if (slots[0]) {
+    const [h, m] = slots[0].split(':');
+    document.getElementById('sched-hour').value = +h;
+    document.getElementById('sched-minute').value = +m;
+  }
+  document.getElementById('sched-enabled').checked = !!d.enabled;
+  const dc = d.day_content_type || {};
+  for (const day of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']) {
+    const ct = dc[day] || 'off';
+    document.getElementById(`day-active-${day}`).checked = ct !== 'off';
+    document.getElementById(`day-mode-${day}`).value = ct;
+  }
+  logTo('pipeline', `[${ts()}] Schedule loaded`, 'success');
+}
+
+// ── Scheduler control ─────────────────────────────────────────────────────────
+
+async function refreshSchedStatus() {
+  const bar = document.getElementById('sched-status-bar');
+  const d = await apiFetch('/api/schedule/status');
+  if (d._err) { bar.textContent = 'Status: error — ' + d._err; bar.style.color = 'var(--error)'; return; }
+  const dry = d.dry_run ? '  [DRY RUN]' : '';
+  if (d.paused) {
+    bar.textContent = `Status: Paused${dry}`;
+    bar.style.color = 'var(--warning)';
+  } else if (d.running) {
+    const nf = d.next_fire ? `  — next: ${d.next_fire.slice(0,16).replace('T',' ')}` : '';
+    bar.textContent = `Status: Running${nf}${dry}`;
+    bar.style.color = 'var(--success)';
+  } else {
+    bar.textContent = `Status: Stopped${dry}`;
+    bar.style.color = 'var(--muted)';
+  }
+}
+
+async function startScheduler() {
+  const d = await apiPost('/api/schedule/start', 'pipeline');
+  if (d && !d._err) { logTo('pipeline', `[${ts()}] Scheduler started`, 'success'); refreshSchedStatus(); }
+}
+
+async function stopScheduler() {
+  const d = await apiPost('/api/schedule/stop', 'pipeline');
+  if (d && !d._err) { logTo('pipeline', `[${ts()}] Scheduler stopped`, 'success'); refreshSchedStatus(); }
+}
+
+async function pauseScheduler() {
+  const d = await apiPost('/api/schedule/pause', 'pipeline');
+  if (d && !d._err) { logTo('pipeline', `[${ts()}] Scheduler paused`, 'success'); refreshSchedStatus(); }
+}
+
+async function resumeScheduler() {
+  const d = await apiPost('/api/schedule/resume', 'pipeline');
+  if (d && !d._err) { logTo('pipeline', `[${ts()}] Scheduler resumed`, 'success'); refreshSchedStatus(); }
+}
+
+// ── Signal Sources ───────────────────────────────────────────────────────────
+let sourcesData = [];
+
+async function loadSources() {
+  const d = await apiFetch('/api/sources');
+  if (d._err) { alert('Error: ' + d._err); return; }
+  sourcesData = d.sources || [];
+  renderSources();
+}
+
+function renderSources() {
+  const tbody = document.getElementById('sources-tbody');
+  tbody.innerHTML = sourcesData.map((s, i) => {
+    const url = s.url || s.subreddit || '';
+    return `<tr>
+      <td><span class="pill pill-muted">${s.type}</span></td>
+      <td>${s.category || ''}</td>
+      <td>${url}</td>
+      <td>${s.limit || ''}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="removeSource(${i})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function removeSource(i) {
+  sourcesData.splice(i, 1);
+  renderSources();
+}
+
+function addSource() {
+  const type = prompt('Type (rss or reddit):', 'rss');
+  if (!type) return;
+  const cat = prompt('Category:', 'digital-marketing') || '';
+  const url = prompt(type === 'rss' ? 'RSS URL:' : 'Subreddit (without /r/):', '');
+  if (!url) return;
+  const entry = {type, category: cat};
+  if (type === 'rss') entry.url = url;
+  else { entry.subreddit = url; entry.limit = 10; }
+  sourcesData.push(entry);
+  renderSources();
+}
+
+async function saveSources() {
+  const d = await apiPost('/api/sources', 'settings', {sources: sourcesData});
+  if (d) alert(`Saved ${sourcesData.length} sources.`);
+}
+
+// ── Database ──────────────────────────────────────────────────────────────────
+async function loadDb() {
+  const table = document.getElementById('db-table').value;
+  const limit = document.getElementById('db-limit').value;
+  const d = await apiFetch(`/api/db/browse?table=${table}&limit=${limit}`);
+  if (d._err) { alert('Error: ' + d._err); return; }
+  document.getElementById('db-count').textContent = `${d.count} rows — ${table}`;
+  const wrap = document.getElementById('db-table-wrap');
+  if (!d.rows.length) { wrap.innerHTML = '<div style="padding:16px;color:var(--muted)">No rows.</div>'; return; }
+  const cols = d.columns;
+  let html = '<table><thead><tr>' + cols.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
+  d.rows.forEach(row => {
+    html += '<tr>' + cols.map(c => `<td title="${String(row[c]??'').replace(/"/g,'')}">${String(row[c]??'').substring(0,100)}</td>`).join('') + '</tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+}
+
+// ── Growth ────────────────────────────────────────────────────────────────────
+async function loadInfluencers() {
+  const d = await apiFetch('/api/engagement/influencers');
+  if (d._err) {
+    document.getElementById('influencer-tbody').innerHTML =
+      '<tr><td colspan="5" style="color:var(--muted)">Engagement engine not yet active.</td></tr>';
+    return;
+  }
+  const rows = d.influencers || [];
+  document.getElementById('influencer-tbody').innerHTML = rows.map(r =>
+    `<tr><td>${r.name}</td><td>${r.linkedin_url}</td><td>${r.category||''}</td><td>${r.priority||3}</td>
+     <td><button class="btn btn-danger btn-sm" onclick="removeInfluencer(${r.id})">✕</button></td></tr>`
+  ).join('') || '<tr><td colspan="5" style="color:var(--muted)">No influencers added yet.</td></tr>';
+}
+
+async function addInfluencer() {
+  const name = prompt('Name:');
+  if (!name) return;
+  const url = prompt('LinkedIn URL:');
+  if (!url) return;
+  const cat = prompt('Category (optional):') || '';
+  const d = await apiPost('/api/engagement/influencers', 'growth', {name, linkedin_url: url, category: cat});
+  if (d) loadInfluencers();
+}
+
+async function removeInfluencer(id) {
+  if (!confirm('Remove this influencer?')) return;
+  const d = await apiFetch(`/api/engagement/influencers/${id}`, {method:'DELETE'});
+  if (!d._err) loadInfluencers();
+}
+
+async function applyGrowthInterval() {
+  const val = +document.getElementById('growth-interval').value;
+  await apiPost('/api/system/workers/engagement/restart', 'growth', {interval_hours: val});
+}
+
+// ── Settings ──────────────────────────────────────────────────────────────────
+const ENV_GROUPS = [
+  {title:'Groq AI', fields:[['GROQ_API_KEY','API Key',true],['GROQ_MODEL','Model']]},
+  {title:'LinkedIn', fields:[
+    ['LINKEDIN_ACCESS_TOKEN','Access Token',true],
+    ['LINKEDIN_ORG_URN','Org URN'],['LINKEDIN_PERSON_URN','Person URN'],
+    ['LINKEDIN_CLIENT_ID','Client ID'],['LINKEDIN_CLIENT_SECRET','Client Secret',true]
+  ]},
+  {title:'Website', fields:[['WEBSITE_REPO_PATH','Repo Path'],['WEBSITE_BASE_URL','Base URL']]},
+  {title:'Images', fields:[['UNSPLASH_ACCESS_KEY','Unsplash Key',true],['STABLE_DIFFUSION_URL','SD URL']]},
+  {title:'Analytics', fields:[['GA_PROPERTY_ID','GA Property ID']]},
+];
+
+function buildSettingsForm() {
+  const el = document.getElementById('settings-form');
+  el.innerHTML = ENV_GROUPS.map(g => `
+    <div class="card">
+      <div class="card-title">${g.title}</div>
+      ${g.fields.map(([key, label, secret]) => `
+        <div class="field">
+          <label>${label}</label>
+          <input type="${secret ? 'password' : 'text'}" id="env-${key}" data-key="${key}" placeholder="${key}">
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+async function loadConfig() {
+  const d = await apiFetch('/api/system/config');
+  if (!d._err) {
+    if (d.content_confidence_threshold) document.getElementById('conf-thresh').value = d.content_confidence_threshold;
+    if (d.content_max_per_cycle) document.getElementById('max-content').value = d.content_max_per_cycle;
+    logTo('settings', `[${ts()}] Config loaded: confidence=${d.content_confidence_threshold}, max=${d.content_max_per_cycle}`, 'success');
+  }
+}
+
+async function applyThresholds() {
+  const conf = +document.getElementById('conf-thresh').value;
+  const mx = +document.getElementById('max-content').value;
+  const d = await apiPost('/api/system/config', 'settings', {content_confidence_threshold: conf, content_max_per_cycle: mx});
+  if (d) logTo('settings', 'Thresholds applied.', 'success');
+}
+
+async function saveSettings() {
+  const entries = {};
+  document.querySelectorAll('#settings-form input[data-key]').forEach(inp => {
+    if (inp.value.trim()) entries[inp.dataset.key] = inp.value.trim();
+  });
+  logTo('settings', `[${ts()}] Note: .env write not available from web GUI. Copy values to your .env file manually.`, 'warning');
+  logTo('settings', JSON.stringify(entries, null, 2), 'muted');
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+buildStepChecks();
+buildSettingsForm();
+
+// Auto-refresh every 30s
+refreshDashboard();
+setInterval(refreshDashboard, 30000);
+</script>
+</body>
+</html>

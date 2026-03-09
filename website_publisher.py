@@ -181,10 +181,32 @@ def git_push_website(slug, title):
     try:
         push = _run(['git', 'push'], timeout=60)
         logger.info('git push: rc=%d  %s', push.returncode, push.stdout.strip())
-        return push.returncode, push.stdout, push.stderr
+        if push.returncode != 0:
+            return push.returncode, push.stdout, push.stderr
     except subprocess.TimeoutExpired:
         logger.error('git push timed out after 60 seconds')
         return 1, '', 'git push timed out'
+
+    # Promote main → deploy branch so Hostinger picks up the new post
+    deploy_script = os.path.join(WEBSITE_REPO, 'deploy.sh')
+    if os.path.exists(deploy_script):
+        try:
+            deploy = _run(
+                ['bash', 'deploy.sh', f'Deploy blog: {title}'],
+                timeout=120,
+            )
+            if deploy.returncode == 0:
+                logger.info('deploy.sh: promoted main to deploy branch.')
+            else:
+                logger.warning('deploy.sh returned %d: %s', deploy.returncode, deploy.stderr[:200])
+        except subprocess.TimeoutExpired:
+            logger.warning('deploy.sh timed out — deploy branch not updated.')
+        except Exception as exc:
+            logger.warning('deploy.sh could not run: %s', exc)
+    else:
+        logger.warning('deploy.sh not found in %s — deploy branch not updated.', WEBSITE_REPO)
+
+    return push.returncode, push.stdout, push.stderr
 
 
 # ── step 6 ────────────────────────────────────────────────────────────────────
