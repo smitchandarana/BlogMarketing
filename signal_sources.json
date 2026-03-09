@@ -76,82 +76,108 @@
   },
   {
     "type": "reddit",
-    "category": "data-science",
+    "category": "bi-powerbi",
     "subreddits": [
-      "datascience",
-      "dataengineering",
-      "BusinessIntelligence",
-      "analytics",
       "PowerBI",
+      "BusinessIntelligence",
       "tableau",
-      "learnmachinelearning",
-      "MLOps",
-      "statistics",
+      "LookerStudio",
+      "excel",
+      "MicrosoftFabric",
+      "dataanalysis"
+    ],
+    "limit": 15
+  },
+  {
+    "type": "reddit",
+    "category": "data-engineering",
+    "subreddits": [
+      "dataengineering",
+      "datascience",
+      "SQL",
+      "SQLServer",
+      "Python",
+      "apachespark",
+      "ETL",
+      "databricks",
       "bigdata",
-      "dataisbeautiful",
-      "deeplearning",
-      "rstats",
-      "SQL"
+      "analytics"
     ],
     "limit": 15
   },
   {
     "type": "reddit",
-    "category": "ai-ml",
+    "category": "cloud-azure",
     "subreddits": [
-      "MachineLearning",
-      "artificial",
-      "ChatGPT",
-      "LocalLLaMA",
-      "singularity",
-      "OpenAI",
-      "LLMDevs",
-      "ArtificialIntelligence",
-      "AItools",
-      "StableDiffusion",
-      "PromptEngineering",
-      "AutoGPT",
-      "LangChain"
-    ],
-    "limit": 15
-  },
-  {
-    "type": "reddit",
-    "category": "digital-marketing",
-    "subreddits": [
-      "digital_marketing",
-      "SEO",
-      "marketing",
-      "content_marketing",
-      "socialmedia",
-      "PPC",
-      "EmailMarketing",
-      "copywriting",
-      "GoogleAnalytics",
-      "AskMarketing",
-      "Blogging",
-      "AffiliateMarketing",
-      "LinkedInMarketing",
-      "seogrowth"
+      "AZURE",
+      "aws",
+      "googlecloud",
+      "MSFabric",
+      "azuredevops",
+      "devops"
     ],
     "limit": 12
   },
   {
     "type": "reddit",
-    "category": "business-startup",
+    "category": "ai-analytics",
     "subreddits": [
+      "MachineLearning",
+      "artificial",
+      "ChatGPT",
+      "MLOps",
+      "learnmachinelearning",
+      "ArtificialIntelligence",
+      "deeplearning",
+      "PromptEngineering",
+      "LangChain",
+      "AutoML"
+    ],
+    "limit": 15
+  },
+  {
+    "type": "reddit",
+    "category": "enterprise-industry",
+    "subreddits": [
+      "manufacturing",
+      "supplychain",
+      "automotive",
+      "HealthIT",
+      "fintech",
+      "retailtech",
+      "ERP",
+      "sap",
+      "ITManagement",
+      "CIO"
+    ],
+    "limit": 10
+  },
+  {
+    "type": "reddit",
+    "category": "consulting-business",
+    "subreddits": [
+      "consulting",
       "entrepreneur",
       "startups",
       "smallbusiness",
-      "SideProject",
-      "AskMarketing",
       "sales",
-      "consulting",
-      "freelance",
-      "business",
-      "indiebiz",
-      "fintech",
-      "SaaS"
+      "B2Bmarketing",
+      "SaaS",
+      "business"
+    ],
+    "limit": 10
+  },
+  {
+    "type": "reddit",
+    "category": "content-marketing",
+    "subreddits": [
+      "digital_marketing",
+      "SEO",
+      "content_marketing",
+      "LinkedInMarketing",
+      "Blogging",
+      "AskMarketing",
+      "marketing"
     ],
     "limit": 10
   },
