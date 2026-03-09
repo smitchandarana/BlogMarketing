@@ -1025,3 +1025,73 @@
 2026-03-07 20:11:15,692  INFO      groq._base_client  Retrying request to /openai/v1/chat/completions in 2.000000 seconds
 2026-03-07 20:11:17,813  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2026-03-07 20:11:17,825  INFO      gui  Scoring complete — 45 posts ranked.
+2026-03-07 22:07:27,004  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 22:09:06,914  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 22:09:06,914  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 22:09:08,367  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 22:09:09,864  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 22:09:10,605  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 22:09:11,749  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 22:09:12,877  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 22:09:15,075  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:09:15,099  INFO      topic_researcher  Reddit synthesis: 10 topics generated
+2026-03-07 22:09:15,099  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 22:09:16,454  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:09:16,454  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 22:09:16,470  INFO      topic_researcher  Saved 18 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 22:09:16,470  INFO      topic_researcher  Research complete: 18 unique topics saved
+2026-03-07 22:09:16,470  INFO      gui  Research results loaded: 18 topics
+2026-03-07 22:09:27,891  INFO      gui  Topic selected from research: "Power BI Dashboard"
+2026-03-07 22:09:32,568  INFO      gui  LinkedIn-only post requested: "Power BI Dashboard"
+2026-03-07 22:09:32,569  INFO      gui  Calling Groq API — standalone LinkedIn post...
+2026-03-07 22:09:33,555  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:09:33,560  INFO      gui  LinkedIn post generated (152 words).
+2026-03-07 22:09:33,566  ERROR     gui  LinkedIn generation failed. Check GROQ_API_KEY in your .env file. — 'insert_post'
+2026-03-07 22:09:46,180  INFO      gui  LinkedIn-only post requested: "Power BI Dashboard"
+2026-03-07 22:09:46,180  INFO      gui  Calling Groq API — standalone LinkedIn post...
+2026-03-07 22:09:47,355  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:09:47,355  INFO      gui  LinkedIn post generated (204 words).
+2026-03-07 22:09:47,364  ERROR     gui  LinkedIn generation failed. Check GROQ_API_KEY in your .env file. — 'insert_post'
+2026-03-07 22:11:12,872  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 22:11:24,463  INFO      gui  LinkedIn-only post requested: "Data Governance for Modern Organizations"
+2026-03-07 22:11:24,463  INFO      gui  Calling Groq API — standalone LinkedIn post...
+2026-03-07 22:11:25,606  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:11:25,622  INFO      gui  LinkedIn post generated (179 words).
+2026-03-07 22:11:25,638  ERROR     gui  LinkedIn generation failed. Check GROQ_API_KEY in your .env file. — invalid literal for int() with base 10: ''
+2026-03-07 22:12:28,435  INFO      gui  Fetching trending topics from Groq...
+2026-03-07 22:12:28,920  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:12:30,981  INFO      gui  LinkedIn-only post requested: "Data-Driven Sustainability: Unlocking the Potential of Business Intelligence for Environmental and Social Responsibility"
+2026-03-07 22:12:30,981  INFO      gui  Calling Groq API — standalone LinkedIn post...
+2026-03-07 22:12:32,037  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 22:12:32,053  INFO      gui  LinkedIn post generated (145 words).
+2026-03-07 22:12:32,053  ERROR     gui  LinkedIn generation failed. Check GROQ_API_KEY in your .env file. — invalid literal for int() with base 10: ''
+2026-03-07 23:35:43,453  INFO      gui  Phoenix Blog Marketing started
+2026-03-07 23:35:47,153  INFO      gui  Starting research: 5 subreddits + LinkedIn=True
+2026-03-07 23:35:47,153  INFO      topic_researcher  Fetching Reddit posts from: ['PowerBI', 'businessintelligence', 'dataengineering', 'analytics', 'datascience']
+2026-03-07 23:35:48,326  INFO      topic_researcher  Reddit r/PowerBI: fetched 13 posts
+2026-03-07 23:35:49,812  INFO      topic_researcher  Reddit r/businessintelligence: fetched 14 posts
+2026-03-07 23:35:50,510  INFO      topic_researcher  Reddit r/dataengineering: fetched 13 posts
+2026-03-07 23:35:52,005  INFO      topic_researcher  Reddit r/analytics: fetched 14 posts
+2026-03-07 23:35:53,226  INFO      topic_researcher  Reddit r/datascience: fetched 14 posts
+2026-03-07 23:35:55,421  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 23:35:55,453  INFO      topic_researcher  Reddit synthesis: 10 topics generated
+2026-03-07 23:35:55,453  INFO      topic_researcher  Synthesising LinkedIn topics via Groq...
+2026-03-07 23:35:56,786  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 23:35:56,786  INFO      topic_researcher  LinkedIn synthesis: 8 topics generated
+2026-03-07 23:35:56,790  INFO      topic_researcher  Saved 18 research topics to c:\Projects\BlogMarketing\MarketingSchedule\ResearchTopics.json
+2026-03-07 23:35:56,790  INFO      topic_researcher  Research complete: 18 unique topics saved
+2026-03-07 23:35:56,794  INFO      gui  Research results loaded: 18 topics
+2026-03-07 23:36:11,146  INFO      gui  Topic selected from research: "SAP to BI Transition"
+2026-03-07 23:36:13,539  INFO      gui  LinkedIn-only post requested: "SAP to BI Transition"
+2026-03-07 23:36:13,544  INFO      gui  Calling Groq API — standalone LinkedIn post...
+2026-03-07 23:36:14,709  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 23:36:14,709  INFO      gui  LinkedIn post generated (191 words).
+2026-03-07 23:36:34,406  INFO      gui  LinkedIn-only post requested: "SAP to BI Transition"
+2026-03-07 23:36:34,406  INFO      gui  Calling Groq API — standalone LinkedIn post...
+2026-03-07 23:36:35,461  INFO      httpx  HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-07 23:36:35,463  INFO      gui  LinkedIn post generated (188 words).
+2026-03-07 23:36:39,757  INFO      gui  Generate requested: "SAP to BI Transition"
+2026-03-07 23:37:01,389  INFO      gui  Publishing Tracker #29 to LinkedIn...
+2026-03-07 23:37:01,389  INFO      linkedin_publisher  Using person URN from env: urn:li:person:63PHaebS5P
+2026-03-07 23:37:02,562  INFO      linkedin_publisher  LinkedIn API POST https://api.linkedin.com/v2/ugcPosts — status 201 — {"id":"urn:li:share:7436110176379891714"}
+2026-03-07 23:37:02,562  INFO      gui  LinkedIn publish successful — Tracker #29

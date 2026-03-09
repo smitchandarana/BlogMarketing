@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../phoenixsolution"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "phoenixsolution"
+	}
+}

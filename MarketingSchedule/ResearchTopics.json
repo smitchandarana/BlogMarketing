@@ -1,200 +1,201 @@
 {
-  "last_run": "2026-03-07 19:29",
+  "last_run": "2026-03-07 23:35",
   "topics": [
     {
-      "pain_point": "Business leaders struggle to effectively manage large numbers of reports, leading to inefficiencies and decreased productivity.",
-      "generated_title": "Simplifying Report Management",
-      "keywords": [
-        "report management",
-        "business intelligence",
-        "productivity"
-      ],
-      "source": "r/PowerBI",
-      "reddit_score": 6
-    },
-    {
-      "pain_point": "Organizations face challenges in optimizing query time for OLAP scale, resulting in slow performance and frustrated users.",
-      "generated_title": "Optimizing OLAP Query Time",
+      "pain_point": "Data engineers struggle with achieving sub-second query times on large-scale OLAP systems",
+      "generated_title": "OLAP Query Optimiz.",
       "keywords": [
         "OLAP",
         "query optimization",
-        "performance"
+        "data engineering"
       ],
       "source": "r/dataengineering",
-      "reddit_score": 238
+      "reddit_score": 256
     },
     {
-      "pain_point": "Companies are unsure about the best approach to managing workforce data, leading to ineffective decision-making.",
-      "generated_title": "Effective Workforce Data Management",
+      "pain_point": "Businesses face challenges in reconciling frontend conversion data with backend validated outcomes",
+      "generated_title": "Data Reconciliation",
       "keywords": [
-        "workforce data",
-        "business intelligence",
-        "decision-making"
+        "data reconciliation",
+        "frontend conversion",
+        "backend validation"
       ],
-      "source": "r/businessintelligence",
-      "reddit_score": 1
+      "source": "r/analytics",
+      "reddit_score": 10
     },
     {
-      "pain_point": "Business leaders are concerned about the impact of AI on their business and how to effectively utilize it for analytics.",
-      "generated_title": "AI in Business Analytics",
+      "pain_point": "Companies are uncertain about the effectiveness of AI consulting firms in delivering predictive analytics tools within a realistic timeframe",
+      "generated_title": "AI Consulting Realism",
+      "keywords": [
+        "AI consulting",
+        "predictive analytics",
+        "project timelines"
+      ],
+      "source": "r/analytics",
+      "reddit_score": 8
+    },
+    {
+      "pain_point": "Organizations need to balance the trade-off between technical skills and subject matter expertise as AI advances",
+      "generated_title": "AI & Expertise",
       "keywords": [
         "AI",
-        "business analytics",
+        "technical skills",
+        "subject matter expertise"
+      ],
+      "source": "r/datascience",
+      "reddit_score": 128
+    },
+    {
+      "pain_point": "Data analysts and scientists struggle with tracking model iterations and maintaining version control in their projects",
+      "generated_title": "Model Iteration Tracking",
+      "keywords": [
+        "model iteration",
+        "version control",
         "data science"
       ],
       "source": "r/datascience",
-      "reddit_score": 151
+      "reddit_score": 22
     },
     {
-      "pain_point": "Organizations struggle to balance the trade-off between technical skills and subject matter expertise in the face of advancing AI technology.",
-      "generated_title": "The Future of Technical Skills",
+      "pain_point": "Businesses are looking for ways to optimize their data pipeline connectors to move data from Excel to BigQuery for visualization",
+      "generated_title": "Data Pipeline Optimization",
       "keywords": [
-        "technical skills",
-        "subject matter expertise",
-        "AI"
-      ],
-      "source": "r/datascience",
-      "reddit_score": 130
-    },
-    {
-      "pain_point": "Companies face difficulties in automating monthly reporting processes, resulting in wasted time and resources.",
-      "generated_title": "Automating Monthly Reports",
-      "keywords": [
-        "report automation",
-        "business intelligence",
-        "productivity"
-      ],
-      "source": "r/analytics",
-      "reddit_score": 12
-    },
-    {
-      "pain_point": "Business leaders are unsure about the best approach to implementing predictive analytics tools, leading to unrealistic expectations and project delays.",
-      "generated_title": "Implementing Predictive Analytics",
-      "keywords": [
-        "predictive analytics",
-        "business intelligence",
-        "project management"
-      ],
-      "source": "r/analytics",
-      "reddit_score": 7
-    },
-    {
-      "pain_point": "Companies struggle to effectively manage data pipelines and move data from Excel to BigQuery for visualization, resulting in data inconsistencies and reporting errors.",
-      "generated_title": "Streamlining Data Pipelines",
-      "keywords": [
-        "data pipelines",
-        "data visualization",
-        "BigQuery"
+        "data pipeline",
+        "Excel",
+        "BigQuery",
+        "visualization"
       ],
       "source": "r/dataengineering",
-      "reddit_score": 2
+      "reddit_score": 5
     },
     {
-      "pain_point": "Business leaders are concerned about the effectiveness of their data science projects and how to measure their impact on the organization.",
-      "generated_title": "Evaluating Data Science Projects",
+      "pain_point": "Companies are shifting from SAP-centric analytics to other BI tools, but face challenges in the transition process",
+      "generated_title": "SAP to BI Transition",
       "keywords": [
-        "data science",
-        "project evaluation",
-        "business impact"
+        "SAP",
+        "BI tools",
+        "transition process"
       ],
-      "source": "r/datascience",
-      "reddit_score": 42
+      "source": "r/analytics",
+      "reddit_score": 5
     },
     {
-      "pain_point": "Organizations face challenges in maintaining and tracking model iterations, resulting in version control issues and decreased collaboration.",
-      "generated_title": "Managing Model Iterations",
+      "pain_point": "Data engineers often work without frontend access, relying on tribal knowledge, which can lead to inefficiencies and risks",
+      "generated_title": "Data Engineering Ineff.",
       "keywords": [
-        "model management",
-        "version control",
-        "collaboration"
+        "data engineering",
+        "tribal knowledge",
+        "inefficiencies"
       ],
-      "source": "r/datascience",
-      "reddit_score": 23
+      "source": "r/dataengineering",
+      "reddit_score": 29
     },
     {
-      "pain_point": "Inefficient data integration across disparate systems",
-      "generated_title": "Unified ERP Reporting",
+      "pain_point": "Businesses are looking for guidance on building effective maintenance dashboards for data analysis and visualization",
+      "generated_title": "Maintenance Dashboard",
       "keywords": [
-        "ERP Integration",
-        "Data Strategy",
-        "Power BI"
+        "maintenance dashboard",
+        "data analysis",
+        "visualization"
       ],
-      "source": "LinkedIn",
-      "reddit_score": 0
+      "source": "r/analytics",
+      "reddit_score": 6
     },
     {
-      "pain_point": "Lack of actionable insights from existing BI tools",
-      "generated_title": "KPI-Driven Decision Making",
+      "pain_point": "Organizations are interested in learning about the applications and limitations of AI and machine learning in analytics work",
+      "generated_title": "AI in Analytics",
       "keywords": [
-        "KPI Development",
+        "AI",
+        "machine learning",
+        "analytics"
+      ],
+      "source": "r/businessintelligence",
+      "reddit_score": 52
+    },
+    {
+      "pain_point": "Inefficient ERP reporting processes",
+      "generated_title": "ERP Reporting Simplified",
+      "keywords": [
+        "ERP Reporting",
         "Business Intelligence",
-        "Data Analytics"
+        "Process Optimization"
       ],
       "source": "LinkedIn",
       "reddit_score": 0
     },
     {
-      "pain_point": "Difficulty in measuring digital transformation ROI",
-      "generated_title": "Digital Transformation Metrics",
+      "pain_point": "Lack of data-driven decision making",
+      "generated_title": "Data Drives Decisions",
       "keywords": [
+        "Data Strategy",
         "Digital Transformation",
-        "ROI Analysis",
-        "IT Strategy"
+        "KPIs"
       ],
       "source": "LinkedIn",
       "reddit_score": 0
     },
     {
-      "pain_point": "Inability to create a single, unified view of organizational data",
-      "generated_title": "Single Source of Truth",
-      "keywords": [
-        "Data Governance",
-        "Data Warehousing",
-        "ERP Reporting"
-      ],
-      "source": "LinkedIn",
-      "reddit_score": 0
-    },
-    {
-      "pain_point": "Struggling to identify and track key performance indicators",
-      "generated_title": "KPI Identification",
-      "keywords": [
-        "KPI Management",
-        "Performance Metrics",
-        "Business Analytics"
-      ],
-      "source": "LinkedIn",
-      "reddit_score": 0
-    },
-    {
-      "pain_point": "Challenges in creating interactive, user-friendly dashboards",
-      "generated_title": "Power BI Dashboard Design",
+      "pain_point": "Power BI adoption and implementation challenges",
+      "generated_title": "Power BI Success",
       "keywords": [
         "Power BI",
-        "Dashboard Development",
-        "Data Visualization"
+        "Business Analytics",
+        "Implementation"
       ],
       "source": "LinkedIn",
       "reddit_score": 0
     },
     {
-      "pain_point": "Difficulty in aligning data strategy with business objectives",
-      "generated_title": "Data-Driven Business",
+      "pain_point": "Aligning KPIs with business objectives",
+      "generated_title": "KPI Alignment Matters",
       "keywords": [
-        "Data Strategy",
-        "Business Alignment",
+        "KPIs",
+        "Business Objectives",
+        "Performance Management"
+      ],
+      "source": "LinkedIn",
+      "reddit_score": 0
+    },
+    {
+      "pain_point": "Overcoming data silos and integration challenges",
+      "generated_title": "Unified Data Vision",
+      "keywords": [
+        "Data Integration",
+        "Data Silos",
         "Digital Transformation"
       ],
       "source": "LinkedIn",
       "reddit_score": 0
     },
     {
-      "pain_point": "Inadequate data security and access controls",
-      "generated_title": "Data Security Best",
+      "pain_point": "Developing a robust data strategy",
+      "generated_title": "Data Strategy Blueprint",
       "keywords": [
-        "Data Security",
-        "Access Controls",
-        "ERP Data Management"
+        "Data Strategy",
+        "Business Intelligence",
+        "Data Governance"
+      ],
+      "source": "LinkedIn",
+      "reddit_score": 0
+    },
+    {
+      "pain_point": "Measuring the ROI of BI and analytics investments",
+      "generated_title": "BI ROI Matters",
+      "keywords": [
+        "BI ROI",
+        "Analytics Investments",
+        "Business Value"
+      ],
+      "source": "LinkedIn",
+      "reddit_score": 0
+    },
+    {
+      "pain_point": "Building a skilled BI and analytics team",
+      "generated_title": "BI Team Excellence",
+      "keywords": [
+        "BI Team",
+        "Analytics Skills",
+        "Talent Development"
       ],
       "source": "LinkedIn",
       "reddit_score": 0

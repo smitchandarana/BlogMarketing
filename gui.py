@@ -86,7 +86,8 @@ def _m():
                                         load_hashtags)
         from linkedin_publisher import publish_post as li_pub
         from trend_research     import get_trending_topics
-        from tracker            import add_entry, update_status, read_all, get_entry
+        from tracker            import (add_entry, add_idea, update_status, read_all,
+                                        get_entry, delete_entry, delete_entries, STATUSES)
         from image_fetcher      import fetch_image
         from website_publisher  import publish_to_website, git_push_website, wait_for_live
         from topic_researcher   import run_research, load_saved_research, get_last_run_date
@@ -764,16 +765,11 @@ class PhoenixApp(tk.Tk):
             from datetime import datetime
             publish_date = datetime.now().strftime('%Y-%m-%d')
             li_path = m['save_linkedin_post'](li, topic, publish_date=publish_date)
-            post_id = m['insert_post'](
-                topic=topic, blog_path='',
-                linkedin_text=li['caption'], hashtags=li['hashtags'],
-                status='draft', publish_date=publish_date,
-            )
-            m['tracker_add_entry'](
+            tid = m['tracker_add'](
                 topic=topic, blog_path='', linkedin_path=li_path,
                 hashtags=li['hashtags'], website_url='',
             )
-            return li, li_path, post_id
+            return li, li_path, tid
 
         self._run_async(
             fn=_work,

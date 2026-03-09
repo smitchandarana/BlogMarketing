@@ -6,22 +6,23 @@
 ## Table of Contents
 
 1. [Product Overview](#1-product-overview)
-2. [System Requirements](#2-system-requirements)
-3. [Installation & Setup](#3-installation--setup)
-4. [Environment Variables](#4-environment-variables)
-5. [File & Folder Structure](#5-file--folder-structure)
-6. [Module Reference](#6-module-reference)
-7. [The GUI — Full Walkthrough](#7-the-gui--full-walkthrough)
-8. [The Automated Pipeline](#8-the-automated-pipeline)
-9. [Content Calendar](#9-content-calendar)
-10. [tracker.csv Schema](#10-trackercsv-schema)
-11. [Prompts & Customisation](#11-prompts--customisation)
-12. [Website Integration](#12-website-integration)
-13. [LinkedIn API](#13-linkedin-api)
-14. [Unsplash Image API](#14-unsplash-image-api)
-15. [Logging](#15-logging)
-16. [Troubleshooting](#16-troubleshooting)
-17. [External API Quick Reference](#17-external-api-quick-reference)
+2. [Technology Stack](#2-technology-stack)
+3. [System Requirements](#3-system-requirements)
+4. [Installation & Setup](#4-installation--setup)
+5. [Environment Variables](#5-environment-variables)
+6. [File & Folder Structure](#6-file--folder-structure)
+7. [Module Reference](#7-module-reference)
+8. [The GUI — Full Walkthrough](#8-the-gui--full-walkthrough)
+9. [The Automated Pipeline](#9-the-automated-pipeline)
+10. [Content Calendar](#10-content-calendar)
+11. [tracker.csv Schema](#11-trackercsv-schema)
+12. [Prompts & Customisation](#12-prompts--customisation)
+13. [Website Integration](#13-website-integration)
+14. [LinkedIn API](#14-linkedin-api)
+15. [Unsplash Image API](#15-unsplash-image-api)
+16. [Logging](#16-logging)
+17. [Troubleshooting](#17-troubleshooting)
+18. [External API Quick Reference](#18-external-api-quick-reference)
 
 ---
 
@@ -54,11 +55,26 @@ LinkedIn publish  (UGC post API, image upload via Assets API)
 Tracker update  (tracker.csv — CSV, no database)
 ```
 
-Everything is controlled from a single Tkinter GUI (`gui.py`). There is no database — `tracker.csv` is the single source of truth.
+Everything is controlled from a single Tkinter GUI (`gui.py`). The system uses SQLite for post management and CSV files for content tracking.
 
 ---
 
-## 2. System Requirements
+## 2. Technology Stack
+
+| Component | Technology | Purpose |
+|---|---|---|
+| **Language** | Python 3.11+ | Core application |
+| **GUI** | Tkinter | Desktop interface |
+| **AI** | Groq API (llama-3.3-70b-versatile) | Content generation |
+| **Database** | SQLite | Post management and scheduling |
+| **Tracking** | CSV files | Content status tracking |
+| **APIs** | Requests library | External service integration |
+| **Scheduling** | APScheduler | Background job management |
+| **Deployment** | Git + PyInstaller | Version control and distribution |
+
+---
+
+## 3. System Requirements
 
 | Requirement | Minimum |
 |---|---|
@@ -70,7 +86,7 @@ Everything is controlled from a single Tkinter GUI (`gui.py`). There is no datab
 
 ---
 
-## 3. Installation & Setup
+## 4. Installation & Setup
 
 ### 3.1 Clone / open the project
 
@@ -106,7 +122,7 @@ Dependencies installed:
 copy .env.example .env
 ```
 
-Edit `.env` with your API keys — see [Section 4](#4-environment-variables).
+Edit `.env` with your API keys — see [Section 5](#5-environment-variables).
 
 ### 3.5 Run the application
 
@@ -116,7 +132,7 @@ python gui.py
 
 ---
 
-## 4. Environment Variables
+## 5. Environment Variables
 
 All configuration lives in `.env` in the project root. Copy `.env.example` to get started.
 
@@ -147,7 +163,7 @@ WEBSITE_REPO_PATH=C:\Projects\phoenixsolution
 
 ---
 
-## 5. File & Folder Structure
+## 6. File & Folder Structure
 
 ```
 c:\Projects\BlogMarketing\
@@ -162,14 +178,19 @@ c:\Projects\BlogMarketing\
 |-- website_publisher.py        Website repo sync: copy files, update index, sitemap, git push
 |-- tracker.py                  CSV read/write for all content entries
 |-- trend_research.py           Trending topic suggestions via Groq
+|-- topic_researcher.py         Reddit/LinkedIn topic research
+|-- smart_scheduler.py          Intelligent auto-posting scheduler
 |-- llm_client.py               Groq client singleton
+|-- paths.py                    Path resolution for dev/frozen builds
 |-- scheduler.py                APScheduler-based daily job (optional CLI tool)
 |-- main.py                     CLI entry point (generate / publish / schedule)
-|-- database.py                 Legacy SQLite module (no longer used by GUI)
+|-- database.py                 SQLite CRUD for post management and scheduling
 |-- requirements.txt
 |-- .env                        Your credentials (never commit)
 |-- .env.example                Template for credentials
 |-- tracker.csv                 Content log — auto-created on first run
+|-- scheduler_config.json       Smart scheduler configuration
+|-- blog_marketing.db           SQLite database — auto-created on first run
 |-- Log.txt                     Activity log — auto-created on first run
 |
 |-- Blogs/
@@ -183,6 +204,7 @@ c:\Projects\BlogMarketing\
 |
 |-- MarketingSchedule/
 |   |-- Calender.json           30-day content calendar
+|   |-- ResearchTopics.json     Latest topic research output
 |
 |-- Prompts/
     |-- blog_prompt.txt         System prompt for blog generation
@@ -200,7 +222,7 @@ c:\Projects\phoenixsolution\       (separate website repo)
 
 ---
 
-## 6. Module Reference
+## 7. Module Reference
 
 ### 6.1 `llm_client.py`
 
@@ -213,7 +235,48 @@ Groq client singleton. Initialised lazily on first use.
 
 ---
 
-### 6.2 `blog_generator.py`
+### 6.2 `paths.py`
+
+Centralised path resolution for development and PyInstaller frozen builds.
+
+| Function | Returns | Description |
+|---|---|---|
+| `app_dir()` | `str` | Directory containing user data (.env, tracker.csv, Blogs/, LinkedIn Posts/, Log.txt) |
+| `resource_dir()` | `str` | Directory containing read-only assets (Prompts/, Blogs/_new-post.html, MarketingSchedule/) |
+
+---
+
+### 6.3 `database.py`
+
+SQLite database operations for post management and scheduling.
+
+| Function | Parameters | Returns | Description |
+|---|---|---|---|
+| `init_db()` | — | — | Creates the posts table if it doesn't exist |
+| `insert_post(topic, blog_path, linkedin_text, hashtags, status, publish_date)` | `str`, `str`, `str`, `str`, `str`, `str or None` | `int` | Inserts a new post record, returns the ID |
+| `update_post_status(post_id, status)` | `int`, `str` | — | Updates the status of a post |
+| `get_post_by_id(post_id)` | `int` | `sqlite3.Row or None` | Returns a single post by ID |
+| `get_scheduled_posts()` | — | `list[sqlite3.Row]` | Returns all posts with status 'scheduled' |
+| `get_all_posts()` | — | `list[sqlite3.Row]` | Returns all posts ordered by creation date |
+
+**Database schema (posts table):**
+
+| Column | Type | Description |
+|---|---|---|
+| `id` | INTEGER PRIMARY KEY | Auto-incremented ID |
+| `topic` | TEXT | Blog topic |
+| `blog_path` | TEXT | Path to generated HTML file |
+| `linkedin_text` | TEXT | LinkedIn post text |
+| `hashtags` | TEXT | Hashtag string |
+| `status` | TEXT | 'draft', 'scheduled', or 'posted' |
+| `publish_date` | TEXT | When the post was published |
+| `created_at` | TEXT | When the record was created |
+
+---
+
+### 6.4 `tracker.py`
+
+CSV-based content log. Auto-creates `tracker.csv` on first run.
 
 Generates structured blog content as a JSON dict via Groq.
 
@@ -271,7 +334,7 @@ Generates LinkedIn captions and hashtags via Groq.
 | Function | Parameters | Returns | Description |
 |---|---|---|---|
 | `load_hashtags()` | — | `list[str]` | Reads `Prompts/Hashtags.txt`, returns tag words (no `#`) |
-| `generate_linkedin_post(topic, blog_data)` | `topic: str`, `blog_data: dict` | `dict` | Caption + hashtags from Groq |
+| `generate_linkedin_post(topic, blog_data)` | `topic: str`, `blog_data: dict or None` | `dict` | Caption + hashtags from Groq. Dual mode: blog-linked (with blog_data) or standalone (blog_data=None) |
 | `save_linkedin_post(li_data, topic, calendar_day, publish_date, blog_url)` | see below | `str` | Saves TXT file, returns path |
 
 **LinkedIn data dict keys:**
@@ -394,7 +457,7 @@ Posts text + optional image to LinkedIn via the UGC Posts API.
 
 ---
 
-### 6.8 `tracker.py`
+### 6.15 `tracker.py`
 
 CSV-based content log. Auto-creates `tracker.csv` on first run.
 
@@ -407,7 +470,7 @@ CSV-based content log. Auto-creates `tracker.csv` on first run.
 
 ---
 
-### 6.9 `trend_research.py`
+### 6.16 `trend_research.py`
 
 Returns 5 trending topic suggestions via Groq.
 
@@ -415,19 +478,68 @@ Called by the "Fetch Trending Topics" button in the Generate tab.
 
 ---
 
-### 6.10 `scheduler.py` / `main.py`
+### 6.17 `topic_researcher.py`
+
+Researches trending BI topics from Reddit and LinkedIn.
+
+| Function | Parameters | Returns | Description |
+|---|---|---|---|
+| `run_research()` | — | `dict` | Fetches Reddit posts and generates LinkedIn topics via Groq, saves to `MarketingSchedule/ResearchTopics.json` |
+
+**Research sources:**
+- **Reddit**: Fetches hot posts from subreddits (PowerBI, businessintelligence, dataengineering, analytics, datascience) via public JSON API
+- **LinkedIn**: Groq LLM synthesizes topics based on what BI professionals discuss (no direct API access)
+
+**Output saved to:** `MarketingSchedule/ResearchTopics.json`
+
+---
+
+### 6.18 `scheduler.py` / `main.py`
 
 Optional CLI tools. Not used by the GUI.
 
 ```bash
 python main.py generate [--topic "..."] [--publish]
+python main.py linkedin [--topic "..."] [--publish]
 python main.py publish  [--id <n>]
 python main.py schedule [--list] [--set-id <n> --status draft|scheduled|posted] [--hour h] [--minute m]
 ```
 
 ---
 
-## 7. The GUI — Full Walkthrough
+### 6.19 `smart_scheduler.py`
+
+Intelligent auto-posting scheduler that scores posts using marketing signals.
+
+| Function | Parameters | Returns | Description |
+|---|---|---|---|
+| `start_scheduler()` | — | — | Starts the background thread that monitors time slots |
+| `stop_scheduler()` | — | — | Stops the scheduler thread |
+| `score_post(post_data)` | `dict` | `float` | Scores a post 0-100 based on multiple marketing signals |
+| `select_best_post()` | — | `dict or None` | Finds the highest-scoring draft/scheduled post |
+
+**Scoring model (100 points total):**
+- 25 pts — Sentiment quality (Groq rates tone: inspiring/authoritative/positive)
+- 20 pts — Engagement hooks (questions, lists, stats, CTAs detected)
+- 15 pts — Keyword relevance (hashtag quality + keyword density)
+- 15 pts — Freshness (newer generated posts rank higher)
+- 15 pts — Optimal length (LinkedIn sweet spot: 900-1500 chars)
+- 10 pts — Has image (image posts get full bonus)
+
+**Configuration file:** `scheduler_config.json`
+
+Optional CLI tools. Not used by the GUI.
+
+```bash
+python main.py generate [--topic "..."] [--publish]
+python main.py linkedin [--topic "..."] [--publish]
+python main.py publish  [--id <n>]
+python main.py schedule [--list] [--set-id <n> --status draft|scheduled|posted] [--hour h] [--minute m]
+```
+
+---
+
+## 8. The GUI — Full Walkthrough
 
 Launch with:
 ```bash
@@ -552,11 +664,11 @@ Always visible below the tab panel. Shows real-time progress for every operation
 - **Orange text**: warnings (e.g. image fetch fallback, git push non-zero exit)
 - **Red text**: errors (e.g. API failure)
 
-Click **Clear** to empty the panel. The same messages are written to `Log.txt` (see Section 15).
+Click **Clear** to empty the panel. The same messages are written to `Log.txt` (see Section 16).
 
 ---
 
-## 8. The Automated Pipeline
+## 9. The Automated Pipeline
 
 Triggered by **Approve, Publish & Save** in the Generate tab. Runs in a background thread so the GUI stays responsive.
 
@@ -595,7 +707,7 @@ Go to Publish tab to post to LinkedIn.
 
 ---
 
-## 9. Content Calendar
+## 10. Content Calendar
 
 **File:** `MarketingSchedule/Calender.json`
 
@@ -619,7 +731,7 @@ Go to Publish tab to post to LinkedIn.
 
 ---
 
-## 10. tracker.csv Schema
+## 11. tracker.csv Schema
 
 Auto-created at `c:\Projects\BlogMarketing\tracker.csv` on first entry.
 
@@ -645,7 +757,7 @@ Status is changed manually from the Tracker tab, or set to `posted` automaticall
 
 ---
 
-## 11. Prompts & Customisation
+## 12. Prompts & Customisation
 
 ### 11.1 Blog prompt
 
@@ -685,7 +797,7 @@ Groq is instructed to select exactly 6 tags from this approved list. The list co
 
 ---
 
-## 12. Website Integration
+## 13. Website Integration
 
 The website is the separate git repository at `WEBSITE_REPO_PATH` (default: `C:\Projects\phoenixsolution`).
 
@@ -722,7 +834,7 @@ BASE_URL = 'https://www.phoenixsolution.in'   # line 35 of website_publisher.py
 
 ---
 
-## 13. LinkedIn API
+## 14. LinkedIn API
 
 ### Token generation
 
@@ -769,7 +881,7 @@ To find your URN manually: it is in the format `urn:li:person:<alphanumeric-id>`
 
 ---
 
-## 14. Unsplash Image API
+## 15. Unsplash Image API
 
 **Endpoint:** `GET https://api.unsplash.com/search/photos`
 
@@ -802,7 +914,7 @@ in the rendered blog HTML.
 
 ---
 
-## 15. Logging
+## 16. Logging
 
 ### GUI Activity Log panel
 
@@ -842,7 +954,7 @@ All module logs appear in both `Log.txt` and the GUI panel because the root logg
 
 ---
 
-## 16. Troubleshooting
+## 17. Troubleshooting
 
 ### "Generation failed. Check GROQ_API_KEY in your .env file."
 
@@ -890,7 +1002,7 @@ All module logs appear in both `Log.txt` and the GUI panel because the root logg
 
 ---
 
-## 17. External API Quick Reference
+## 18. External API Quick Reference
 
 | API | Purpose | Auth method | Free tier | Docs |
 |---|---|---|---|---|
