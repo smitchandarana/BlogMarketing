@@ -9,6 +9,7 @@ Endpoints:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from fastapi import APIRouter, HTTPException, Query
 
@@ -90,7 +91,7 @@ async def generate_content(body: GenerateRequest = GenerateRequest()) -> Generat
             return GenerateResponse(insights_processed=0, content_created=0,
                                     timestamp=__import__("datetime").datetime.utcnow().isoformat() + "Z")
         else:
-            result = content_worker.run_now()
+            result = await asyncio.to_thread(content_worker.run_now)
             return GenerateResponse(**result)
     except Exception as exc:
         logger.error("Generate endpoint error: %s", exc)

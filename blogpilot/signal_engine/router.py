@@ -9,6 +9,7 @@ Endpoints:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from fastapi import APIRouter, HTTPException, Query
 
@@ -79,8 +80,8 @@ async def collect_signals(body: CollectRequest = CollectRequest()) -> CollectRes
     from blogpilot.signal_engine.services.scorer import score
 
     try:
-        new_signals = collect()
-        scored_signals = score(new_signals) if body.run_scorer else []
+        new_signals = await asyncio.to_thread(collect)
+        scored_signals = await asyncio.to_thread(score, new_signals) if body.run_scorer else []
         return CollectResponse(
             collected=len(new_signals),
             scored=len(scored_signals),

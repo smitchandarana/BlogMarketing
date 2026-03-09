@@ -53,7 +53,8 @@ BLUE     = "#60a5fa"
 # Helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
-def _api(path: str, method: str = "GET", body: dict | None = None) -> tuple[dict | None, str | None]:
+def _api(path: str, method: str = "GET", body: dict | None = None,
+         timeout: int = 90) -> tuple[dict | None, str | None]:
     """Call the API. Returns (data, error_msg). error_msg is None on success."""
     try:
         import urllib.request, urllib.error
@@ -64,7 +65,7 @@ def _api(path: str, method: str = "GET", body: dict | None = None) -> tuple[dict
             headers={"Content-Type": "application/json"},
             method=method,
         )
-        with urllib.request.urlopen(req, timeout=10) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             return json.loads(r.read().decode()), None
     except urllib.error.HTTPError as e:
         try:

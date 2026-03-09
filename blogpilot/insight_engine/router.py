@@ -9,6 +9,7 @@ Endpoints:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from fastapi import APIRouter, HTTPException, Query
 
@@ -65,7 +66,7 @@ async def get_insight(insight_id: int) -> InsightResponse:
 @router.post("/generate", response_model=GenerateResponse)
 async def generate_insights(body: GenerateRequest = GenerateRequest()) -> GenerateResponse:
     try:
-        result = insight_worker.run_now()
+        result = await asyncio.to_thread(insight_worker.run_now)
         return GenerateResponse(**result)
     except Exception as exc:
         logger.error("Generate endpoint error: %s", exc)

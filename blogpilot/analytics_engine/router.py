@@ -10,6 +10,7 @@ Endpoints:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 
 from fastapi import APIRouter, HTTPException, Query
@@ -89,7 +90,7 @@ async def top_content(
 async def collect() -> CollectResponse:
     """Trigger an immediate metrics collection and analysis cycle."""
     try:
-        result = analytics_worker.run_now()
+        result = await asyncio.to_thread(analytics_worker.run_now)
         return CollectResponse(
             linkedin_collected=result.get("linkedin_collected", 0),
             website_collected=result.get("website_collected", 0),

@@ -10,6 +10,7 @@ Endpoints:
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import datetime
 
@@ -105,7 +106,7 @@ async def schedule_item(body: ScheduleRequest) -> ScheduleResponse:
 async def run_worker() -> WorkerRunResponse:
     """Trigger an immediate distribution cycle."""
     try:
-        result = distribution_worker.run_now()
+        result = await asyncio.to_thread(distribution_worker.run_now)
         return WorkerRunResponse(**result)
     except Exception as exc:
         logger.error("distribution run endpoint error: %s", exc)
