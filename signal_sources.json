@@ -14,15 +14,35 @@
   },
   {
     "type": "rss",
-    "category": "ai-ml",
+    "category": "ai-llm-agents",
     "feeds": [
       "https://openai.com/news/rss.xml",
+      "https://www.anthropic.com/news/rss.xml",
       "https://blog.google/technology/ai/rss/",
       "https://huggingface.co/blog/feed.xml",
       "https://venturebeat.com/category/ai/feed/",
       "https://www.technologyreview.com/topic/artificial-intelligence/feed",
       "https://machinelearningmastery.com/blog/feed/",
-      "https://www.deepmind.com/blog/rss.xml"
+      "https://www.deepmind.com/blog/rss.xml",
+      "https://bair.berkeley.edu/blog/feed.xml",
+      "https://lilianweng.github.io/feed.xml",
+      "https://newsletter.theaiedge.io/feed",
+      "https://www.interconnects.ai/feed"
+    ]
+  },
+  {
+    "type": "rss",
+    "category": "web-dev-engineering",
+    "feeds": [
+      "https://css-tricks.com/feed/",
+      "https://www.smashingmagazine.com/feed/",
+      "https://dev.to/feed",
+      "https://hashnode.com/rss",
+      "https://blog.logrocket.com/feed/",
+      "https://www.freecodecamp.org/news/rss/",
+      "https://reactnative.dev/blog/rss.xml",
+      "https://vercel.com/blog/rss.xml",
+      "https://nextjs.org/feed.xml"
     ]
   },
   {
@@ -120,20 +140,49 @@
   },
   {
     "type": "reddit",
-    "category": "ai-analytics",
+    "category": "ai-llm-agents",
     "subreddits": [
       "MachineLearning",
       "artificial",
       "ChatGPT",
-      "MLOps",
-      "learnmachinelearning",
-      "ArtificialIntelligence",
-      "deeplearning",
+      "ClaudeAI",
+      "LocalLLaMA",
+      "LLMDevs",
       "PromptEngineering",
       "LangChain",
-      "AutoML"
+      "AutoGPT",
+      "AIAgents",
+      "OpenAI",
+      "Gemini",
+      "singularity",
+      "ArtificialIntelligence",
+      "learnmachinelearning",
+      "MLOps",
+      "deeplearning",
+      "AutoML",
+      "ollama",
+      "StableDiffusion"
     ],
-    "limit": 15
+    "limit": 20
+  },
+  {
+    "type": "reddit",
+    "category": "web-dev",
+    "subreddits": [
+      "webdev",
+      "javascript",
+      "typescript",
+      "reactjs",
+      "nextjs",
+      "node",
+      "Frontend",
+      "web_design",
+      "programming",
+      "learnprogramming",
+      "softwareengineering",
+      "ExperiencedDevs"
+    ],
+    "limit": 12
   },
   {
     "type": "reddit",
@@ -195,8 +244,15 @@
   },
   {
     "type": "github_trending",
-    "category": "ai-ml",
+    "category": "ai-llm-agents",
     "language": "python",
+    "since": "daily",
+    "limit": 20
+  },
+  {
+    "type": "github_trending",
+    "category": "web-dev",
+    "language": "typescript",
     "since": "daily",
     "limit": 15
   },
@@ -206,6 +262,13 @@
     "language": "javascript",
     "since": "weekly",
     "limit": 10
+  },
+  {
+    "type": "github_trending",
+    "category": "ai-llm-agents",
+    "language": "",
+    "since": "daily",
+    "limit": 15
   },
   {
     "type": "google_trends",
