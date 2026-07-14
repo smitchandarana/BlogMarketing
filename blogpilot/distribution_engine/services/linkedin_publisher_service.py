@@ -9,9 +9,6 @@ import sys
 logger = logging.getLogger(__name__)
 
 _ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", ".."))
-_LI_GROWTH_ROOT = os.path.normpath(os.path.join(_ROOT, "..", "LinkedINGrowth"))
-if not os.path.exists(_LI_GROWTH_ROOT):
-    _LI_GROWTH_ROOT = r"d:\Projects\LinkedINGrowth"
 
 
 def _ensure_root() -> None:
@@ -32,23 +29,31 @@ def publish(
         org_urn:    Company page URN; posts to personal profile if None.
 
     Returns:
-        LinkedIn post URL on success, else None.
+        LinkedIn post URL on success (None only when the post succeeded but
+        no post id came back).
+
+    Raises:
+        Exception: Propagates any publish failure (auth, network, API error,
+            usage limit) so callers mark the job FAILED — swallowing errors
+            here previously caused failed publishes to be recorded as
+            published by distribution_worker.
     """
     _ensure_root()
+    from linkedin_publisher import publish_post  # type: ignore[import]
+
     try:
-        from linkedin_publisher import publish_post  # type: ignore[import]
-
         result = publish_post(text=text, image_path=image_path, org_urn=org_urn)
-        if result:
-            post_id = result.get("id", "")
-            url = f"https://www.linkedin.com/feed/update/{post_id}" if post_id else None
-            logger.info("LinkedIn post published. URL: %s", url or "unavailable")
-            return url
-        return None
-
     except Exception as exc:
         logger.error("linkedin_publisher_service.publish failed: %s", exc)
-        return None
+        raise
+
+    if not result:
+        raise RuntimeError("linkedin_publisher.publish_post returned no result")
+
+    post_id = result.get("id", "")
+    url = f"https://www.linkedin.com/feed/update/{post_id}" if post_id else None
+    logger.info("LinkedIn post published. URL: %s", url or "unavailable")
+    return url
 
 
 def pick_best_post() -> dict | None:

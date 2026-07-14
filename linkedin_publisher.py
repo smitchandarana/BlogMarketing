@@ -107,7 +107,15 @@ def publish_post(text, image_path=None, org_urn=None):
     to that company page using the same content.
     Returns the personal profile API response dict.
     Falls back to text-only if image upload fails.
+
+    Raises:
+        UsageLimitError: When today's LinkedIn post budget is exhausted.
     """
+    from usage_tracker import UsageLimitError, check, record, seconds_until_reset
+
+    if not check('linkedin'):
+        raise UsageLimitError('linkedin', seconds_until_reset())
+
     author_urn = authenticate()
     headers    = _get_headers()
 
@@ -153,8 +161,11 @@ def publish_post(text, image_path=None, org_urn=None):
     )
     if not resp.ok:
         logger.error('LinkedIn personal post failed %d: %s', resp.status_code, resp.text[:600])
+        record('linkedin', event='post', success=False,
+               detail=f'{resp.status_code}: {resp.text[:300]}')
         resp.raise_for_status()
     log_response(resp)
+    record('linkedin', event='post', success=True)
     personal_result = resp.json()
 
     # Optionally post to company page

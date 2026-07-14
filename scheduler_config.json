@@ -5,6 +5,11 @@
   "manual_id": null,
   "post_target": "personal",
   "dry_run": true,
+  "usage_limits": {
+    "groq_calls_per_day": 500,
+    "linkedin_posts_per_day": 3,
+    "unsplash_fetches_per_day": 45
+  },
   "days": ["Mon", "Wed", "Thu", "Fri"],
   "day_content_type": {
     "Mon": "blog_and_li",

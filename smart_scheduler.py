@@ -427,7 +427,33 @@ def _scheduler_loop(on_log: Optional[Callable] = None,
                 else:
                     log('Pipeline complete — topic: {}'.format(result.get('topic', '?')))
         except Exception as exc:
-            log('Auto-post failed: {}'.format(exc), 'warning')
+            # Usage-limit exhaustion is recoverable: sleep until the daily
+            # window resets, then resume — instead of silently skipping to
+            # the next configured slot (which could be days away).
+            _usage_limit_exc = None
+            try:
+                from usage_tracker import UsageLimitError
+                if isinstance(exc, UsageLimitError):
+                    _usage_limit_exc = exc
+            except ImportError:
+                pass
+
+            if _usage_limit_exc is not None:
+                wait_s = int(getattr(_usage_limit_exc, 'retry_after_seconds', 0)) + 60
+                resume_at = datetime.now() + timedelta(seconds=wait_s)
+                log('Usage limit hit for {} — pausing until {} then resuming.'.format(
+                    _usage_limit_exc.service, resume_at.strftime('%a %d %b %H:%M')), 'warning')
+                if on_status_change:
+                    on_status_change('usage_limit_wait', resume_at)
+                # Interruptible wait so stop()/pause() still work
+                while not _stop_event.is_set() and not _pause_event.is_set():
+                    remaining = (resume_at - datetime.now()).total_seconds()
+                    if remaining <= 0:
+                        break
+                    _stop_event.wait(min(30, remaining))
+                log('Usage window reset — scheduler resuming.')
+            else:
+                log('Auto-post failed: {}'.format(exc), 'warning')
 
         if on_status_change:
             on_status_change('fired', datetime.now())

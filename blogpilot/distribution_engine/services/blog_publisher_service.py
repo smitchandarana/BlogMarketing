@@ -34,12 +34,17 @@ def publish(
         git_push:      Whether to git-push the website repo after publishing.
 
     Returns:
-        Live blog URL if successful, else None.
+        Live blog URL if successful.
+
+    Raises:
+        Exception: Propagates any publish/git failure so callers mark the job
+            FAILED — swallowing errors here previously caused failed publishes
+            to be recorded as published by distribution_worker.
     """
     _ensure_root()
-    try:
-        from website_publisher import publish_to_website, git_push_website  # type: ignore[import]
+    from website_publisher import publish_to_website, git_push_website  # type: ignore[import]
 
+    try:
         publish_to_website(
             blog_data=blog_data,
             src_html_path=src_html_path,
@@ -52,11 +57,10 @@ def publish(
             slug = blog_data.get("slug", "")
             git_push_website(slug, blog_data.get("title", ""))
             logger.info("Website git push complete for slug '%s'.", slug)
-
-        base_url = os.getenv("WEBSITE_BASE_URL", "https://www.phoenixsolution.in")
-        slug = blog_data.get("slug", "")
-        return f"{base_url}/blog/{slug}" if slug else None
-
     except Exception as exc:
         logger.error("blog_publisher_service.publish failed: %s", exc)
-        return None
+        raise
+
+    base_url = os.getenv("WEBSITE_BASE_URL", "https://www.phoenixsolution.in")
+    slug = blog_data.get("slug", "")
+    return f"{base_url}/blog/{slug}" if slug else None

@@ -43,7 +43,9 @@ def _imports():
     from image_fetcher import fetch_image
     from website_publisher import publish_to_website, git_push_website
     from tracker import add_entry as tracker_add_entry
+    from usage_tracker import get_usage
     return {
+        'get_usage': get_usage,
         'init_db': init_db,
         'insert_post': insert_post,
         'update_post_status': update_post_status,
@@ -269,6 +271,24 @@ def cmd_schedule(args, m):
     m['start_scheduler'](hour=hour, minute=minute)
 
 
+def cmd_usage(args, m):
+    """Print today's API usage vs daily limits."""
+    snapshot = m['get_usage']()
+    resets = snapshot['resets_in_seconds']
+    print(f"API usage for {snapshot['date']} "
+          f"(resets in {resets // 3600:02d}:{resets % 3600 // 60:02d}):\n")
+    print(f"  {'SERVICE':<10} {'USED':>6} {'LIMIT':>6} {'REMAINING':>10} {'TOKENS':>10}")
+    for name, row in snapshot['services'].items():
+        limit = row['limit'] if row['limit'] is not None else '-'
+        remaining = row['remaining'] if row['remaining'] is not None else '-'
+        print(f"  {name:<10} {row['used']:>6} {limit:>6} {remaining:>10} {row['tokens']:>10}")
+    exhausted = [n for n, r in snapshot['services'].items()
+                 if r['remaining'] == 0]
+    if exhausted:
+        print(f"\n  LIMIT REACHED: {', '.join(exhausted)} — "
+              f"automation resumes after the reset.")
+
+
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def main():
@@ -300,6 +320,9 @@ def main():
     sch.add_argument('--hour', type=int, help='Scheduler run hour, 0-23 (default: 9)')
     sch.add_argument('--minute', type=int, help='Scheduler run minute, 0-59 (default: 0)')
 
+    # usage
+    sub.add_parser('usage', help='Show today\'s API usage vs daily limits (Groq/LinkedIn/Unsplash)')
+
     args = parser.parse_args()
 
     m = _imports()
@@ -313,6 +336,8 @@ def main():
         cmd_publish(args, m)
     elif args.command == 'schedule':
         cmd_schedule(args, m)
+    elif args.command == 'usage':
+        cmd_usage(args, m)
 
 
 if __name__ == '__main__':
