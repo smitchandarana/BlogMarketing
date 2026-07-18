@@ -52,11 +52,23 @@ def get_all(
 
 
 def get_due(db_path: str | None = None) -> list[DistributionQueue]:
-    """Return queued/scheduled items whose scheduled_time has arrived."""
+    """Return queued/scheduled items whose scheduled_time has arrived.
+
+    scheduled_at is stored as Python's ``datetime.isoformat() + "Z"``
+    (e.g. "2026-07-18T07:01:27.741835Z"), while SQLite's datetime('now')
+    returns "2026-07-18 07:01:27" (space separator, no fractional seconds,
+    no 'Z'). A raw string comparison between the two formats is wrong: the
+    'T' separator (0x54) sorts *after* the space (0x20) used by
+    datetime('now'), so any same-day scheduled_at string compares as
+    "greater than" datetime('now') regardless of the actual time, and due
+    items are silently skipped until the calendar date rolls over. Wrapping
+    both sides in SQLite's datetime() normalises them to the same format
+    before comparing.
+    """
     query = """
         SELECT * FROM distribution_queue
         WHERE status IN ('queued', 'scheduled')
-          AND (scheduled_at IS NULL OR scheduled_at <= datetime('now'))
+          AND (scheduled_at IS NULL OR datetime(scheduled_at) <= datetime('now'))
         ORDER BY scheduled_at ASC
         LIMIT 20
     """

@@ -255,12 +255,13 @@ def run(
                 log('Step 6/9  Publishing blog to phoenixsolution.in...')
                 from website_publisher import publish_to_website, git_push_website
                 try:
-                    blog_url = publish_to_website(
+                    publish_result = publish_to_website(
                         blog_data=blog_data,
                         src_html_path=blog_path,
                         publish_date=publish_date,
                         image_local=image_info['local_path'] if image_info else None,
                     )
+                    blog_url = publish_result['blog_url']
                     result['blog_url'] = blog_url
                     result['published_website'] = True
                     log(f'Website published: {blog_url}')

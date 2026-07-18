@@ -15,7 +15,7 @@ import requests
 from datetime import datetime
 
 from dotenv import load_dotenv
-from llm_client import get_client, get_model
+from llm_client import chat_completion
 
 load_dotenv()
 
@@ -115,8 +115,7 @@ def synthesise_from_reddit(posts):
     )
 
     try:
-        resp = get_client().chat.completions.create(
-            model=get_model(),
+        content = chat_completion(
             messages=[
                 {'role': 'system', 'content': system_prompt},
                 {'role': 'user',   'content': user_prompt},
@@ -124,7 +123,7 @@ def synthesise_from_reddit(posts):
             response_format={'type': 'json_object'},
             temperature=0.7,
         )
-        result = json.loads(resp.choices[0].message.content)
+        result = json.loads(content)
         topics = result.get('topics', [])
         logger.info('Reddit synthesis: %d topics generated', len(topics))
         return topics
@@ -168,8 +167,7 @@ def synthesise_linkedin_topics(n=8):
     )
 
     try:
-        resp = get_client().chat.completions.create(
-            model=get_model(),
+        content = chat_completion(
             messages=[
                 {'role': 'system', 'content': system_prompt},
                 {'role': 'user',   'content': user_prompt},
@@ -177,7 +175,7 @@ def synthesise_linkedin_topics(n=8):
             response_format={'type': 'json_object'},
             temperature=0.75,
         )
-        result = json.loads(resp.choices[0].message.content)
+        result = json.loads(content)
         topics = result.get('topics', [])
         logger.info('LinkedIn synthesis: %d topics generated', len(topics))
         return topics

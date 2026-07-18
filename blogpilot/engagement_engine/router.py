@@ -143,10 +143,15 @@ async def get_viral_posts(days: int = 7) -> dict:
         from blogpilot.db.connection import get_connection  # type: ignore[import]
         with get_connection() as conn:
             conn.row_factory = None
+            # engaged_at is stored as datetime.isoformat() ("...T...+00:00"),
+            # while datetime('now', ...) returns SQLite's space-separated
+            # format. Wrap engaged_at in datetime() too so both sides compare
+            # in the same normalised format (see distribution.get_due() for
+            # the same class of bug at the day-boundary).
             cur = conn.execute(
                 "SELECT post_urn, author_name, post_text, viral_score, engaged_at "
                 "FROM engagement_log "
-                "WHERE viral_score >= 0.5 AND engaged_at >= datetime('now', ?) "
+                "WHERE viral_score >= 0.5 AND datetime(engaged_at) >= datetime('now', ?) "
                 "ORDER BY viral_score DESC LIMIT 50",
                 (f"-{days} days",),
             )

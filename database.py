@@ -4,8 +4,26 @@ import sqlite3
 DB_PATH = os.path.join(os.path.dirname(__file__), 'blog_marketing.db')
 
 
+class _ClosingConnection(sqlite3.Connection):
+    """sqlite3.Connection whose context manager also closes the connection.
+
+    Stdlib sqlite3.Connection.__exit__ only commits/rolls back the current
+    transaction — it never closes the connection. Every caller in this
+    codebase uses ``with get_connection() as conn:`` expecting the connection
+    to be released afterwards, which was leaking a connection (and file
+    descriptor) on every call. This subclass fixes that without touching any
+    of the ~40 call sites.
+    """
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        try:
+            return super().__exit__(exc_type, exc_val, exc_tb)
+        finally:
+            self.close()
+
+
 def get_connection() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, factory=_ClosingConnection)
     conn.row_factory = sqlite3.Row
     return conn
 

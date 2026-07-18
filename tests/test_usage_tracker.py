@@ -207,6 +207,198 @@ def test_hashtags_str_handles_string_and_list():
     assert _hashtags_str({}) == ''
 
 
+def test_blog_and_linkedin_publish_stores_string_blog_url(monkeypatch, tmp_path):
+    """publish_to_website() returns {'blog_url': ..., 'image_public_url': ...} —
+    daily_pipeline must unpack the 'blog_url' key, not store the whole dict.
+
+    Regression test: the pipeline used to assign the raw dict returned by
+    publish_to_website() straight into `blog_url` / result['blog_url'], which
+    then got written into tracker.csv's website_url column and into the saved
+    LinkedIn post text as the "Read the full article" link — corrupting both
+    with a stringified Python dict instead of a real URL.
+    """
+    import automation.daily_pipeline as dp
+    import blog_generator
+    import html_renderer
+    import image_fetcher
+    import website_publisher
+    import linkedin_generator
+    import linkedin_publisher
+    import tracker
+    import database
+
+    monkeypatch.setattr(dp, '_research_is_fresh', lambda *a, **k: True)
+
+    fake_blog_data = {
+        'title': 'Test Title', 'slug': 'test-slug',
+        'meta_description': 'x' * 20, 'category': 'Analytics', 'tag_emoji': '\U0001F4A1',
+        'keywords': ['a', 'b'], 'intro': 'intro text',
+        'sections': [{'heading': 'H1', 'body': 'body1'}],
+        'conclusion': 'the end', 'cta_headline': 'CTA', 'cta_subtext': 'sub',
+        'related_service_url': '/x', 'related_service_name': 'X', 'related_service_desc': 'd',
+    }
+    monkeypatch.setattr(blog_generator, 'generate_blog', lambda topic, **k: fake_blog_data)
+
+    blog_html_path = tmp_path / 'blog.html'
+    blog_html_path.write_text('<html></html>', encoding='utf-8')
+    monkeypatch.setattr(html_renderer, 'save_blog', lambda *a, **k: str(blog_html_path))
+    monkeypatch.setattr(image_fetcher, 'fetch_image', lambda *a, **k: None)
+
+    real_blog_url = 'https://www.phoenixsolution.in/blog/test-slug'
+    monkeypatch.setattr(
+        website_publisher, 'publish_to_website',
+        lambda *a, **k: {'blog_url': real_blog_url, 'image_public_url': None},
+    )
+    monkeypatch.setattr(website_publisher, 'git_push_website', lambda *a, **k: (0, '', ''))
+
+    li_file = tmp_path / 'post.txt'
+    li_file.write_text('body', encoding='utf-8')
+    captured_save_blog_url = {}
+
+    def fake_save_linkedin_post(li_data, topic, calendar_day=None, publish_date=None, blog_url=None):
+        captured_save_blog_url['blog_url'] = blog_url
+        return str(li_file)
+
+    monkeypatch.setattr(
+        linkedin_generator, 'generate_linkedin_post',
+        lambda topic, blog_data=None: {
+            'caption': 'body', 'hashtags': '#A #B', 'full_post': 'x', 'blog_url': ''
+        },
+    )
+    monkeypatch.setattr(linkedin_generator, 'save_linkedin_post', fake_save_linkedin_post)
+    monkeypatch.setattr(linkedin_publisher, 'publish_post', lambda *a, **k: {'id': 'urn:li:share:1'})
+
+    captured: dict = {}
+    monkeypatch.setattr(
+        tracker, 'add_entry',
+        lambda **kw: captured.setdefault('tracker_website_url', kw.get('website_url')) or 1,
+    )
+    monkeypatch.setattr(
+        database, 'insert_post',
+        lambda **kw: captured.setdefault('db_status', kw.get('status')) or 1,
+    )
+
+    result = dp.run(topic='Test Topic', content_types=['blog_and_linkedin'], publish=True)
+
+    assert result['error'] is None
+    assert result['blog_url'] == real_blog_url
+    assert isinstance(result['blog_url'], str)
+    assert captured_save_blog_url['blog_url'] == real_blog_url
+    assert captured['tracker_website_url'] == real_blog_url
+
+
+# ── topic_researcher now routes through the shared usage-limited client ───────
+
+def test_synthesise_from_reddit_respects_daily_groq_limit(temp_db, monkeypatch):
+    """synthesise_from_reddit/synthesise_linkedin_topics used to call
+    llm_client.get_client() directly, bypassing chat_completion()'s daily
+    usage-limit check, retry/backoff, and token-usage recording. Now that
+    they route through chat_completion(), a call made after the daily Groq
+    budget is exhausted must be blocked (no live API call) instead of
+    silently going straight to Groq.
+    """
+    import usage_tracker as ut
+    import topic_researcher as tr
+
+    monkeypatch.setattr(ut, 'get_limits', lambda: {'groq': 0})
+
+    calls = {'n': 0}
+
+    def fake_create(**kw):
+        calls['n'] += 1
+        raise AssertionError('Groq API should not be called once the daily limit is hit')
+
+    import llm_client
+    monkeypatch.setattr(
+        llm_client, 'get_client',
+        lambda: types.SimpleNamespace(
+            chat=types.SimpleNamespace(
+                completions=types.SimpleNamespace(create=fake_create)
+            )
+        ),
+    )
+
+    topics = tr.synthesise_from_reddit([{'subreddit': 'PowerBI', 'score': 10, 'title': 'x'}])
+    assert topics == []
+    assert calls['n'] == 0
+
+    topics2 = tr.synthesise_linkedin_topics(n=3)
+    assert topics2 == []
+    assert calls['n'] == 0
+
+
+# ── distribution_queue.get_due() timestamp-format bug ─────────────────────────
+
+def test_get_due_finds_past_due_iso_timestamp(tmp_path):
+    """distribution_planner stores scheduled_at as datetime.isoformat() + "Z"
+    (e.g. "2026-07-18T07:01:27.741835Z"). SQLite's datetime('now') returns
+    "2026-07-18 07:01:27" (space separator, no fractional seconds, no 'Z').
+    A raw string comparison ('T' sorts after ' ' in ASCII) makes same-day
+    scheduled items compare as "in the future" no matter their actual time,
+    so get_due() silently skipped every item scheduled for later "today"
+    until the calendar date rolled over. This regression test inserts a job
+    scheduled 1 hour in the past and asserts get_due() returns it.
+    """
+    from datetime import datetime, timedelta
+    import blogpilot.db.migrations as migrations
+    import blogpilot.db.repositories.content as content_repo
+    import blogpilot.db.repositories.distribution as dist_repo
+    from blogpilot.content_engine.models.content_model import Content
+    from blogpilot.distribution_engine.models.distribution_queue_model import DistributionQueue
+
+    db_path = str(tmp_path / 'dist_test.db')
+    migrations.run_migrations(db_path)
+
+    content_ids = [
+        content_repo.insert(Content(content_type='linkedin_post', topic='t'), db_path=db_path)
+        for _ in range(3)
+    ]
+
+    past_due = (datetime.utcnow() - timedelta(hours=1)).isoformat() + 'Z'
+    future = (datetime.utcnow() + timedelta(hours=1)).isoformat() + 'Z'
+
+    dist_repo.insert(
+        DistributionQueue(content_id=content_ids[0], channel='linkedin', scheduled_time=past_due),
+        db_path=db_path,
+    )
+    dist_repo.insert(
+        DistributionQueue(content_id=content_ids[1], channel='linkedin', scheduled_time=future),
+        db_path=db_path,
+    )
+    dist_repo.insert(
+        DistributionQueue(content_id=content_ids[2], channel='website', scheduled_time=None),
+        db_path=db_path,
+    )
+
+    due = dist_repo.get_due(db_path=db_path)
+    due_content_ids = {d.content_id for d in due}
+
+    assert content_ids[0] in due_content_ids, 'past-due ISO-timestamp job must be returned as due'
+    assert content_ids[2] in due_content_ids, 'NULL scheduled_at (ASAP job) must be returned as due'
+    assert content_ids[1] not in due_content_ids, 'future job must not be returned as due'
+
+
+# ── distribution_planner no longer double-queues a broken LinkedIn promo job ──
+
+def test_distribution_planner_does_not_duplicate_linkedin_for_blog_post():
+    """distribution_planner used to queue a second 'linkedin' job that reused
+    the blog_post's own content_id. distribution_worker then posted that
+    content's raw `body` (the blog's intro paragraph — no hook, no hashtags,
+    no article link) straight to LinkedIn as if it were a ready-made caption.
+    content_planner already creates a dedicated, properly-captioned
+    linkedin_post content row (and its own distribution job) for every
+    insight, so the blog_post branch must only ever queue a 'website' job.
+    """
+    from blogpilot.distribution_engine.services.distribution_planner import plan
+
+    jobs = plan(content_type='blog_post', content_id=42)
+
+    assert len(jobs) == 1
+    assert jobs[0]['channel'] == 'website'
+    assert jobs[0]['content_id'] == 42
+    assert not any(j['channel'] == 'linkedin' for j in jobs)
+
+
 # ── distribution_worker failure handling ──────────────────────────────────────
 
 def test_distribution_worker_marks_failed_on_publish_error(monkeypatch):
