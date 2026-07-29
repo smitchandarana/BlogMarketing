@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-from llm_client import get_client, get_model
+from llm_client import chat_completion
 
 load_dotenv()
 
@@ -13,8 +13,7 @@ def get_trending_topics(industry: str = DEFAULT_INDUSTRY, n: int = 5) -> list:
     Return n trending blog topic ideas for the given industry.
     Each topic is a specific, ready-to-use blog title.
     """
-    response = get_client().chat.completions.create(
-        model=get_model(),
+    content = chat_completion(
         messages=[
             {
                 'role': 'system',
@@ -37,5 +36,5 @@ def get_trending_topics(industry: str = DEFAULT_INDUSTRY, n: int = 5) -> list:
         temperature=0.85,
     )
 
-    result = json.loads(response.choices[0].message.content)
+    result = json.loads(content)
     return result.get('topics', [])

@@ -26,8 +26,9 @@ Local automation system that generates blog posts, publishes them to the phoenix
 
 | File | Responsibility |
 |---|---|
-| `llm_client.py` | Groq client singleton — `get_client()`, `get_model()` |
+| `llm_client.py` | Groq client singleton — `get_client()`, `get_model()`, `chat_completion()` (usage-limited, 429 retry, token logging) |
 | `paths.py` | `app_dir()` / `resource_dir()` — dev + PyInstaller frozen support |
+| `usage_tracker.py` | Daily API usage counters + limits (Groq/LinkedIn/Unsplash) — `record`, `check`, `get_usage`, `seconds_until_reset`, `UsageLimitError`; limits in scheduler_config.json `usage_limits` |
 | `database.py` | SQLite CRUD — `init_db`, `insert_post`, `update_post_status`, `get_post_by_id`, `get_scheduled_posts`, `get_all_posts` |
 | `tracker.py` | CSV tracker (`tracker.csv`) — `add_entry`, `update_status`, `get_entry`, `read_all`; used by smart_scheduler |
 | `blog_generator.py` | `generate_blog(topic)` — Groq JSON blog data |
@@ -137,6 +138,7 @@ python main.py publish  [--id <n>]
 python main.py schedule [--list]
 python main.py schedule [--set-id <n> --status draft|scheduled|posted]
 python main.py schedule [--hour <h>] [--minute <m>]
+python main.py usage   # today's API usage vs daily limits
 ```
 
 ---

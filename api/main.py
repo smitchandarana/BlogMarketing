@@ -251,6 +251,13 @@ def create_app() -> FastAPI:
         return {"engine": engine, "action": "restarted", key: interval}
 
     # ── Observability / Metrics ───────────────────────────────────────────────
+    @app.get("/api/system/usage", tags=["System"])
+    async def system_usage() -> dict:
+        """Today's API usage per service (Groq/LinkedIn/Unsplash) vs daily limits."""
+        import asyncio
+        from usage_tracker import get_usage
+        return await asyncio.to_thread(get_usage)
+
     @app.get("/api/system/metrics", tags=["System"])
     async def system_metrics() -> dict:
         """Return operational metrics for monitoring and debugging."""
@@ -430,11 +437,15 @@ def create_app() -> FastAPI:
     # ── Pipeline run (selected steps) ─────────────────────────────────────────
     @app.post("/api/pipeline/run", tags=["System"])
     async def pipeline_run(body: dict) -> dict:
+        import asyncio
         steps = body.get("steps")  # list of ints 1-7, or None = all
         dry_run = body.get("dry_run", False)
         try:
             from automation.pipeline import run as pipeline_run_fn
-            result = pipeline_run_fn(dry_run=dry_run, steps=steps)
+            # Blocking multi-minute pipeline (Groq calls, git push, LinkedIn
+            # HTTP) — must not run on the event loop or every other request
+            # (including /health) freezes for the duration.
+            result = await asyncio.to_thread(pipeline_run_fn, dry_run=dry_run, steps=steps)
             return result
         except Exception as exc:
             raise HTTPException(status_code=500, detail=str(exc)) from exc

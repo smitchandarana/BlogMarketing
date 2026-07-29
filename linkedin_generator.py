@@ -3,7 +3,7 @@ import json
 import re
 from datetime import datetime
 from dotenv import load_dotenv
-from llm_client import get_client, get_model
+from llm_client import chat_completion
 
 load_dotenv()
 
@@ -141,8 +141,7 @@ def generate_linkedin_post(topic: str, blog_data: dict = None) -> dict:
             '- Total post length including hashtags must stay under 3000 LinkedIn characters.'
         )
 
-    response = get_client().chat.completions.create(
-        model=get_model(),
+    content = chat_completion(
         messages=[
             {'role': 'system', 'content': system_prompt},
             {'role': 'user',   'content': user_prompt},
@@ -151,7 +150,7 @@ def generate_linkedin_post(topic: str, blog_data: dict = None) -> dict:
         temperature=0.7,
     )
 
-    result      = json.loads(response.choices[0].message.content)
+    result      = json.loads(content)
     caption     = result.get('caption', '').strip()
     sel_tags    = result.get('selected_hashtags', approved_tags[:6])
     hashtag_str = ' '.join(f'#{t}' for t in sel_tags)

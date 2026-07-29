@@ -255,12 +255,13 @@ def run(
                 log('Step 6/9  Publishing blog to phoenixsolution.in...')
                 from website_publisher import publish_to_website, git_push_website
                 try:
-                    blog_url = publish_to_website(
+                    publish_result = publish_to_website(
                         blog_data=blog_data,
                         src_html_path=blog_path,
                         publish_date=publish_date,
                         image_local=image_info['local_path'] if image_info else None,
                     )
+                    blog_url = publish_result['blog_url']
                     result['blog_url'] = blog_url
                     result['published_website'] = True
                     log(f'Website published: {blog_url}')
@@ -287,7 +288,9 @@ def run(
                 result['blog_url'] = blog_url
 
             if mode == 'blog_only':
-                _log_to_tracker(topic, blog_path, None, '', website_url=blog_url or '')
+                blog_status = 'posted' if result['published_website'] else 'draft'
+                _log_to_tracker(topic, blog_path, None, '',
+                                website_url=blog_url or '', status=blog_status)
                 log('Pipeline complete (blog only).')
                 return result
 
@@ -311,9 +314,16 @@ def run(
 
             # ── Step 9: Log ──────────────────────────────────────────────
             log('Step 9/9  Logging to tracker and database...')
-            hashtags = ' '.join(li_data.get('hashtags', []))
-            _log_to_tracker(topic, blog_path, li_path, hashtags, website_url=blog_url or '')
-            _log_to_db(topic, blog_path, li_path, hashtags, publish_date, blog_url or '')
+            hashtags = _hashtags_str(li_data)
+            status = (
+                'posted'
+                if result['published_linkedin'] or result['published_website']
+                else 'draft'
+            )
+            _log_to_tracker(topic, blog_path, li_path, hashtags,
+                            website_url=blog_url or '', status=status)
+            _log_to_db(topic, blog_path, li_path, hashtags, publish_date,
+                       blog_url or '', status=status)
 
         # ══════════════════════════════════════════════════════════════════
         # LINKEDIN ONLY MODE
@@ -338,9 +348,10 @@ def run(
 
             # ── Step 5: Log ──────────────────────────────────────────────
             log('Step 5/9  Logging to tracker...')
-            hashtags = ' '.join(li_data.get('hashtags', []))
-            _log_to_tracker(topic, '', li_path, hashtags)
-            _log_to_db(topic, '', li_path, hashtags, publish_date, '')
+            hashtags = _hashtags_str(li_data)
+            status = 'posted' if result['published_linkedin'] else 'draft'
+            _log_to_tracker(topic, '', li_path, hashtags, status=status)
+            _log_to_db(topic, '', li_path, hashtags, publish_date, '', status=status)
 
         log('Pipeline complete.')
 
@@ -355,17 +366,29 @@ def run(
 # Helpers
 # ═════════════════════════════════════════════════════════════════════════════
 
+def _hashtags_str(li_data: dict) -> str:
+    """Normalise li_data['hashtags'] to a space-separated string.
+
+    linkedin_generator returns a pre-joined string ('#A #B'); joining a string
+    again would space-separate every character, so handle both shapes.
+    """
+    hashtags = li_data.get('hashtags', '')
+    if isinstance(hashtags, (list, tuple)):
+        return ' '.join(hashtags)
+    return str(hashtags)
+
+
 def _publish_linkedin(li_data: dict, image_info: dict | None, log: Callable) -> None:
     """Publish a LinkedIn post via the UGC API."""
     caption = li_data.get('caption', '')
-    hashtags_list = li_data.get('hashtags', [])
+    hashtags = _hashtags_str(li_data)
     blog_url = li_data.get('blog_url', '')
 
     parts = [caption]
     if blog_url:
         parts.append(f'\nRead the full article: {blog_url}')
-    if hashtags_list:
-        parts.append('\n' + ' '.join(hashtags_list))
+    if hashtags:
+        parts.append('\n' + hashtags)
     full_text = '\n'.join(parts)
 
     image_path = image_info['local_path'] if image_info else None
@@ -385,8 +408,14 @@ def _log_to_tracker(
     linkedin_path: str | None,
     hashtags: str,
     website_url: str = '',
+    status: str = 'draft',
 ) -> None:
-    """Append a row to tracker.csv."""
+    """Append a row to tracker.csv with the REAL outcome status.
+
+    'posted' must only be recorded when a publish actually succeeded —
+    dry runs and failed publishes are logged as 'draft' so topic dedup
+    and analytics stay truthful.
+    """
     try:
         from tracker import add_entry
         add_entry(
@@ -396,7 +425,7 @@ def _log_to_tracker(
             hashtags=hashtags,
             content_angle='',
             website_url=website_url,
-            status='posted',
+            status=status,
         )
     except Exception as exc:
         logger.warning('Tracker log failed: %s', exc)
@@ -409,8 +438,9 @@ def _log_to_db(
     hashtags: str,
     publish_date: str,
     blog_url: str,
+    status: str = 'draft',
 ) -> None:
-    """Insert a record into blog_marketing.db."""
+    """Insert a record into blog_marketing.db with the REAL outcome status."""
     try:
         from database import insert_post
         # Read linkedin text from file if available
@@ -423,7 +453,7 @@ def _log_to_db(
             blog_path=blog_path or '',
             linkedin_text=li_text,
             hashtags=hashtags,
-            status='posted',
+            status=status,
             publish_date=publish_date,
         )
     except Exception as exc:

@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-from llm_client import get_client, get_model
+from llm_client import chat_completion
 
 load_dotenv()
 
@@ -78,8 +78,7 @@ Rules:
 - tone: insightful, authoritative, practical
 - audience: business leaders and consultants"""
 
-    response = get_client().chat.completions.create(
-        model=get_model(),
+    content = chat_completion(
         messages=[
             {'role': 'system', 'content': system_prompt},
             {'role': 'user',   'content': base_prompt},
@@ -88,4 +87,4 @@ Rules:
         temperature=0.7,
     )
 
-    return json.loads(response.choices[0].message.content)
+    return json.loads(content)
