@@ -1,6 +1,15 @@
 # BlogMarketing
 
-Automate Blog post and LinkedIn post generation and publishing for Phoenix Solutions.
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)
+
+Generate blog posts with an LLM, publish them to your website, and create +
+schedule matching LinkedIn posts — all from a CLI or desktop GUI. Powered by
+Groq, it turns one topic into a published article and a ready-to-post LinkedIn
+update in a single command.
+
+> Originally built to run content marketing for [phoenixsolution.in](https://www.phoenixsolution.in),
+> now open-sourced so you can point it at your own site and LinkedIn account.
 
 ## Technology Stack
 
@@ -41,14 +50,14 @@ Automate Blog post and LinkedIn post generation and publishing for Phoenix Solut
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/smitchandarana/BlogMarketing.git
    cd BlogMarketing
    ```
 
 2. Create virtual environment:
    ```bash
    python -m venv .venv
-   .venv\Scripts\activate  # Windows
+   source .venv/bin/activate     # Windows: .venv\Scripts\activate
    ```
 
 3. Install dependencies:
@@ -58,8 +67,8 @@ Automate Blog post and LinkedIn post generation and publishing for Phoenix Solut
 
 4. Configure environment:
    ```bash
-   copy .env.example .env
-   # Edit .env with your API keys
+   cp .env.example .env          # Windows: copy .env.example .env
+   # Edit .env with your own API keys
    ```
 
 5. Run the GUI:
@@ -162,13 +171,25 @@ BlogMarketing/
 
 For detailed documentation, see [DOCUMENTATION.md](DOCUMENTATION.md).
 
+## Disclaimer
+
+This tool publishes to LinkedIn through LinkedIn's **official UGC API** using
+your own OAuth token, and to your own website via Git. You are responsible for:
+
+- Using it in line with the [LinkedIn API Terms of Service](https://legal.linkedin.com/api-terms-of-use)
+  and any platform whose API you connect.
+- The content it generates — AI output should be reviewed before publishing.
+- Keeping your API keys private (they live in `.env`, which is gitignored).
+
+Provided "as is", without warranty of any kind (see [LICENSE](LICENSE)). Not
+affiliated with or endorsed by LinkedIn, Groq, or Unsplash.
+
 ## Contributing
 
-1. Follow the established module architecture
-2. Add type hints and docstrings
-3. Update tests for new functionality
-4. Update documentation
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for setup,
+conventions, and the PR checklist. Good first issues are labeled
+[`good first issue`](https://github.com/smitchandarana/BlogMarketing/labels/good%20first%20issue).
 
 ## License
 
-[Add license information here]
+Released under the [MIT License](LICENSE). © 2026 Smit Chandarana.
